@@ -1,5 +1,5 @@
-drop table orders;
 drop table order_items;
+drop table orders;
 drop table stores;
 drop table cards;
 drop table users;

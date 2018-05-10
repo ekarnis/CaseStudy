@@ -35,9 +35,9 @@ create table locations(
 	location_id int primary key,
 	street varchar(4000),
 	city varchar(4000),
-	state varchar(4000)
+	state varchar(4000),
 	country varchar(4000),
-	zip varchar(4000),
+	zip varchar(4000)
 );
 create table user_statuses(
 	user_status_id int primary key,
@@ -65,8 +65,8 @@ create table stores(
 	store varchar(4000),
 	phone_number int,
 	manager_id int references users(user_id),
-	open_time timestamp,
-	close_time timestamp
+	open_time int,
+	close_time int
 );
 create table orders(
 	order_id int primary key,

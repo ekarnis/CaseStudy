@@ -36,7 +36,7 @@ insert into delivery_methods
 
 
 insert into locations
-	values (0,'100 example st', 'townville', 'WA', 'USA',5)
+	values (0,'100 example st', 'townville', 'WA', 'USA',5);
 
 
 
@@ -64,7 +64,7 @@ insert into users
 	values (0,'Eric','Karnis','eric@karnis.com','hey',0,0);
 
 insert into cards
-	values (0,1,5,(TO_DATE('2003/05/03 21:02:44', 'yyyy/mm/dd hh24:mi:ss') ,123)
+	values (0,0,5,(TO_DATE('2003/05/03 21:02:44', 'yyyy/mm/dd hh24:mi:ss')) ,123);
 
 insert into stores
 	values (0,0,'Deer Valley',1,0,0800,2100);
