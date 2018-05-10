@@ -1,0 +1,13 @@
+delete order_items;
+delete orders;
+delete stores;
+delete cards;
+delete users;
+delete user_statuses;
+delete locations;
+delete delivery_methods;
+delete delivery_statuses;
+delete combos;
+delete specials;
+delete items;
+delete time_slots;
