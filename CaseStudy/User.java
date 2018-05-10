@@ -2,6 +2,7 @@ package CaseStudy;
 
 public class User {
 	
+	int userId;
 	String firstName;
 	String lastName;
 	String email;
@@ -11,14 +12,24 @@ public class User {
 	public User() {
 		super();
 	}
-	public User(String firstName, String lastName, String email, String password, int userStatusId, int locationId) {
+
+	public User(int userId, String firstName, String lastName, String email, String password, int userStatusId,
+			int locationId) {
 		super();
+		this.userId = userId;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
 		this.userStatusId = userStatusId;
 		this.locationId = locationId;
+	}
+
+	public int getUserId() {
+		return userId;
+	}
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 	public String getFirstName() {
 		return firstName;

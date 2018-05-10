@@ -16,7 +16,7 @@ create table items(
 	check(vegetarian in ('y', 'n'))
 );
 create table specials(
-	item_id int references items(item_id),
+	item_id int references items(item_id) ON DELETE CASCADE,
 	discount_percentage int
 );
 create table combos(
@@ -47,14 +47,14 @@ create table users(
 	user_id int primary key,
 	first varchar(4000),
 	last varchar(4000),
-	email varchar(4000),
-	password varchar(4000),
+	email varchar(4000) not null,
+	password varchar(4000) not null,
 	user_status_id int references user_statuses(user_status_id),
 	location_id varchar(4000)
 );
 create table cards(
 	card_id int primary key,
-	user_id int references users(user_id),
+	user_id int references users(user_id) ON DELETE CASCADE,
 	card_number int,
 	expiry_date date,
 	security_code int
