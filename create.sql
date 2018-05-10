@@ -1,7 +1,7 @@
 create table time_slots(
 	time_slot_id int primary key,
-	slot_start timestamp,
-	slot_end timestamp,
+	slot_start int,
+	slot_end int,
 	slot_name varchar(4000)
 );
 create table items(
@@ -35,9 +35,9 @@ create table locations(
 	location_id int primary key,
 	street varchar(4000),
 	city varchar(4000),
+	state varchar(4000)
 	country varchar(4000),
 	zip varchar(4000),
-	state varchar(4000)
 );
 create table user_statuses(
 	user_status_id int primary key,
@@ -71,8 +71,8 @@ create table stores(
 create table orders(
 	order_id int primary key,
 	user_id int references users(user_id),
-	placed_timestamp timestamp,
-	delivery_timestamp timestamp,
+	placed_timestamp int,
+	delivery_timestamp int,
 	card_id int references cards(card_id),
 	instructions varchar(4000),
 	delivery_method_id int references delivery_methods(delivery_method_id),
