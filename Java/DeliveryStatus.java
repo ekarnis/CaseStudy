@@ -5,6 +5,12 @@ public class DeliveryStatus {
 	int delivery_status_id;
 	String delivery_status;
 	
+	
+	
+	public DeliveryStatus() {
+		super();
+	}
+
 	public DeliveryStatus(int delivery_status_id, String delivery_status) {
 		super();
 		this.delivery_status_id = delivery_status_id;

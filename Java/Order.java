@@ -34,6 +34,14 @@ public class Order {
 		this.item_ids = item_ids;
 	}
 
+	
+	
+	public Order() {
+		super();
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "Order [order_id=" + order_id + ", user_id=" + user_id + ", placed_timestamp=" + placed_timestamp

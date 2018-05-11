@@ -5,6 +5,12 @@ public class DeliveryMethod {
 	int delivery_method_id;
 	String delivery_method;
 	
+	
+	
+	public DeliveryMethod() {
+		super();
+	}
+
 	public DeliveryMethod(int delivery_method_id, String delivery_method) {
 		super();
 		this.delivery_method_id = delivery_method_id;
