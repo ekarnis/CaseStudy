@@ -1,7 +1,7 @@
 package CaseStudy;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -17,23 +17,31 @@ public class UserService {
 		super();
 		this.connection = connection;
 	}
-	public void addUser(int userId, String firstName, String lastName, String email, String password, int userStatusId,
-			int locationId){
+	public void add(User user){
 		try{
-			PreparedStatement oPS = connection.prepareStatement("insert into users values (?,?,?,?,?,?,?)");
-			oPS.setInt(1, userId);
-			oPS.setString(2, firstName);
-			oPS.setString(3, lastName);
-			oPS.setString(4, email);
-			oPS.setString(5, password);
-			oPS.setInt(6, userStatusId);
-			oPS.setInt(7, locationId);
-			oPS.execute();
+			int userId = user.getUserId();
+			String firstName = user.getFirstName();
+			String lastName = user.getLastName();
+			String email = user.getEmail();
+			String password = user.getPassword();
+			int userStatusId = user.getUserStatusId();
+			int locationId = user.getLocationId();
+			
+			CallableStatement oCSF = connection.prepareCall("{?=call sp_insert_user(?,?,?,?,?,?,?)}");
+			oCSF.setInt(2, userId);
+			oCSF.setString(3, firstName);
+			oCSF.setString(4, lastName);
+			oCSF.setString(5, email);
+			oCSF.setString(6, password);
+			oCSF.setInt(7, userStatusId);
+			oCSF.setInt(8, locationId);
+			oCSF.execute();
+			oCSF.close();
 		}catch(Exception e){
 			System.out.println(e.getMessage());
 		}	
 	}
-	public void deleteUserById(int id){
+	public void deleteById(int id){
 		try{
 			Statement usersSt = connection.createStatement();
 			usersSt.executeQuery("Delete from users where user_id = "+id);
@@ -41,7 +49,7 @@ public class UserService {
 			System.out.println(e.getMessage());
 		}
 	}
-	public ArrayList<User> getAllUsers(){
+	public ArrayList<User> getAll(){
 
 		ArrayList<User> users = new ArrayList<User>();
 		
@@ -66,7 +74,7 @@ public class UserService {
 		}
 		return users;
 	}
-	public User getUserById(int id){
+	public User getById(int id){
 		User user = null;
 		
 		try{
@@ -88,6 +96,30 @@ public class UserService {
 		}	
 		
 		return user;
+	}
+	public void UpdateById(User user){
+		try{
+			int userId = user.getUserId();
+			String firstName = user.getFirstName();
+			String lastName = user.getLastName();
+			String email = user.getEmail();
+			String password = user.getPassword();
+			int userStatusId = user.getUserStatusId();
+			int locationId = user.getLocationId();
+			
+			CallableStatement oCSF = connection.prepareCall("{?=call sp_update_user(?,?,?,?,?,?,?)}");
+			oCSF.setInt(2, userId);
+			oCSF.setString(3, firstName);
+			oCSF.setString(4, lastName);
+			oCSF.setString(5, email);
+			oCSF.setString(6, password);
+			oCSF.setInt(7, userStatusId);
+			oCSF.setInt(8, locationId);
+			oCSF.execute();
+			oCSF.close();
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}	
 	}
 	
 	
