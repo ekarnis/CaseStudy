@@ -17,22 +17,23 @@ public class UserService {
 		super();
 		this.connection = connection;
 	}
-	void addUser(int userId, String firstName, String lastName, String email, String password, int userStatusId,
+	public void addUser(int userId, String firstName, String lastName, String email, String password, int userStatusId,
 			int locationId){
 		try{
 			PreparedStatement oPS = connection.prepareStatement("insert into users values (?,?,?,?,?,?,?)");
 			oPS.setInt(1, userId);
 			oPS.setString(2, firstName);
-			oPS.setString(2, lastName);
-			oPS.setString(2, email);
-			oPS.setString(2, password);
-			oPS.setInt(1, userStatusId);
-			oPS.setInt(1, locationId);
+			oPS.setString(3, lastName);
+			oPS.setString(4, email);
+			oPS.setString(5, password);
+			oPS.setInt(6, userStatusId);
+			oPS.setInt(7, locationId);
 			oPS.execute();
 		}catch(Exception e){
 			System.out.println(e.getMessage());
-		}	}
-	void deleteUserById(int id){
+		}	
+	}
+	public void deleteUserById(int id){
 		try{
 			Statement usersSt = connection.createStatement();
 			usersSt.executeQuery("Delete from users where user_id = "+id);
@@ -40,7 +41,7 @@ public class UserService {
 			System.out.println(e.getMessage());
 		}
 	}
-	ArrayList<User> getAllUsers(){
+	public ArrayList<User> getAllUsers(){
 
 		ArrayList<User> users = new ArrayList<User>();
 		
@@ -65,7 +66,7 @@ public class UserService {
 		}
 		return users;
 	}
-	User getUserById(int id){
+	public User getUserById(int id){
 		User user = null;
 		
 		try{
