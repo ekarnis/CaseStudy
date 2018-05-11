@@ -3,13 +3,13 @@ package CaseStudy;
 public class Menu {
 	int id;
 	String name;
-	String vegetarian;
+	char vegetarian;
 	String description;
 	int slot_ID;
 	String photo;
 	float price;
 	
-	public Menu(int id, String name, String vegetarian, String description, int slot_ID, String photo, float price) {
+	public Menu(int id, String name, char vegetarian, String description, int slot_ID, String photo, float price) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -19,6 +19,7 @@ public class Menu {
 		this.photo = photo;
 		this.price = price;
 	}
+	
 
 	public int getId() {
 		return id;
@@ -36,11 +37,11 @@ public class Menu {
 		this.name = name;
 	}
 
-	public String getVegetarian() {
+	public char getVegetarian() {
 		return vegetarian;
 	}
 
-	public void setVegetarian(String vegetarian) {
+	public void setVegetarian(char vegetarian) {
 		this.vegetarian = vegetarian;
 	}
 
@@ -75,6 +76,14 @@ public class Menu {
 	public void setPrice(float price) {
 		this.price = price;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Menu [id=" + id + ", name=" + name + ", vegetarian=" + vegetarian + ", description=" + description
+				+ ", slot_ID=" + slot_ID + ", photo=" + photo + ", price=" + price + "]";
+	}
+	
 	
 	
 }
