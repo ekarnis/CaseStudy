@@ -1,6 +1,6 @@
-addByID(class)
+add(class)
 deleteByID(int ID)
 getAll()
 getByID(int ID)
-updateByID(class)
+update(class)
 
