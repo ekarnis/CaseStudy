@@ -2,20 +2,23 @@ package CaseStudy;
 
 public class User {
 	
-	int userId;
+	String userId;
 	String firstName;
 	String lastName;
 	String email;
 	String password;
-	int userStatusId;
-	int locationId;
+	String userStatusId;
+	String locationId;
 	public User() {
 		super();
 	}
 
-	public User(int userId, String firstName, String lastName, String email, String password, int userStatusId,
-			int locationId) {
+	public User(String userId, String firstName, String lastName, String email, String password, String userStatusId,
+			String locationId) throws IdException{
 		super();
+        if(userId.length() < 7)
+	           throw new IdException("Id can't be less than 7 characters");
+
 		this.userId = userId;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -25,10 +28,13 @@ public class User {
 		this.locationId = locationId;
 	}
 
-	public int getUserId() {
+	public String getUserId() {
 		return userId;
 	}
-	public void setUserId(int userId) {
+	public void setUserId(String userId) throws IdException{
+        if(userId.length() < 7)
+	           throw new IdException("Id can't be less than 7 characters");
+        
 		this.userId = userId;
 	}
 	public String getFirstName() {
@@ -55,16 +61,20 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public int getUserStatusId() {
+	public String getUserStatusId() {
 		return userStatusId;
 	}
-	public void setUserStatusId(int userStatusId) {
+	public void setUserStatusId(String userStatusId) throws IdException{
+        if(userStatusId.length() < 7)
+	           throw new IdException("Id can't be less than 7 characters");
 		this.userStatusId = userStatusId;
 	}
-	public int getLocationId() {
+	public String getLocationId(){
 		return locationId;
 	}
-	public void setLocationId(int locationId) {
+	public void setLocationId(String locationId) throws IdException{
+        if(locationId.length() < 7)
+	           throw new IdException("Id can't be less than 7 characters");
 		this.locationId = locationId;
 	}
 	@Override

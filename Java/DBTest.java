@@ -22,16 +22,23 @@ public class DBTest {
 			System.out.println("Connection Successful");
 			
 			UserService us = new UserService(con);
-			us.deleteUserById(0);
+			us.deleteById("0");
 			
-			ArrayList<User> users = us.getAllUsers();
+			ArrayList<User> users = us.getAll();
 			
 			for(User user: users){
 				System.out.println(user);
 			}
 			
-			User usId = us.getUserById(0);
+			User usId = us.getById("0");
 			System.out.println(usId);
+			
+			try{
+				User user = new User("hey", "hi", "","","","","");
+				us.add(user);
+			}catch(IdException e){
+				e.printStackTrace();
+			}
 						
 			con.close();
 			
@@ -48,17 +55,24 @@ public class DBTest {
 			System.out.println("Connection Successful");
 			
 			UserStatusService uss = new UserStatusService(con);
-			uss.deleteUserStatusById(0);
+			uss.deleteById(0);
 			
-			ArrayList<UserStatus> userStatuses = uss.getAllUserStatuses();
+			ArrayList<UserStatus> userStatuses = uss.getAll();
 			
 			for(UserStatus userStatus: userStatuses){
 				System.out.println(userStatus);
 			}
 			
-			UserStatus usSId = uss.getUserStatusById(0);
+			UserStatus usSId = uss.getById(0);
 			System.out.println(usSId);
-						
+			
+			try{
+				UserStatus userStatus = new UserStatus("hey", "hi");
+				uss.add(userStatus);
+			}catch(IdException e){
+				e.printStackTrace();
+			}
+
 			con.close();
 			
 		}catch(Exception ex){

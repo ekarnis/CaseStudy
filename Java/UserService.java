@@ -3,6 +3,7 @@ package CaseStudy;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -19,33 +20,33 @@ public class UserService {
 	}
 	public void add(User user){
 		try{
-			int userId = user.getUserId();
+			String userId = user.getUserId();
 			String firstName = user.getFirstName();
 			String lastName = user.getLastName();
 			String email = user.getEmail();
 			String password = user.getPassword();
-			int userStatusId = user.getUserStatusId();
-			int locationId = user.getLocationId();
+			String userStatusId = user.getUserStatusId();
+			String locationId = user.getLocationId();
 			
 			CallableStatement oCSF = connection.prepareCall("{?=call sp_insert_user(?,?,?,?,?,?,?)}");
-			oCSF.setInt(2, userId);
+			oCSF.setString(2, userId);
 			oCSF.setString(3, firstName);
 			oCSF.setString(4, lastName);
 			oCSF.setString(5, email);
 			oCSF.setString(6, password);
-			oCSF.setInt(7, userStatusId);
-			oCSF.setInt(8, locationId);
+			oCSF.setString(7, userStatusId);
+			oCSF.setString(8, locationId);
 			oCSF.execute();
 			oCSF.close();
-		}catch(Exception e){
+		}catch(SQLException e){
 			System.out.println(e.getMessage());
 		}	
 	}
-	public void deleteById(int id){
+	public void deleteById(String id){
 		try{
 			Statement usersSt = connection.createStatement();
 			usersSt.executeQuery("Delete from users where user_id = "+id);
-		}catch(Exception e){
+		}catch(SQLException e){
 			System.out.println(e.getMessage());
 		}
 	}
@@ -59,13 +60,13 @@ public class UserService {
 			
 			while(usersRs.next()){
 				User user = new User(
-						usersRs.getInt(1),
+						usersRs.getString(1),
 						usersRs.getString(2),
 						usersRs.getString(3),
 						usersRs.getString(4),
 						usersRs.getString(5),
-						usersRs.getInt(6),
-						usersRs.getInt(7)
+						usersRs.getString(6),
+						usersRs.getString(7)
 						); 
 				users.add(user);
 			}
@@ -74,7 +75,7 @@ public class UserService {
 		}
 		return users;
 	}
-	public User getById(int id){
+	public User getById(String id){
 		User user = null;
 		
 		try{
@@ -83,13 +84,13 @@ public class UserService {
 			
 			usersRs.next();
 			user = new User(
-					usersRs.getInt(1),
+					usersRs.getString(1),
 					usersRs.getString(2),
 					usersRs.getString(3),
 					usersRs.getString(4),
 					usersRs.getString(5),
-					usersRs.getInt(6),
-					usersRs.getInt(7)
+					usersRs.getString(6),
+					usersRs.getString(7)
 					); 
 		}catch(Exception e){
 			System.out.println(e.getMessage());
@@ -99,25 +100,25 @@ public class UserService {
 	}
 	public void UpdateById(User user){
 		try{
-			int userId = user.getUserId();
+			String userId = user.getUserId();
 			String firstName = user.getFirstName();
 			String lastName = user.getLastName();
 			String email = user.getEmail();
 			String password = user.getPassword();
-			int userStatusId = user.getUserStatusId();
-			int locationId = user.getLocationId();
+			String userStatusId = user.getUserStatusId();
+			String locationId = user.getLocationId();
 			
 			CallableStatement oCSF = connection.prepareCall("{?=call sp_update_user(?,?,?,?,?,?,?)}");
-			oCSF.setInt(2, userId);
+			oCSF.setString(2, userId);
 			oCSF.setString(3, firstName);
 			oCSF.setString(4, lastName);
 			oCSF.setString(5, email);
 			oCSF.setString(6, password);
-			oCSF.setInt(7, userStatusId);
-			oCSF.setInt(8, locationId);
+			oCSF.setString(7, userStatusId);
+			oCSF.setString(8, locationId);
 			oCSF.execute();
 			oCSF.close();
-		}catch(Exception e){
+		}catch(SQLException e){
 			System.out.println(e.getMessage());
 		}	
 	}

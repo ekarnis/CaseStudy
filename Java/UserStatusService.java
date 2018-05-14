@@ -3,6 +3,7 @@ package CaseStudy;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -19,25 +20,25 @@ public class UserStatusService {
 		this.connection = connection;
 	}
 	
-	public void add(UserStatus userStatus){
+	public void add(UserStatus userStatus) {
 		try{
-			int userStatusId = userStatus.getUserStatusId();
+			String userStatusId = userStatus.getUserStatusId();
 			String userStatusName = userStatus.getUserStatus();
 			
 			CallableStatement oCSF = connection.prepareCall("{?=call sp_insert_user_status(?,?)}");
-			oCSF.setInt(2,userStatusId);
+			oCSF.setString(2,userStatusId);
 			oCSF.setString(3, userStatusName);
 			oCSF.execute();
 			oCSF.close();
-		}catch(Exception e){
+		}catch(SQLException e){
 			System.out.println(e.getMessage());
-		}	
+		}
 	}
 	public void deleteById(int id){
 		try{
 			Statement usersSt = connection.createStatement();
 			usersSt.executeQuery("Delete from user_statuses where user_status_id = "+id);
-		}catch(Exception e){
+		}catch(SQLException e){
 			System.out.println(e.getMessage());
 		}
 	}
@@ -50,7 +51,7 @@ public class UserStatusService {
 			
 			usersRs.next();
 			userStatus = new UserStatus(
-					usersRs.getInt(1),
+					usersRs.getString(1),
 					usersRs.getString(2)
 					); 
 		}catch(Exception e){
@@ -68,7 +69,7 @@ public class UserStatusService {
 			
 			while(userStatusesRs.next()){
 				UserStatus userStatus = new UserStatus(
-						userStatusesRs.getInt(1),
+						userStatusesRs.getString(1),
 						userStatusesRs.getString(2)
 						); 
 				userStatuses.add(userStatus);
@@ -80,15 +81,15 @@ public class UserStatusService {
 	}
 	public void updateById(UserStatus userStatus){
 		try{
-			int userStatusId = userStatus.getUserStatusId();
+			String userStatusId = userStatus.getUserStatusId();
 			String userStatusName = userStatus.getUserStatus();
 			
 			CallableStatement oCSF = connection.prepareCall("{?=call sp_update_user_status(?,?)}");
-			oCSF.setInt(2,userStatusId);
+			oCSF.setString(2,userStatusId);
 			oCSF.setString(3, userStatusName);
 			oCSF.execute();
 			oCSF.close();
-		}catch(Exception e){
+		}catch(SQLException e){
 			System.out.println(e.getMessage());
 		}	
 	}
