@@ -1,38 +1,38 @@
 create table time_slots(
-	time_slot_id int primary key,
+	time_slot_id varchar(4000) primary key,
 	slot_start int,
 	slot_end int,
 	slot_name varchar(4000)
 );
 create table items(
-	item_id int primary key,
+	item_id varchar(4000) primary key,
 	name varchar(4000),
 	vegetarian char(1),
 	description varchar(4000),
-	time_slot_id int references time_slots(time_slot_id),
+	time_slot_id varchar(4000) references time_slots(time_slot_id),
 	photo varchar(4000),
 	price number(5,2),
 	constraint check_vegetarian
 	check(vegetarian in ('y', 'n'))
 );
 create table specials(
-	item_id int references items(item_id) ON DELETE CASCADE,
+	item_id varchar(4000) references items(item_id) ON DELETE CASCADE,
 	discount_percentage int
 );
 create table combos(
-	combo_id int references items(item_id),
-	item_id int references items(item_id)
+	combo_id varchar(4000) references items(item_id),
+	item_id varchar(4000) references items(item_id)
 );
 create table delivery_statuses(
-	delivery_status_id int primary key,
+	delivery_status_id varchar(4000) primary key,
 	delivery_status varchar(4000)
 );
 create table delivery_methods(
-	delivery_method_id int primary key,
+	delivery_method_id varchar(4000) primary key,
 	delivery_method varchar(4000)
 );
 create table locations(
-	location_id int primary key,
+	location_id varchar(4000) primary key,
 	street varchar(4000),
 	city varchar(4000),
 	state varchar(4000),
@@ -40,46 +40,46 @@ create table locations(
 	zip varchar(4000)
 );
 create table user_statuses(
-	user_status_id int primary key,
+	user_status_id varchar(4000) primary key,
 	user_status varchar(4000)
 );
 create table users(
-	user_id int primary key,
+	user_id varchar(4000) primary key,
 	first varchar(4000),
 	last varchar(4000),
 	email varchar(4000) not null,
 	password varchar(4000) not null,
-	user_status_id int references user_statuses(user_status_id),
+	user_status_id varchar(4000) references user_statuses(user_status_id),
 	location_id varchar(4000)
 );
 create table cards(
-	card_id int primary key,
-	user_id int references users(user_id) ON DELETE CASCADE,
+	card_id varchar(4000) primary key,
+	user_id varchar(4000) references users(user_id) ON DELETE CASCADE,
 	card_number int,
 	expiry_date date,
 	security_code int
 );
 create table stores(
-	store_id int primary key,
-	location_id int references locations(location_id),
+	store_id varchar(4000) primary key,
+	location_id varchar(4000) references locations(location_id),
 	store varchar(4000),
 	phone_number int,
-	manager_id int references users(user_id),
+	manager_id varchar(4000) references users(user_id),
 	open_time int,
 	close_time int
 );
 create table orders(
-	order_id int primary key,
-	user_id int references users(user_id),
+	order_id varchar(4000) primary key,
+	user_id varchar(4000) references users(user_id),
 	placed_timestamp int,
 	delivery_timestamp int,
-	card_id int references cards(card_id),
+	card_id varchar(4000) references cards(card_id),
 	instructions varchar(4000),
-	delivery_method_id int references delivery_methods(delivery_method_id),
-	store_id int references stores(store_id),
-	delivery_status_id int references delivery_statuses(delivery_status_id)
+	delivery_method_id varchar(4000) references delivery_methods(delivery_method_id),
+	store_id varchar(4000) references stores(store_id),
+	delivery_status_id varchar(4000) references delivery_statuses(delivery_status_id)
 );
 create table order_items(
-	order_id int references orders(order_id),
-	item_id int references items(item_id) 
+	order_id varchar(4000) references orders(order_id),
+	item_id varchar(4000) references items(item_id) 
 );
