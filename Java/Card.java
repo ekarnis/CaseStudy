@@ -4,17 +4,17 @@ import java.sql.Date;
 
 public class Card {
 	
-	int cardId;
-	int userId;
-	int cardNumber;
+	String cardId;
+	String userId;
+	String cardNumber;
 	Date expiryDate;
-	int securityCode;
+	String securityCode;
 	
 	public Card() {
 		super();
 	} 
 	
-	public Card(int cardId, int userId, int cardNumber, Date expiryDate, int securityCode) {
+	public Card(String cardId, String userId, String cardNumber, Date expiryDate, String securityCode) {
 		super();
 		this.cardId = cardId;
 		this.userId = userId;
@@ -23,22 +23,22 @@ public class Card {
 		this.securityCode = securityCode;
 	}
 	
-	public int getCardId() {
+	public String getCardId() {
 		return cardId;
 	}
-	public void setCardId(int cardId) {
+	public void setCardId(String cardId) {
 		this.cardId = cardId;
 	}
-	public int getUserId() {
+	public String getUserId() {
 		return userId;
 	}
-	public void setUserId(int userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public int getCardNumber() {
+	public String getCardNumber() {
 		return cardNumber;
 	}
-	public void setCardNumber(int cardNumber) {
+	public void setCardNumber(String cardNumber) {
 		this.cardNumber = cardNumber;
 	}
 	public Date getExpiryDate() {
@@ -47,10 +47,10 @@ public class Card {
 	public void setExpiryDate(Date expiryDate) {
 		this.expiryDate = expiryDate;
 	}
-	public int getSecurityCode() {
+	public String getSecurityCode() {
 		return securityCode;
 	}
-	public void setSecurityCode(int securityCode) {
+	public void setSecurityCode(String securityCode) {
 		this.securityCode = securityCode;
 	}
 	@Override
