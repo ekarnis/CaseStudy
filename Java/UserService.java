@@ -98,7 +98,7 @@ public class UserService {
 		
 		return user;
 	}
-	public void UpdateById(User user){
+	public void Update(User user){
 		try{
 			String userId = user.getUserId();
 			String firstName = user.getFirstName();

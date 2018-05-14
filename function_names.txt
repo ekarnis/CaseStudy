@@ -1,6 +1,6 @@
 add(class)
-deleteByID(int ID)
+deleteByID(String ID)
 getAll()
-getByID(int ID)
+getByID(String ID)
 update(class)
 

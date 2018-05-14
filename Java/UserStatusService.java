@@ -79,7 +79,7 @@ public class UserStatusService {
 		}
 		return userStatuses;
 	}
-	public void updateById(UserStatus userStatus){
+	public void update(UserStatus userStatus){
 		try{
 			String userStatusId = userStatus.getUserStatusId();
 			String userStatusName = userStatus.getUserStatus();
