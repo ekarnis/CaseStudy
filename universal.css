@@ -26,7 +26,7 @@ nav{
 #nav_container{
 	display: flex;
 	justify-content: space-between;
-	width: 40vw;
+	width: 50vw;
 	right: 5vw;
 }
 
@@ -60,4 +60,9 @@ footer{
 
 h1{
 	font-size: 6vh;
+}
+
+#spacer{
+	height: 3vh;
+	width: 100%;
 }
