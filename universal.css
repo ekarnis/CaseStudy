@@ -1,5 +1,13 @@
+html, body
+{
+    margin: 0;
+    padding: 0;
+}
+
 body{
 	background-color: #EEEEEE; 
+	display: flex;
+	flex-flow: column;
 }
 
 nav{
@@ -9,7 +17,6 @@ nav{
 	color: white;
 	left:0;
 	right: 0;
-	position: fixed;
 	top: 0;
 	width: 100vw;
 	height: 10vh;
@@ -33,6 +40,7 @@ nav a{
 #main_container{
 	background-color: white; 
 	margin: 5% 6% 5% 5%;
+	top:100vh;
 	min-height:75vh;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
@@ -48,4 +56,8 @@ footer{
 	margin: -5% 6% 0% 5%;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	padding: 0.2vh 1vw;
+}
+
+h1{
+	font-size: 6vh;
 }
