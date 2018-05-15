@@ -1,7 +1,7 @@
-package CaseStudy;
+package caseStudy;
 
 public class Menu {
-	int id;
+	String id;
 	String name;
 	char vegetarian;
 	String description;
@@ -9,7 +9,7 @@ public class Menu {
 	String photo;
 	float price;
 	
-	public Menu(int id, String name, char vegetarian, String description, int slot_ID, String photo, float price) {
+	public Menu(String id, String name, char vegetarian, String description, int slot_ID, String photo, float price) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -21,11 +21,11 @@ public class Menu {
 	}
 	
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
