@@ -70,7 +70,7 @@ insert into stores
 	values ('0',0,'Deer Valley',1,0,0800,2100);
 
 insert into orders 
-	values ('0',0,0,0,0,'hey',0,0,0);
+	values ('0','0',0,0,'0','hey','0','0','0');
 
 insert into order_items
 	values ('0','0');
