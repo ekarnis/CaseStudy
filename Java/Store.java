@@ -3,11 +3,11 @@ package CaseStudy;
 import java.sql.Date;
 
 public class Store {
-	int storeId;
-	int locationId;
+	String storeId;
+	String locationId;
 	String storeName;
-	int phoneNumber;
-	int managerId;
+	String phoneNumber;
+	String managerId;
 	Date openTime;
 	Date closeTime;
 	
@@ -15,7 +15,7 @@ public class Store {
 		super();
 	}
 	
-	public Store(int storeId, int locationId, String storeName, int phoneNumber, int managerId, Date openTime,
+	public Store(String storeId, String locationId, String storeName, String phoneNumber, String managerId, Date openTime,
 			Date closeTime) {
 		super();
 		this.storeId = storeId;
@@ -27,16 +27,16 @@ public class Store {
 		this.closeTime = closeTime;
 	}
 	
-	public int getStoreId() {
+	public String getStoreId() {
 		return storeId;
 	}
-	public void setStoreId(int storeId) {
+	public void setStoreId(String storeId) {
 		this.storeId = storeId;
 	}
-	public int getLocationId() {
+	public String getLocationId() {
 		return locationId;
 	}
-	public void setLocationId(int locationId) {
+	public void setLocationId(String locationId) {
 		this.locationId = locationId;
 	}
 	public String getStoreName() {
@@ -45,16 +45,16 @@ public class Store {
 	public void setStoreName(String storeName) {
 		this.storeName = storeName;
 	}
-	public int getPhoneNumber() {
+	public String getPhoneNumber() {
 		return phoneNumber;
 	}
-	public void setPhoneNumber(int phoneNumber) {
+	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-	public int getManagerId() {
+	public String getManagerId() {
 		return managerId;
 	}
-	public void setManagerId(int managerId) {
+	public void setManagerId(String managerId) {
 		this.managerId = managerId;
 	}
 	public Date getOpenTime() {

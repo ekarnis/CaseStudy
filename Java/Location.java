@@ -2,7 +2,7 @@ package CaseStudy;
 
 public class Location {
 	
-	int locationId;
+	String locationId;
 	String street;
 	String city;
 	String country;
@@ -13,7 +13,7 @@ public class Location {
 		super();
 	}
 	
-	public Location(int locationId, String street, String city, String country, String state, String zip) {
+	public Location(String locationId, String street, String city, String country, String state, String zip) {
 		super();
 		this.locationId = locationId;
 		this.street = street;
@@ -23,11 +23,11 @@ public class Location {
 		this.zip = zip;
 	}
 
-	public int getlocationId() {
+	public String getLocationId() {
 		return locationId;
 	}
 
-	public void setlocationId(int locationId) {
+	public void setLocationId(String locationId) {
 		this.locationId = locationId;
 	}
 
