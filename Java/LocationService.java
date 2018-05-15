@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class LocationService implements Service{
+public class LocationService implements Service<Location>{
 	
 	Connection connection;
 	
@@ -94,7 +94,7 @@ public class LocationService implements Service{
 		
 		return location;
 	}
-	public void Update(Location location){
+	public void update(Location location){
 		try{
 			String locationId = location.getLocationId();
 			String street = location.getStreet();

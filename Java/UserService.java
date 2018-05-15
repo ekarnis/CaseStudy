@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class UserService {
+public class UserService implements Service<User>{
 	
 	Connection connection;
 	
@@ -98,7 +98,7 @@ public class UserService {
 		
 		return user;
 	}
-	public void Update(User user){
+	public void update(User user){
 		try{
 			String userId = user.getUserId();
 			String firstName = user.getFirstName();

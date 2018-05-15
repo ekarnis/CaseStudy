@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class StoreService implements Service{
+public class StoreService implements Service<Store>{
 	
 	Connection connection;
 	
@@ -100,7 +100,7 @@ public class StoreService implements Service{
 		
 		return store;
 	}
-	public void Update(Store store){
+	public void update(Store store){
 		try{
 			String storeId = store.getStoreId();
 			String locationId = store.getLocationId();

@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class UserStatusService {
+public class UserStatusService implements Service<UserStatus>{
 
 	
 	Connection connection;
@@ -34,7 +34,7 @@ public class UserStatusService {
 			System.out.println(e.getMessage());
 		}
 	}
-	public void deleteById(int id){
+	public void deleteById(String id){
 		try{
 			Statement usersSt = connection.createStatement();
 			usersSt.executeQuery("Delete from user_statuses where user_status_id = "+id);
@@ -42,7 +42,7 @@ public class UserStatusService {
 			System.out.println(e.getMessage());
 		}
 	}
-	public UserStatus getById(int id){
+	public UserStatus getById(String id){
 		UserStatus userStatus = null;
 		
 		try{
@@ -93,4 +93,5 @@ public class UserStatusService {
 			System.out.println(e.getMessage());
 		}	
 	}
+
 }

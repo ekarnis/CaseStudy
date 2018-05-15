@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class CardService implements Service{
+public class CardService implements Service<Card>{
 	
 	Connection connection;
 	
@@ -91,7 +91,8 @@ public class CardService implements Service{
 		
 		return card;
 	}
-	public void Update(Card card){
+
+	public void update(Card card){
 		try{
 			String cardId = card.getCardId();
 			String userId = card.getUserId();
@@ -111,5 +112,5 @@ public class CardService implements Service{
 			System.out.println(e.getMessage());
 		}	
 	}
-	
+
 }
