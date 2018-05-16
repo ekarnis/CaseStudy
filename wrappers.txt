@@ -1,0 +1,4 @@
+bool login(String username, string password)
+
+bool register(String email, etc)
+

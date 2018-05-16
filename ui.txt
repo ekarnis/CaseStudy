@@ -5,7 +5,7 @@ b. Go back
 
 1. Login
 2. Register
-3. Anonymous Login
+3. Menu
 
 
 Login

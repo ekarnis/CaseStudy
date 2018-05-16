@@ -47,7 +47,7 @@ create table users(
 	user_id varchar(4000) primary key,
 	first varchar(4000),
 	last varchar(4000),
-	email varchar(4000) not null,
+	email varchar(4000) not null unique,
 	password varchar(4000) not null,
 	user_status_id varchar(4000) references user_statuses(user_status_id),
 	location_id varchar(4000)
