@@ -7,7 +7,6 @@ drop table users;
 drop table user_statuses;
 drop table delivery_methods;
 drop table delivery_statuses;
-drop table combos;
 drop table specials;
 drop table items;
 drop table item_types;

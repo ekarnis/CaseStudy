@@ -7,7 +7,6 @@ delete users;
 delete user_statuses;
 delete delivery_methods;
 delete delivery_statuses;
-delete combos;
 delete specials;
 delete items;
 delete item_types;

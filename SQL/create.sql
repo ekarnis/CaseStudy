@@ -27,10 +27,7 @@ create table specials(
 	item_id varchar(4000) references items(item_id) ON DELETE CASCADE,
 	discount_percentage int
 );
-create table combos(
-	combo_id varchar(4000) references items(item_id),
-	item_id varchar(4000) references items(item_id)
-);
+
 create table delivery_statuses(
 	delivery_status_id varchar(4000) primary key,
 	delivery_status varchar(4000)

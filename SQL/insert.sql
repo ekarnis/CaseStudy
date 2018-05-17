@@ -8,7 +8,7 @@ insert into item_types
 insert into item_types
 	values ('2', 'Entree');
 insert into item_types
-	values ('3', 'Combo');
+	values ('3', 'Package');
 
 
 insert into items
@@ -16,9 +16,6 @@ insert into items
 
 insert into specials
 	values ('0', 10);
-
-insert into combos
-	values ('0','0');
 
 insert into delivery_statuses
 	values ('0', 'pending');
