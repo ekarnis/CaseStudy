@@ -1,4 +1,4 @@
-package caseStudy;
+package services;
 
 public class Special {
 	String item_ID;

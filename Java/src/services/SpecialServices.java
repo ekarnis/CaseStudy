@@ -8,7 +8,8 @@ import java.sql.Types;
 import java.util.ArrayList;
 
 
-public class SpecialServices implements ServiceOperations<Special> {
+
+public class SpecialServices implements Service<Special> {
 	Connection con;
 	
 	public SpecialServices(Connection con) {
@@ -16,7 +17,8 @@ public class SpecialServices implements ServiceOperations<Special> {
 		this.con = con;
 	}
 
-	public void add(Special spec){
+	@Override
+	public boolean add(Special spec){
 		CallableStatement oracleCallStmt;
 		try {
 			oracleCallStmt = con.prepareCall("{call insertSpecial(?,?)}");
@@ -25,12 +27,15 @@ public class SpecialServices implements ServiceOperations<Special> {
 			oracleCallStmt.execute();
 			System.out.println("Successful?");
 			con.close();
+			return true;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return false;
 	}
 	
+	@Override
 	public void deleteById(String id){
 		CallableStatement stmt;
 		try {
@@ -44,7 +49,7 @@ public class SpecialServices implements ServiceOperations<Special> {
 	}
 	
 	@Override
-	public Special getByID(String id){
+	public Special getById(String id){
 		try {
 			ResultSet rs = con.createStatement().executeQuery("SELECT * FROM specials WHERE item_id = " + id);
 			rs.next();
@@ -83,9 +88,5 @@ public class SpecialServices implements ServiceOperations<Special> {
 		
 	}
 
-	@Override
-	public void deleteByID(int id) {
-		// TODO Auto-generated method stub
-		
-	}
+
 }
