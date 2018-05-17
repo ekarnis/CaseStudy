@@ -4,10 +4,18 @@ create table time_slots(
 	slot_end int,
 	slot_name varchar(4000)
 );
+
+create table item_types(
+	item_type_id varchar(4000) primary key,
+	item_type varchar(4000)
+);
+
+
 create table items(
 	item_id varchar(4000) primary key,
 	name varchar(4000),
 	vegetarian char(1),
+	item_type_id varchar(4000) references item_types(item_type_id),
 	description varchar(4000),
 	time_slot_id varchar(4000) references time_slots(time_slot_id),
 	photo varchar(4000),
@@ -31,14 +39,6 @@ create table delivery_methods(
 	delivery_method_id varchar(4000) primary key,
 	delivery_method varchar(4000)
 );
-create table locations(
-	location_id varchar(4000) primary key,
-	street varchar(4000),
-	city varchar(4000),
-	state varchar(4000),
-	country varchar(4000),
-	zip varchar(4000)
-);
 create table user_statuses(
 	user_status_id varchar(4000) primary key,
 	user_status varchar(4000)
@@ -47,10 +47,19 @@ create table users(
 	user_id varchar(4000) primary key,
 	first varchar(4000),
 	last varchar(4000),
+	phone varchar(4000),
 	email varchar(4000) not null unique,
 	password varchar(4000) not null,
-	user_status_id varchar(4000) references user_statuses(user_status_id),
-	location_id varchar(4000)
+	user_status_id varchar(4000) references user_statuses(user_status_id)
+);
+create table locations(
+	location_id varchar(4000) primary key,
+	user_id varchar(4000) references users(user_id),
+	street varchar(4000),
+	city varchar(4000),
+	state varchar(4000),
+	country varchar(4000),
+	zip varchar(4000)
 );
 create table cards(
 	card_id varchar(4000) primary key,
