@@ -36,8 +36,10 @@ public class CardService implements Service<Card>{
 			oCSF.setString(6, securityCode);
 			oCSF.execute();
 			oCSF.close();
+			return true;
 		}catch(SQLException e){
 			System.out.println(e.getMessage());
+			return false;
 		}	
 	}
 	public void deleteById(String id){

@@ -19,7 +19,7 @@ public class StoreService implements Service<Store>{
 		super();
 		this.connection = connection;
 	}
-	public void add(Store store){
+	public boolean add(Store store){
 		try{
 			String storeId = store.getStoreId();
 			String locationId = store.getLocationId();
@@ -40,8 +40,10 @@ public class StoreService implements Service<Store>{
 
 			oCSF.execute();
 			oCSF.close();
+			return true;
 		}catch(SQLException e){
 			System.out.println(e.getMessage());
+			return false;
 		}	
 	}
 	public void deleteById(String id){

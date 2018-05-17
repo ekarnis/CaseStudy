@@ -18,7 +18,7 @@ public class LocationService implements Service<Location>{
 		super();
 		this.connection = connection;
 	}
-	public void add(Location location){
+	public boolean add(Location location){
 		try{
 			String locationId = location.getLocationId();
 			String street = location.getStreet();
@@ -36,8 +36,10 @@ public class LocationService implements Service<Location>{
 			oCSF.setString(7, zip);
 			oCSF.execute();
 			oCSF.close();
+			return true;
 		}catch(SQLException e){
 			System.out.println(e.getMessage());
+			return false;
 		}	
 	}
 	public void deleteById(String id){
