@@ -5,21 +5,31 @@ public class Menu {
 	String name;
 	char vegetarian;
 	String description;
+	String type;
 	int slot_ID;
 	String photo;
 	float price;
 	
-	public Menu(String id, String name, char vegetarian, String description, int slot_ID, String photo, float price) {
+	public Menu(String id, String name, char vegetarian, String type, String description, int slot_ID, String photo, float price) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.vegetarian = vegetarian;
+		this.type = type;
 		this.description = description;
 		this.slot_ID = slot_ID;
 		this.photo = photo;
 		this.price = price;
 	}
 	
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
 
 	public String getId() {
 		return id;
@@ -81,9 +91,8 @@ public class Menu {
 	@Override
 	public String toString() {
 		return "Menu [id=" + id + ", name=" + name + ", vegetarian=" + vegetarian + ", description=" + description
-				+ ", slot_ID=" + slot_ID + ", photo=" + photo + ", price=" + price + "]";
+				+ ", type=" + type + ", slot_ID=" + slot_ID + ", photo=" + photo + ", price=" + price + "]";
 	}
-	
-	
+
 	
 }
