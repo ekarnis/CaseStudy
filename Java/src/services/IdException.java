@@ -1,4 +1,4 @@
-package CaseStudy;
+package services;
 
 public class IdException extends Exception{
     /**

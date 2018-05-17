@@ -1,4 +1,4 @@
-package caseStudy;
+package services;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;

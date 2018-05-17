@@ -1,4 +1,4 @@
-package CaseStudy;
+package services;
 
 public class TimeSlots {
 	int slot_ID;

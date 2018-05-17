@@ -1,10 +1,12 @@
-package CaseStudy;
+package services;
+
+import java.util.ArrayList;
 
 public interface Service<E> {
 	public void deleteById(String id);
-	public Boolean add(E obj);
+	public boolean add(E obj);
 	public void update(E obj);
-	public Object getById(String id);
-	public Object getAll();
+	public E getById(String id);
+	public ArrayList<E> getAll();
 
 }

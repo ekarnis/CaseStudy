@@ -1,4 +1,4 @@
-package caseStudy;
+package services;
 
 public class Menu {
 	String id;

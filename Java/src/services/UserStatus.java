@@ -1,4 +1,4 @@
-package CaseStudy;
+package services;
 
 public class UserStatus {
 	String userStatusId;

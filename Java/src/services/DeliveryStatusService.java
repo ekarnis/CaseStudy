@@ -1,4 +1,4 @@
-package caseStudy;
+package services;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -9,7 +9,7 @@ import java.sql.Statement;
 import java.sql.Types;
 import java.util.ArrayList;
 
-public class DeliveryStatusService {
+public class DeliveryStatusService implements Service<DeliveryStatus>{
 	
 	Connection connection;
 	
@@ -20,48 +20,9 @@ public class DeliveryStatusService {
 		super();
 		this.connection = connection;
 	}
-	void addById(DeliveryStatus deliveryStatus){
-		try{
-			CallableStatement statement = connection.prepareCall("{call AddDeliveryStatus(?, ?)}");
-			statement.setInt(1, deliveryStatus.getDelivery_status_id());
-			statement.setString(2, deliveryStatus.getDelivery_status());
-			statement.execute();
-			statement.close();
-			
-		}catch(Exception e){
-			System.out.println(e.getMessage());
-		}	
-	}
 	
-	void updateByID(DeliveryStatus deliveryStatus){
-		String statement = "UPDATE DELIVERY_STATUSES SET DELIVERY_STATUS = ?"
-				+ "WHERE DELIVERY_STATUS_ID = ?";
-		
-		try{
-			PreparedStatement preparedStatement = connection.prepareStatement(statement);
-			
-			preparedStatement.setString(1, deliveryStatus.getDelivery_status());
-			preparedStatement.setInt(2, deliveryStatus.getDelivery_status_id());
-			preparedStatement.executeUpdate();
-		
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-		}
-	}
-	
-	void deleteByID(int id){
-		try{
-			
-			CallableStatement statement = connection.prepareCall("{call DeleteDeliveryStatus(?)}");
-			statement.setInt(1, id);
-			statement.execute();
-			statement.close();
-			
-		}catch(Exception e){
-			System.out.println(e.getMessage());
-		}
-	}
-	ArrayList<DeliveryStatus> getAll(){
+	@Override
+	public ArrayList<DeliveryStatus> getAll(){
 
 		ArrayList<DeliveryStatus> deliveryStatuses = new ArrayList<DeliveryStatus>();
 		
@@ -78,7 +39,51 @@ public class DeliveryStatusService {
 		}
 		return deliveryStatuses;
 	}
-	DeliveryStatus getByID(int id){
+
+	@Override
+	public void deleteById(String id) {
+		try{
+			
+			CallableStatement statement = connection.prepareCall("{call DeleteDeliveryStatus(?)}");
+			statement.setString(1, id);
+			statement.execute();
+			statement.close();
+			
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
+	}
+	@Override
+	public boolean add(DeliveryStatus deliveryStatus) {
+		try{
+			CallableStatement statement = connection.prepareCall("{call AddDeliveryStatus(?, ?)}");
+			statement.setInt(1, deliveryStatus.getDelivery_status_id());
+			statement.setString(2, deliveryStatus.getDelivery_status());
+			statement.execute();
+			statement.close();
+			return true;
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+			return false;
+		}	
+	}
+	@Override
+	public void update(DeliveryStatus deliveryStatus) {
+		String statement = "UPDATE DELIVERY_STATUSES SET DELIVERY_STATUS = ?"
+				+ "WHERE DELIVERY_STATUS_ID = ?";
+		try{
+			PreparedStatement preparedStatement = connection.prepareStatement(statement);
+			
+			preparedStatement.setString(1, deliveryStatus.getDelivery_status());
+			preparedStatement.setInt(2, deliveryStatus.getDelivery_status_id());
+			preparedStatement.executeUpdate();
+		
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	@Override
+	public DeliveryStatus getById(String id) {
 		DeliveryStatus deliveryStatus = null;
 		
 		try{

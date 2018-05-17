@@ -1,4 +1,4 @@
-package caseStudy;
+package services;
 
 import static org.junit.Assert.*;
 
