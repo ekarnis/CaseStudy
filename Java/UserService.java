@@ -18,7 +18,7 @@ public class UserService implements Service<User>{
 		super();
 		this.connection = connection;
 	}
-	public void add(User user){
+	public Boolean add(User user){
 		try{
 			String userId = user.getUserId();
 			String firstName = user.getFirstName();
@@ -38,8 +38,10 @@ public class UserService implements Service<User>{
 			oCSF.setString(8, locationId);
 			oCSF.execute();
 			oCSF.close();
+			return true;
 		}catch(SQLException e){
 			System.out.println(e.getMessage());
+			return false;
 		}	
 	}
 	public void deleteById(String id){
