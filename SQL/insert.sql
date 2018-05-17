@@ -54,7 +54,7 @@ insert into users
 
 
 insert into locations
-	values ('0','0',50.5,'100 example st', 'townville', 'WA', 'USA','01440');
+	values ('0','0','100 example st', 'townville', 'WA', 'USA','01440');
 
 insert into cards
 	values ('0','0',5,(TO_DATE('2003/05/03 21:02:44', 'yyyy/mm/dd hh24:mi:ss')) ,123);
@@ -63,7 +63,7 @@ insert into stores
 	values ('0','0','Deer Valley',1,0,0800,2100);
 
 insert into orders 
-	values ('0','0',2.50,15.50,0,0,'0','hey','0','0','0');
+	values ('0','0',0,0,'0','hey','0','0','0');
 
 insert into order_items
 	values ('0','0');

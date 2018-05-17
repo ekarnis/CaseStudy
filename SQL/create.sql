@@ -52,14 +52,11 @@ create table users(
 create table locations(
 	location_id varchar(4000) primary key,
 	user_id varchar(4000) references users(user_id),
-	tax_rate number(5,2),
 	street varchar(4000),
 	city varchar(4000),
 	state varchar(4000),
 	country varchar(4000),
-	zip varchar(4000),
-	constraint limit_tax
-	check(tax_rate between 0 and 100.00)
+	zip varchar(4000)
 );
 create table cards(
 	card_id varchar(4000) primary key,
@@ -80,8 +77,6 @@ create table stores(
 create table orders(
 	order_id varchar(4000) primary key,
 	user_id varchar(4000) references users(user_id),
-	tip number(5,2),
-	total_price number(7,2),
 	placed_timestamp int,
 	delivery_timestamp int,
 	card_id varchar(4000) references cards(card_id),
