@@ -18,7 +18,7 @@ public class UserService implements Service<User>{
 		super();
 		this.connection = connection;
 	}
-	public Boolean add(User user){
+	public boolean add(User user){
 		try{
 			String userId = user.getUserId();
 			String firstName = user.getFirstName();

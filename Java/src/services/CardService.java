@@ -19,7 +19,7 @@ public class CardService implements Service<Card>{
 		super();
 		this.connection = connection;
 	}
-	public void add(Card card){
+	public boolean add(Card card){
 		try{
 			String cardId = card.getCardId();
 			String userId = card.getUserId();
