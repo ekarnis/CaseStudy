@@ -1,29 +1,32 @@
 package services;
 
-import java.sql.Date;
 import java.util.ArrayList;
 
 public class Order {
 	
-	String order_id;
-	String user_id;
-	int placed_timestamp;
-	int delivery_timestamp;
-	String card_id;
-	String instuctions;
-	String delivery_method_id;
-	String store_id;
-	String delivery_status_id;
+	String order_id; //varchar
+	String user_id; //varchar
+	String tip; //number(5,2)
+	String total_price;//number(7,2)
+	int placed_timestamp; //int
+	int delivery_timestamp; //int
+	String card_id; //varchar
+	String instuctions; //carchar
+	String delivery_method_id; //varchar
+	String store_id; //varchar
+	String delivery_status_id; //varchar
 	
 	//Array to hold order items rather than the order_items table
 	ArrayList<String> item_ids = new ArrayList<String>();
 
-	public Order(String order_id, String user_id, int placed_timestamp, int delivery_timestamp, String card_id,
-			String instuctions, String delivery_method_id, String store_id, String delivery_status_id,
-			ArrayList<String> item_ids) {
+	public Order(String order_id, String user_id, String tip, String total_price, int placed_timestamp,
+			int delivery_timestamp, String card_id, String instuctions, String delivery_method_id, String store_id,
+			String delivery_status_id, ArrayList<String> item_ids) {
 		super();
 		this.order_id = order_id;
 		this.user_id = user_id;
+		this.tip = tip;
+		this.total_price = total_price;
 		this.placed_timestamp = placed_timestamp;
 		this.delivery_timestamp = delivery_timestamp;
 		this.card_id = card_id;
@@ -33,24 +36,25 @@ public class Order {
 		this.delivery_status_id = delivery_status_id;
 		this.item_ids = item_ids;
 	}
-
+	
 	public Order() {
 		super();
 	}
 
 	@Override
 	public String toString() {
-		return "Order [order_id=" + order_id + ", user_id=" + user_id + ", placed_timestamp=" + placed_timestamp
-				+ ", delivery_timestamp=" + delivery_timestamp + ", card_id=" + card_id + ", instuctions=" + instuctions
-				+ ", delivery_method_id=" + delivery_method_id + ", store_id=" + store_id + ", delivery_status_id="
-				+ delivery_status_id + ", item_ids=" + item_ids + "]";
+		return "Order [order_id=" + order_id + ", user_id=" + user_id + ", tip=" + tip + ", total_price=" + total_price
+				+ ", placed_timestamp=" + placed_timestamp + ", delivery_timestamp=" + delivery_timestamp + ", card_id="
+				+ card_id + ", instuctions=" + instuctions + ", delivery_method_id=" + delivery_method_id
+				+ ", store_id=" + store_id + ", delivery_status_id=" + delivery_status_id + ", item_ids=" + item_ids
+				+ "]";
 	}
-
+	
 	public ArrayList<String> getItem_ids() {
 		return item_ids;
 	}
 
-	public void setItem_ids(ArrayList<String> item_ids) {
+	public void setItem_ids(ArrayList<String> item_ids) { 
 		this.item_ids = (ArrayList<String>) item_ids.clone();
 	}
 
@@ -68,6 +72,22 @@ public class Order {
 
 	public void setUser_id(String user_id) {
 		this.user_id = user_id;
+	}
+
+	public String getTip() {
+		return tip;
+	}
+
+	public void setTip(String tip) {
+		this.tip = tip;
+	}
+
+	public String getTotal_price() {
+		return total_price;
+	}
+
+	public void setTotal_price(String total_price) {
+		this.total_price = total_price;
 	}
 
 	public int getPlaced_timestamp() {
