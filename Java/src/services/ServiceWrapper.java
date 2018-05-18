@@ -1,20 +1,30 @@
 package services;
 
+import java.sql.Connection;
+
 public class ServiceWrapper {
 	
+	Connection con;
+	
+	public ServiceWrapper(Connection con) {
+		super();
+		this.con = con;
+	}
+
 	public Boolean login(String email, String password){
 		
-		
-		
-		return true;
+		UserService us = new UserService(con);
+		User candidate = us.getByEmail(email);
+		if(password == candidate.getPassword()) return true;
+		else return false;
 	}
 	
-	public Boolean register(String userId, String firstName, String lastName, String email, String password, String userStatusId,
+	public boolean register(String userId, String firstName, String lastName, String email, String password, String userStatusId,
 			String locationId){
-		Boolean result = false;
+		boolean result = false;
 		try{
 			User user = new User(userId,firstName,lastName,email,password,userStatusId,locationId);
-			UserService us = new UserService();
+			UserService us = new UserService(con);
 			result =  us.add(user);
 		}catch(IdException idEx){
 			System.out.println(idEx);

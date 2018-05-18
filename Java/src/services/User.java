@@ -1,5 +1,7 @@
 package services;
 
+import java.util.ArrayList;
+
 public class User {
 	
 	String userId;
@@ -9,6 +11,7 @@ public class User {
 	String password;
 	String userStatusId;
 	String locationId;
+	ArrayList<Card> cards = new ArrayList<Card>();
 	public User() {
 		super();
 	}

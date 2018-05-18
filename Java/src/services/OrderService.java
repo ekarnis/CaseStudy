@@ -53,8 +53,10 @@ public class OrderService implements Service<Order>{
 				statement.execute();
 				statement.close();
 			}
+			return true;
 		}catch(SQLException e){
 			System.out.println(e.getMessage());
+			return false;
 		}	
 	}
 	
@@ -121,7 +123,7 @@ public class OrderService implements Service<Order>{
 		return orders;
 	}
 	
-	Order getByID(String id){
+	public Order getById(String id){
 		Order order = new Order();
 				try{
 					//Get Order
@@ -145,9 +147,9 @@ public class OrderService implements Service<Order>{
 					resultSet = statement.executeQuery(
 							"SELECT * FROM ORDER_ITEMS WHERE ORDER_ID = " + id);
 					
-					ArrayList<Integer> order_items = new ArrayList<Integer>();
+					ArrayList<String> order_items = new ArrayList<String>();
 					while(resultSet.next()){
-						order_items.add(resultSet.getInt("ITEM_ID"));
+						order_items.add(resultSet.getString("ITEM_ID"));
 					}
 					order.setItem_ids(order_items);	
 				}catch(SQLException e){
@@ -157,7 +159,7 @@ public class OrderService implements Service<Order>{
 				return order;
 	}
 	
-	void update(Order order){
-		//comment
+	public void update(Order order){
+		
 	}
 }

@@ -19,7 +19,8 @@ public class CardService implements Service<Card>{
 		super();
 		this.connection = connection;
 	}
-	public void add(Card card){
+	//asd
+	public boolean add(Card card){
 		try{
 			String cardId = card.getCardId();
 			String userId = card.getUserId();
@@ -35,8 +36,10 @@ public class CardService implements Service<Card>{
 			oCSF.setString(6, securityCode);
 			oCSF.execute();
 			oCSF.close();
+			return true;
 		}catch(SQLException e){
 			System.out.println(e.getMessage());
+			return false;
 		}	
 	}
 	public void deleteById(String id){

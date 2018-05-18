@@ -11,14 +11,11 @@ public class UserService implements Service<User>{
 	
 	Connection connection;
 	
-	public UserService() {
-		super();
-	}
 	public UserService(Connection connection) {
 		super();
 		this.connection = connection;
 	}
-	public Boolean add(User user){
+	public boolean add(User user){
 		try{
 			String userId = user.getUserId();
 			String firstName = user.getFirstName();
@@ -83,6 +80,30 @@ public class UserService implements Service<User>{
 		try{
 			Statement usersSt = connection.createStatement();
 			ResultSet usersRs = usersSt.executeQuery("Select * from Users where user_id = " + id);
+			
+			usersRs.next();
+			user = new User(
+					usersRs.getString(1),
+					usersRs.getString(2),
+					usersRs.getString(3),
+					usersRs.getString(4),
+					usersRs.getString(5),
+					usersRs.getString(6),
+					usersRs.getString(7)
+					); 
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}	
+		
+		return user;
+	}
+	
+	public User getByEmail(String email){
+		User user = null;
+		
+		try{
+			Statement usersSt = connection.createStatement();
+			ResultSet usersRs = usersSt.executeQuery("Select * from Users where email = " + email);
 			
 			usersRs.next();
 			user = new User(

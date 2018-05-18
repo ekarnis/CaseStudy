@@ -20,7 +20,7 @@ public class UserStatusService implements Service<UserStatus>{
 		this.connection = connection;
 	}
 	
-	public void add(UserStatus userStatus) {
+	public boolean add(UserStatus userStatus) {
 		try{
 			String userStatusId = userStatus.getUserStatusId();
 			String userStatusName = userStatus.getUserStatus();
@@ -30,8 +30,10 @@ public class UserStatusService implements Service<UserStatus>{
 			oCSF.setString(3, userStatusName);
 			oCSF.execute();
 			oCSF.close();
+			return true;
 		}catch(SQLException e){
 			System.out.println(e.getMessage());
+			return false;
 		}
 	}
 	public void deleteById(String id){
