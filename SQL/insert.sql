@@ -1,5 +1,4 @@
-insert into time_slots
-	values ('0', 0600, 0900, 'Breakfast');
+insert into time_slots values ('0', 0600, 0900, 'Breakfast');
 
 insert into item_types
 	values ('0', 'Drink');
@@ -11,8 +10,9 @@ insert into item_types
 	values ('3', 'Package');
 
 
-insert into items
-	values ('0', 'Rice', 'y', '1', 'Steamed Basmati Rice', 0, null, 1);
+insert into items values ('0', 'Rice', 'y', '0', 'Steamed Basmati Rice', '0', 'photo', 1);
+
+insert into items values ('1', 'Drink', 'y', '0', 'A refreshing drink', '0', 'photo', 1.50);
 
 insert into specials
 	values ('0', 10);

@@ -1,11 +1,12 @@
 package services;
 
-public class TimeSlots {
-	int slot_ID;
+public class TimeSlot {
+	String slot_ID;
 	int timeStart;
 	int timeEnd;
 	String timeName;
-	public TimeSlots(int slot_ID, int timeStart, int timeEnd, String timeName) {
+	
+	public TimeSlot(String slot_ID, int timeStart, int timeEnd, String timeName) {
 		super();
 		this.slot_ID = slot_ID;
 		this.timeStart = timeStart;
@@ -13,10 +14,10 @@ public class TimeSlots {
 		this.timeName = timeName;
 	}
 	
-	public int getSlot_ID() {
+	public String getSlot_ID() {
 		return slot_ID;
 	}
-	public void setSlot_ID(int slot_ID) {
+	public void setSlot_ID(String slot_ID) {
 		this.slot_ID = slot_ID;
 	}
 	public int getTimeStart() {
@@ -37,7 +38,5 @@ public class TimeSlots {
 	public void setTimeName(String timeName) {
 		this.timeName = timeName;
 	}
-	
-	
 	
 }
