@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import domain.User;
+
 public class UserService implements Service<User>{
 	
 	Connection connection;

@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
 
+import domain.Special;
+
 
 
 public class SpecialServices implements Service<Special> {

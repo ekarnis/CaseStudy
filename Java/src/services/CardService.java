@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import domain.Card;
+
 public class CardService implements Service<Card>{
 	
 	Connection connection;
@@ -115,5 +117,6 @@ public class CardService implements Service<Card>{
 			System.out.println(e.getMessage());
 		}	
 	}
+
 
 }

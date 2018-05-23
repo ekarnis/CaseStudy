@@ -6,8 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Types;
 import java.util.ArrayList;
+
+import domain.DeliveryMethod;
 
 public class DeliveryMethodService implements Service<DeliveryMethod>{
 	

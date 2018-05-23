@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import domain.Location;
+
 public class LocationService implements Service<Location>{
 	
 	Connection connection;

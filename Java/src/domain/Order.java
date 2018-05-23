@@ -1,6 +1,5 @@
-package services;
+package domain;
 
-import java.sql.Date;
 import java.util.ArrayList;
 
 public class Order {
