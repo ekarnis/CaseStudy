@@ -1,4 +1,4 @@
-package services;
+package domain;
 
 public class TimeSlots {
 	int slot_ID;

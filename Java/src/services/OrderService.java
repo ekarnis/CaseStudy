@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import domain.Order;
+
 public class OrderService implements Service<Order>{
 	/*
 	ArrayList<Integer> item_ids = new ArrayList<Integer>();

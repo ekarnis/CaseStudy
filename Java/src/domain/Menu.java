@@ -1,4 +1,4 @@
-package services;
+package domain;
 
 public class Menu {
 	String id;

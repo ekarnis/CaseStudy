@@ -1,6 +1,10 @@
-package services;
+package cli;
 
 import java.sql.Connection;
+
+import domain.IdException;
+import domain.User;
+import services.UserService;
 
 public class ServiceWrapper {
 	

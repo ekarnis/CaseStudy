@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import domain.Store;
+
 public class StoreService implements Service<Store>{
 	
 	Connection connection;
