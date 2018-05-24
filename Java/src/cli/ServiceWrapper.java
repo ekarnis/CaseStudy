@@ -102,10 +102,6 @@ public class ServiceWrapper {
 		
 		return items;
 	}
-	public Order getOrCreateCurrentOrder(User currentUser) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
+
 
 }

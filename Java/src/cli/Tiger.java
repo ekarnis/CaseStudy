@@ -39,7 +39,7 @@ public class Tiger{
 		int count = 0;
 		for(String option : options) {
 			count++;
-			System.out.println("\n" + count + ". " + option);
+			System.out.println(count + ". " + option);
 		}
 		
 		Scanner sc = new Scanner(System.in);
@@ -67,8 +67,12 @@ public class Tiger{
 		User candidate = us.getByEmail(email);
 		if(password.equals(candidate.getPassword())){
 			currentUser = candidate;
-			currentOrder = sw.getOrCreateCurrentOrder(currentUser);
-	    	System.out.println("Logged In");
+			currentOrder = new Order();
+			currentOrder.setOrder_id(Double.toString(Math.random()* 10001));
+			currentOrder.setUser_id(currentUser.getUserId());
+			currentOrder.setDelivery_status_id("0");
+			//currentOrder.setCard_id();
+	    	System.out.println("Welcome " + currentUser.getFirstName());
 	    	homeScreen();
 	    }
 	    else{
@@ -190,9 +194,10 @@ public class Tiger{
 		System.out.println("Enter Quantity");
 		Scanner sc = new Scanner(System.in);
 	    int input = sc.nextInt();
-	    //OrderItemService ois = new OrderItemService(con);
+	    OrderService os = new OrderService(con);
 	    for(int i=0;i<input;i++){
-	    	//create order item and it to item
+	    	//create order item and add to item
+	    	os.addItem_id(menu.getId());
 	    }
 	    sc.close();
 	}
