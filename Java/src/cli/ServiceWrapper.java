@@ -93,7 +93,6 @@ public class ServiceWrapper {
 	public ArrayList<Menu> getMenuItems(ArrayList<String> itemIds) {
 		
 		MenuServices ms = new MenuServices(con);
-		
 		ArrayList<Menu> items = new ArrayList<Menu>();
 		
 		for (String itemId:itemIds){
