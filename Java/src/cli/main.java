@@ -152,10 +152,10 @@ public class main {
 	    int input = sc.nextInt();
 	    if(input==menus.size()+1) homeScreen();
 	    else if(input==menus.size()+2) System.exit(0);
-	    else itemScreen(menus.get(input));
+	    else menuItemScreen(menus.get(input));
 	    sc.close();
 	}
-	public static void itemScreen(Menu menu){
+	public static void menuItemScreen(Menu menu){
 		System.out.println(menu.getName());
 		System.out.println(menu.getDescription());
 		System.out.println(menu.getPrice());
@@ -167,6 +167,7 @@ public class main {
 	    else if(input==2) System.exit(0);
 	    sc.close();
 	}
+	//TODO finish this
 	public static void itemQuantityScreen(Menu menu){
 		System.out.println("Enter Quantity");
 		Scanner sc = new Scanner(System.in);
@@ -184,10 +185,46 @@ public class main {
 		System.out.println("Method: " +currentOrder.getDelivery_method_id());
 		System.out.println("Status: " +currentOrder.getDelivery_status_id());
 		System.out.println("1. Cancel");
-		System.out.println("2. Go Back");
+		System.out.println("2. View Items");
+		System.out.println("3. Edit Order");
+		System.out.println("4. Submit Order");
+		System.out.println("5. Go Back");
 		Scanner sc = new Scanner(System.in);
 	    int input = sc.nextInt();
 	    if(input==1 && confirm()) sw.cancelOrder(currentOrder);
+	    if(input==2) viewOrderItems(currentOrder);
+	    if(input==3) editOrder(currentOrder);
+	    if(input==4 && confirm()) sw.submitOrder(currentOrder);
+	    else if(input==2) System.exit(0);
+	    sc.close();
+	}
+
+	private static void editOrder(Order order) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	//TODO get item from item id here
+	private static void viewOrderItems(Order order) {
+		ArrayList<String> items = order.getItem_ids();
+		ArrayList<String> itemNames = sw.getItemNames();
+		ServiceWrapper.printOptions(items);
+		Scanner sc = new Scanner(System.in);
+	    int input = sc.nextInt();
+	    if(input==items.size()+1) homeScreen();
+	    else if(input==items.size()+2) System.exit(0);
+	    else orderItemScreen(items.get(input));
+	    sc.close();
+	}
+	public static void orderItemScreen(Menu menu){
+		System.out.println(menu.getName());
+		System.out.println(menu.getDescription());
+		System.out.println(menu.getPrice());
+		System.out.println("1. Enter Quantity");
+		System.out.println("2. Go Back");
+		Scanner sc = new Scanner(System.in);
+	    int input = sc.nextInt();
+	    if(input==1) itemQuantityScreen(menu);
 	    else if(input==2) System.exit(0);
 	    sc.close();
 	}
@@ -213,10 +250,14 @@ public class main {
 		System.out.println("Method: " +order.getDelivery_method_id());
 		System.out.println("Status: " +order.getDelivery_status_id());
 		System.out.println("1. Reorder");
-		System.out.println("3. Go Back");
+		System.out.println("2. Go Back");
 		Scanner sc = new Scanner(System.in);
 	    int input = sc.nextInt();
-	    if(input==1 && confirm()) sw.reOrder(order);
+	    if(input==1 && confirm()) {
+	    	currentOrder=order;
+	    	//TODO find out what the status id this thing needs is
+	    	currentOrder.setDelivery_status_id("1");
+	    }
 	    else if(input==2) System.exit(0);
 	    sc.close();
 	}
@@ -235,7 +276,4 @@ public class main {
 	    if(input==1) return true;
 	    return false;
 	}
-	
-
-
 }

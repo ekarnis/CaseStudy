@@ -251,13 +251,7 @@ public class OrderService implements Service<Order>{
 			System.out.println(e.getMessage());
 		}
 		return orders;
-		
-		
-		
-		
+
 	}
-	
-	
-	
 	
 }

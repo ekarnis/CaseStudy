@@ -85,9 +85,14 @@ public class ServiceWrapper {
 		
 	}
 
-	public void reOrder(Order order) {
+	public void submitOrder(Order currentOrder) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public ArrayList<String> getItemNames() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 
