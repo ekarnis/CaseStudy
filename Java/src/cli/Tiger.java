@@ -88,7 +88,6 @@ public class Tiger{
 			//currentOrder.setCard_id();
 			StoreService ss = new StoreService(con);
 			currentStore = ss.getById("0");
-	    	System.out.println("Welcome " + currentUser.getFirstName());
 	    	homeScreen();
 	    }
 	    else{
@@ -109,6 +108,8 @@ public class Tiger{
 	    String email = sc.next();
 		System.out.println("Enter password:");
 	    String password = sc.next();
+		System.out.println("Enter password again:");
+	    String passwordConfirm = sc.next();
 		System.out.println("Enter first name:");
 	    String first = sc.next();
 		System.out.println("Enter last name:");
@@ -128,19 +129,24 @@ public class Tiger{
 		System.out.println("Enter status:");
 	    String status = sc.next();*/
 	    //, street, city, state, country, zip, status
-	    if(sw.register(first, last, phone, email, password)) {
+	    if(password.equals(passwordConfirm)){
 	    	System.out.println("Registered");
+	    	currentUser = sw.register(first, last, phone, email, password);
+			currentOrder = new Order();
+			currentOrder.setOrder_id(Double.toString(Math.random()* 10001));
+			currentOrder.setUser_id(currentUser.getUserId());
+			currentOrder.setDelivery_status_id("0");
 	    	homeScreen();
+	    }else{
+	    	System.out.println("Mismatching passwords, try again");
+	    	firstScreen();
 	    }
-	    else{
-	    	System.out.println("Wrong email or password");
-			loginScreen();
-	    }
-	    
+
 
 	}
 
 	public static void homeScreen(){
+    	System.out.println("Welcome " + currentUser.getFirstName());
 		System.out.println("\n*Home*");
 		ArrayList<String> options = new ArrayList<String>();
 		options.add("Menu");
@@ -197,7 +203,9 @@ public class Tiger{
 		System.out.println("\n*Current Order*");
 		System.out.println("Placed: " +currentOrder.getPlaced_timestamp());
 		System.out.println("Delivered: " +currentOrder.getDelivery_timestamp());
-		System.out.println("Total price: " +currentOrder.getTotal_price());
+		ServiceWrapper sw = new ServiceWrapper(con);
+		currentOrder.setTotal_price(sw.calculateTotalPrice(currentOrder.getItem_ids()));
+		System.out.println("Total price: $" +currentOrder.getTotal_price());
 		System.out.println("Method: " +currentOrder.getDelivery_method_id());
 		System.out.println("Status: " +currentOrder.getDelivery_status_id());
 		System.out.println("1. Cancel");
@@ -206,7 +214,12 @@ public class Tiger{
 		System.out.println("4. Submit Order");
 		System.out.println("5. Go Back");
 	    int input = sc.nextInt();
-	    if(input==1 && confirm()) sw.cancelOrder(currentOrder);
+	    if(input==1 && confirm()) {
+	    	currentOrder = new Order();
+			currentOrder.setOrder_id(Double.toString(Math.random()* 10001));
+			currentOrder.setUser_id(currentUser.getUserId());
+			currentOrder.setDelivery_status_id("0");
+	    }
 	    if(input==2) viewEditOrderItems(currentOrder);
 	    if(input==3) editOrder(currentOrder);
 	    if(input==4 && confirm()) sw.submitOrder(currentOrder);
@@ -256,8 +269,6 @@ public class Tiger{
 
     		if(input==6) homeScreen();
 	    
-	    OrderService os = new OrderService(con);
-	    os.update(currentOrder);
 	    currentOrderScreen();
 		
 	}
@@ -298,6 +309,8 @@ public class Tiger{
 	    	//create order item and add to item
 	    	//os.addItem_id(menu.getId(), currentOrder.getOrder_id());
 	   // }
+	    //OrderService os = new OrderService(con);
+	    //os.update(currentOrder);
 	}
 	
 	public static void accountScreen(){

@@ -36,7 +36,7 @@ public class ServiceWrapper {
 		else return null;
 	}
 	
-	public boolean register(String firstName, String lastName, String phone, String email, String password){
+	public User register(String firstName, String lastName, String phone, String email, String password){
 		//, String street, String city, String state, String country, String zip, String userStatus
 		boolean result = false;
 		String userId = Double.toString(Math.random()* 10001);
@@ -45,7 +45,7 @@ public class ServiceWrapper {
 		User user = new User(userId,firstName,lastName,phone, email,password,userStatusId);
 		UserService us = new UserService(con);
 		result =  us.add(user);
-		return result;
+		return user;
 	}
 
 	public static void printOptions(ArrayList<String> options){
@@ -62,7 +62,7 @@ public class ServiceWrapper {
 		int count = 0;
 		for(Menu menu: menus){
 			count++;
-			System.out.println(count + ". " + menu.getName());
+			System.out.println(count + ". $" + menu.getPrice() + " " + menu.getName());
 		}
 		System.out.println(++count + ". Go Back");
 	}
@@ -102,6 +102,16 @@ public class ServiceWrapper {
 		}
 
 		return items;
+	}
+
+	public int calculateTotalPrice(ArrayList<String> item_ids) {
+		int total = 0;
+		ServiceWrapper sw = new ServiceWrapper(con);
+		ArrayList<Menu> items = sw.getMenuItems(item_ids);
+		for(Menu item: items){
+			total += item.getPrice();
+		}
+		return total;
 	}
 
 
