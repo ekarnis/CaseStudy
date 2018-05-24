@@ -253,8 +253,18 @@ public class OrderService implements Service<Order>{
 		return orders;
 
 	}
-	public void addItem_id(String item_id) { 
-		//add an item to order items
+	public void addItem_id(String item_id, String order_id) { 
+		try{
+			CallableStatement statement = connection.prepareCall(
+					"{call AddOrderItem(?,?)}");
+			statement.setString(1, order_id);
+			statement.setString(2, item_id);
+			statement.execute();
+			statement.close();
+		}catch(SQLException e){
+			System.out.println(e.getMessage());
+		}
+		
 	}
 
 	
