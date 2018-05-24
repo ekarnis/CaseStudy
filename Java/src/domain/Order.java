@@ -42,11 +42,6 @@ public class Order {
 	public Order() {
 		super();
 	}
-<<<<<<< Updated upstream
-=======
-
-	
->>>>>>> Stashed changes
 	
 	public ArrayList<String> getItem_ids() {
 		return item_ids;
