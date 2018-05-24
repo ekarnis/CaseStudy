@@ -19,7 +19,7 @@ public class DeliveryStatusService {
 		super();
 		this.connection = connection;
 	}
-	void add(DeliveryStatus deliveryStatus){
+	public void add(DeliveryStatus deliveryStatus){
 		try{
 			CallableStatement statement = connection.prepareCall("{call AddDeliveryStatus(?, ?)}");
 			statement.setString(1, deliveryStatus.getDelivery_status_id());
@@ -32,7 +32,7 @@ public class DeliveryStatusService {
 		}	
 	}
 	
-	void update(DeliveryStatus deliveryStatus){
+	public void update(DeliveryStatus deliveryStatus){
 		String statement = "UPDATE DELIVERY_STATUSES SET DELIVERY_STATUS = ?"
 				+ "WHERE DELIVERY_STATUS_ID = ?";
 		
@@ -48,7 +48,7 @@ public class DeliveryStatusService {
 		}
 	}
 	
-	void deleteByID(String id){
+	public void deleteByID(String id){
 		try{
 			
 			CallableStatement statement = connection.prepareCall("{call DeleteDeliveryStatus(?)}");
@@ -60,7 +60,7 @@ public class DeliveryStatusService {
 			System.out.println(e.getMessage());
 		}
 	}
-	ArrayList<DeliveryStatus> getAll(){
+	public ArrayList<DeliveryStatus> getAll(){
 
 		ArrayList<DeliveryStatus> deliveryStatuses = new ArrayList<DeliveryStatus>();
 		
@@ -77,7 +77,7 @@ public class DeliveryStatusService {
 		}
 		return deliveryStatuses;
 	}
-	DeliveryStatus getByID(String id){
+	public DeliveryStatus getByID(String id){
 		DeliveryStatus deliveryStatus = null;
 		
 		try{

@@ -86,12 +86,28 @@ insert into locations
 
 insert into cards
 	values ('0','0',5,(TO_DATE('2003/05/03 21:02:44', 'yyyy/mm/dd hh24:mi:ss')) ,123);
+insert into cards
+	values ('1','0',5435,(TO_DATE('2003/05/03 21:02:44', 'yyyy/mm/dd hh24:mi:ss')) ,123);
+insert into cards
+	values ('2','1',523453,(TO_DATE('2003/05/03 21:02:44', 'yyyy/mm/dd hh24:mi:ss')) ,123);
+insert into cards
+	values ('3','2',32545,(TO_DATE('2003/05/03 21:02:44', 'yyyy/mm/dd hh24:mi:ss')) ,123);
+insert into cards
+	values ('4','3',642645,(TO_DATE('2003/05/03 21:02:44', 'yyyy/mm/dd hh24:mi:ss')) ,123);
 
 insert into stores
 	values ('0','0','Deer Valley',1,0,0800,2100);
 
 insert into orders 
 	values ('0','0',2.50,15.50,0,0,'0','hey','0','0','0');
+insert into orders 
+	values ('1','1',5.00,16.50,0,0,'0','run to house','1','0','2');
 
 insert into order_items
 	values ('0','0');
+insert into order_items
+	values ('1','2');
+insert into order_items
+	values ('1','3');
+insert into order_items
+	values ('1','4');

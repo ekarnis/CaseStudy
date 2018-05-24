@@ -75,8 +75,7 @@ public class TimeSlotServices implements Service<TimeSlots>	{
 		try {
 			ResultSet rs = con.createStatement().executeQuery("SELECT * FROM time_slots");
 			while(rs.next()){
-				TimeSlots tim = new TimeSlots(rs.getString("time_slot_id"), rs.getInt("slot_start"), rs.getInt("slot_end"), rs.getString("slot_name"));
-				timArr.add(tim);
+				timArr.add(new TimeSlots(rs.getString("time_slot_id"), rs.getInt("slot_start"), rs.getInt("slot_end"), rs.getString("slot_name")));
 			}
 			return timArr;
 			

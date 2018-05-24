@@ -38,5 +38,13 @@ public class TimeSlots {
 	public void setTimeName(String timeName) {
 		this.timeName = timeName;
 	}
+
+	@Override
+	public String toString() {
+		return "TimeSlots [slot_ID=" + slot_ID + ", timeStart=" + timeStart + ", timeEnd=" + timeEnd + ", timeName="
+				+ timeName + "]";
+	}
+	
+	
 	
 }
