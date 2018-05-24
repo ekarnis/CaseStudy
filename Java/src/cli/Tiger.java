@@ -67,7 +67,7 @@ public class Tiger{
 	}
 		
 	public static void loginScreen(){
-		System.out.println("*Login*");
+		System.out.println("\n*Login*");
 		System.out.println("Enter email:");
 	    String email = sc.next();
 		System.out.println("Enter password:");
@@ -100,7 +100,7 @@ public class Tiger{
 
 	}
 	public static void registerScreen(){
-		System.out.println("*Register*");
+		System.out.println("\n*Register*");
 		System.out.println("Enter email:");
 	    String email = sc.next();
 		System.out.println("Enter password:");
@@ -137,7 +137,7 @@ public class Tiger{
 	}
 
 	public static void homeScreen(){
-		System.out.println("*Home*");
+		System.out.println("\n*Home*");
 		ArrayList<String> options = new ArrayList<String>();
 		options.add("Menu");
 		options.add("Order");
@@ -163,7 +163,7 @@ public class Tiger{
 	}
 	
 	public static void menuScreen(){
-		System.out.println("*Menu*");
+		System.out.println("\n*Menu*");
 		MenuServices ms = new MenuServices(con);
 		ArrayList<Menu> menus = ms.getAll();
 		ServiceWrapper.printMenuItems(menus);
@@ -190,7 +190,7 @@ public class Tiger{
 		menuScreen();
 	}
 	public static void currentOrderScreen() {
-		System.out.println("*Current Order*");
+		System.out.println("\n*Current Order*");
 		System.out.println("Placed: " +currentOrder.getPlaced_timestamp());
 		System.out.println("Delivered: " +currentOrder.getDelivery_timestamp());
 		System.out.println("Total price: " +currentOrder.getTotal_price());
@@ -211,7 +211,7 @@ public class Tiger{
 
 	private static void editOrder(Order order) {
 		// TODO Auto-generated method stub
-		System.out.println("Edit Order");
+		System.out.println("\n*Edit Order*");
 
 		
 	}
@@ -220,9 +220,8 @@ public class Tiger{
 	private static void viewOrderItems(Order order) {
 		System.out.println("*View Items*");
 		ArrayList<String> itemIds = currentOrder.getItem_ids();
-		System.out.println("Order items: " + itemIds);
 		ArrayList<Menu> items = sw.getMenuItems(itemIds);
-		System.out.println("Menu items: " + items);
+		if(items.isEmpty()) System.out.println("No items");
 		ServiceWrapper.printMenuItems(items);
 	    int input = sc.nextInt();
 	    if(input==items.size()) homeScreen();
@@ -243,7 +242,7 @@ public class Tiger{
 
 	//TODO
 	public static void submitOrder(){
-		System.out.println("*Submit*");
+		System.out.println("\n*Submit*");
 
 	    //OrderService os = new OrderService(con);
 	    //input should be equal to number of items in order
@@ -256,7 +255,7 @@ public class Tiger{
 	}
 	
 	public static void accountScreen(){
-		System.out.println("*Account*");
+		System.out.println("\n*Account*");
 		ArrayList<String> options = new ArrayList<String>();
 		options.add("Edit First Name");
 		options.add("Edit Last Name");
@@ -325,7 +324,7 @@ public class Tiger{
 	}
 
 	public static void allOrdersScreen(){
-		System.out.println("*All orders*");
+		System.out.println("\n*All orders*");
 		OrderService os = new OrderService(con);
 		ArrayList<Order> orders = os.getUserOrders(currentUser.getUserId());
 		ServiceWrapper.printOrders(orders);
@@ -350,7 +349,7 @@ public class Tiger{
 	    else if(input==2) accountScreen();
 	}
 	public static void storeDetailsScreen(){
-		System.out.println("*Store*");
+		System.out.println("\n*Store*");
 		System.out.println("Name: " + currentStore.getStoreName());
 		System.out.println("Phone Number: " + currentStore.getPhoneNumber());
 		System.out.println("Location: " + currentStore.getLocationId());
@@ -360,7 +359,7 @@ public class Tiger{
 	}
 
 	public static boolean confirm(){
-		System.out.println("*Confirm*");
+		System.out.println("\n*Confirm*");
 		System.out.println("1. Yes");
 		System.out.println("2. No");
 	    int input = sc.nextInt();

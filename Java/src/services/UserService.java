@@ -108,9 +108,9 @@ public class UserService implements Service<User>{
 		
 		try{
 			
-			PreparedStatement pstmt = connection.prepareStatement("select * from users ");
-	//				+ "where email = ?"); 
-			//pstmt.setString(1,email);
+			PreparedStatement pstmt = connection.prepareStatement("select * from users "
+					+ "where email = ?"); 
+			pstmt.setString(1,email);
 						
 			ResultSet usersRs = pstmt.executeQuery();
 			
