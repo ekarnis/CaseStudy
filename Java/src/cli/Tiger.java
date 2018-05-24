@@ -35,7 +35,7 @@ public class Tiger{
 	}
 	
 	public static void firstScreen(){
-		System.out.println("*Welcome*");
+		System.out.println(" __  __ _                     _ _        _____       __     \n|  \\/  (_)                   (_| )      / ____|     / _|    \n| \\  / |_ _ __ ___  _ __ ___  _|/ ___  | |     __ _| |_ ___ \n| |\\/| | | '_ ` _ \\| '_ ` _ \\| | / __| | |    / _` |  _/ _ \\\n| |  | | | | | | | | | | | | | | \\__ \\ | |___| (_| | ||  __/\n|_|  |_|_|_| |_| |_|_| |_| |_|_| |___/  \\_____\\__,_|_| \\___|");
 		ArrayList<String> options = new ArrayList<String>();
 		options.add("Login");
 		options.add("Register");
@@ -56,6 +56,9 @@ public class Tiger{
     		case 3:
     			System.out.println("Goodbye");
     			System.exit(0);
+    		case 4:
+    			AdminAndManager aam = new AdminAndManager(con);
+    			aam.adminScreen();
 	    }
 	    sc.close();
 
