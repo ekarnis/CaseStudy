@@ -1,14 +1,16 @@
 -- Procedures
 CREATE OR REPLACE PROCEDURE AddOrder(OrderID VARCHAR2, UserID VARCHAR2, 
-PlacedTimestamp NUMBER, DeliveryTimestamp NUMBER, CardID VARCHAR2, 
-Instructions VARCHAR2, DeliveryMethodID VARCHAR2, StoreID VARCHAR2, 
-DeliveryStatusID VARCHAR2)
+Tip NUMBER, TotalPrice NUMBER, PlacedTimestamp NUMBER, DeliveryTimestamp NUMBER,
+CardID VARCHAR2, Instructions VARCHAR2, DeliveryMethodID VARCHAR2, 
+StoreID VARCHAR2, DeliveryStatusID VARCHAR2)
 AS
 BEGIN
-  INSERT INTO ORDERS (ORDER_ID, USER_ID, PLACED_TIMESTAMP, DELIVERY_TIMESTAMP, 
-  CARD_ID, INSTRUCTIONS, DELIVERY_METHOD_ID, STORE_ID, DELIVERY_STATUS_ID)
-    VALUES (OrderID, UserID, PlacedTimestamp, DeliveryTimestamp, CardID, 
-    Instructions, DeliveryMethodID, StoreID, DeliveryStatusID);
+  INSERT INTO ORDERS (ORDER_ID, USER_ID, TIP, TOTAL_PRICE, PLACED_TIMESTAMP, 
+  DELIVERY_TIMESTAMP, CARD_ID, INSTRUCTIONS, DELIVERY_METHOD_ID, STORE_ID, 
+  DELIVERY_STATUS_ID)
+    VALUES (OrderID, UserID, Tip, TotalPrice, PlacedTimestamp, 
+    DeliveryTimestamp, CardID, Instructions, DeliveryMethodID, StoreID, 
+    DeliveryStatusID);
 END;
 
 CREATE OR REPLACE PROCEDURE DeleteOrder(OrderID VARCHAR2)

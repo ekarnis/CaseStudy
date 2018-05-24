@@ -16,11 +16,13 @@ public class ServiceWrapper {
 	
 	Connection con;
 	
+	
+	
 	public ServiceWrapper() {
 		super();
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-	        con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "hr", "hr");
+	        con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "pass", "pass");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

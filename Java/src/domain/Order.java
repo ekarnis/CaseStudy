@@ -6,6 +6,8 @@ public class Order {
 	
 	String order_id;
 	String user_id;
+	float tip;
+	float total_price;
 	int placed_timestamp;
 	int delivery_timestamp;
 	String card_id;
@@ -17,12 +19,16 @@ public class Order {
 	//Array to hold order items rather than the order_items table
 	ArrayList<String> item_ids = new ArrayList<String>();
 
-	public Order(String order_id, String user_id, int placed_timestamp, int delivery_timestamp, String card_id,
-			String instuctions, String delivery_method_id, String store_id, String delivery_status_id,
-			ArrayList<String> item_ids) {
+	
+
+	public Order(String order_id, String user_id, float tip, float total_price, int placed_timestamp,
+			int delivery_timestamp, String card_id, String instuctions, String delivery_method_id, String store_id,
+			String delivery_status_id, ArrayList<String> item_ids) {
 		super();
 		this.order_id = order_id;
 		this.user_id = user_id;
+		this.tip = tip;
+		this.total_price = total_price;
 		this.placed_timestamp = placed_timestamp;
 		this.delivery_timestamp = delivery_timestamp;
 		this.card_id = card_id;

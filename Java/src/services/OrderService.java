@@ -31,18 +31,6 @@ public class OrderService implements Service<Order>{
 			CallableStatement statement = connection.prepareCall(
 					"{call AddOrder(?,?,?,?,?,?,?,?,?)}");
 			
-			String order_id; //varchar
-			String user_id; //varchar
-			String tip; //number(5,2)
-			String total_price;//number(7,2)
-			int placed_timestamp; //int
-			int delivery_timestamp; //int
-			String card_id; //varchar
-			String instuctions; //carchar
-			String delivery_method_id; //varchar
-			String store_id; //varchar
-			String delivery_status_id; //varchar
-			
 			statement.setString(1,order.getOrder_id());
 			statement.setString(2,order.getUser_id());
 			statement.setInt(3,order.getPlaced_timestamp());
@@ -65,8 +53,10 @@ public class OrderService implements Service<Order>{
 				statement.execute();
 				statement.close();
 			}
+			return true;
 		}catch(SQLException e){
 			System.out.println(e.getMessage());
+			return false;
 		}	
 	}
 	
