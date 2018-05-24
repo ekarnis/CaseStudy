@@ -6,11 +6,11 @@ public class Menu {
 	char vegetarian;
 	String description;
 	String type;
-	int slot_ID;
+	String slot_ID;
 	String photo;
 	float price;
 	
-	public Menu(String id, String name, char vegetarian, String type, String description, int slot_ID, String photo, float price) {
+	public Menu(String id, String name, char vegetarian, String type, String description, String slot_ID, String photo, float price) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -63,11 +63,11 @@ public class Menu {
 		this.description = description;
 	}
 
-	public int getSlot_ID() {
+	public String getSlot_ID() {
 		return slot_ID;
 	}
 
-	public void setSlot_ID(int slot_ID) {
+	public void setSlot_ID(String slot_ID) {
 		this.slot_ID = slot_ID;
 	}
 
@@ -96,3 +96,4 @@ public class Menu {
 
 	
 }
+

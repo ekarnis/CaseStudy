@@ -7,23 +7,32 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import domain.Menu;
+import domain.TimeSlots;
 
 public class MenuServices implements Service<Menu> {
 	Connection con;
+	TimeSlotServices timServ;
 	
 	public MenuServices(Connection con) {
 		super();
 		this.con = con;
+		timServ = new TimeSlotServices(con);
 	}
 
 	@Override
 	public Menu getById(String id){
+		ArrayList<TimeSlots> times = timServ.getAll();
+		
 		try {
 			ResultSet rs = con.createStatement().executeQuery("SELECT * FROM items WHERE item_id = " + id);
 			rs.next();
-			
 			float price = rs.getFloat("price");
-			Menu men = new Menu(rs.getString("item_id"), rs.getString("name"), rs.getString("vegetarian").charAt(0), rs.getString("item_type_id"), rs.getString("description"), rs.getInt("time_slot_id"), rs.getString("photo"), price);
+			String time = getTimeName(times, rs.getString("time_slot_id"));
+			System.out.println("Got price");
+			Menu men = new Menu(rs.getString("item_id"), rs.getString("name"), 
+					rs.getString("vegetarian").charAt(0), rs.getString("item_type_id"), 
+					rs.getString("description"), time, rs.getString("photo"), price);
+			System.out.println("Got everything");
 			return men;
 			
 		} catch (SQLException e) {
@@ -38,11 +47,16 @@ public class MenuServices implements Service<Menu> {
 	@Override
 	public ArrayList<Menu> getAll(){
 		ArrayList<Menu> menArr = new ArrayList<Menu>();
+		ArrayList<TimeSlots> times = timServ.getAll();
 		try {
 			ResultSet rs = con.createStatement().executeQuery("SELECT * FROM items");
 			while(rs.next()){
 				float price = rs.getFloat("price");
-				Menu men = new Menu(rs.getString("item_id"), rs.getString("name"), rs.getString("vegetarian").charAt(0), rs.getString("item_type_id"), rs.getString("description"), rs.getInt("time_slot_id"), rs.getString("photo"), price);
+				String tid = rs.getString("time_slot_id");
+				String tName = getTimeName(times, tid);
+				Menu men = new Menu(rs.getString("item_id"), rs.getString("name"), rs.getString("vegetarian").charAt(0), 
+						rs.getString("item_type_id"), rs.getString("description"), tName, 
+						rs.getString("photo"), price);
 				menArr.add(men);
 			}
 			return menArr;
@@ -65,11 +79,11 @@ public class MenuServices implements Service<Menu> {
 			preStmt.setString(1, men.getId());
 			preStmt.setString(2, men.getName());
 			preStmt.setString(3, ("" + men.getVegetarian()));
-			preStmt.setString(3, men.getType());
-			preStmt.setString(4, men.getDescription());
-			preStmt.setInt(5, men.getSlot_ID());
-			preStmt.setString(6, men.getPhoto());
-			preStmt.setFloat(7, men.getPrice());
+			preStmt.setString(4, men.getType());
+			preStmt.setString(5, men.getDescription());
+			preStmt.setString(6, men.getSlot_ID());
+			preStmt.setString(7, men.getPhoto());
+			preStmt.setFloat(8, men.getPrice());
 			preStmt.executeUpdate(); //Data is not yet committed
 			System.out.println("Inserted");
 			return true;
@@ -91,16 +105,37 @@ public class MenuServices implements Service<Menu> {
 	
 	@Override
 	public void update(Menu men){
-		
+		ArrayList<TimeSlots> times = timServ.getAll();
+		String timeId = getTimeID(times, men.getSlot_ID());
+		try {
+			PreparedStatement preStmt = con.prepareStatement("UPDATE items SET name=?, vegetarian=?, item_type_id=?, description=?, time_slot_id=?, photo=?, price=? WHERE item_id=?");
+			preStmt.setString(1, men.getName());
+			preStmt.setString(2, ("" + men.getVegetarian()));
+			preStmt.setString(3, men.getType());
+			preStmt.setString(4, men.getDescription());
+			preStmt.setString(5, timeId);
+			preStmt.setString(6, men.getPhoto());
+			preStmt.setFloat(7, men.getPrice());
+			preStmt.setString(8, men.getId());
+			preStmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public ArrayList<Menu> getByType(String type){
 		ArrayList<Menu> menArr = new ArrayList<Menu>();
+		ArrayList<TimeSlots> times = timServ.getAll();
 		try {
-			ResultSet rs = con.createStatement().executeQuery("SELECT * FROM items WHERE item_type_id=" + type);
+			ResultSet rs = con.createStatement().executeQuery("SELECT * FROM items WHERE items_type_id = " + type);
 			while(rs.next()){
 				float price = rs.getFloat("price");
-				Menu men = new Menu(rs.getString("item_id"), rs.getString("name"), rs.getString("vegetarian").charAt(0), rs.getString("item_type_id"), rs.getString("description"), rs.getInt("time_slot_id"), rs.getString("photo"), price);
+				String tid = rs.getString("time_slot_id");
+				String tName = getTimeName(times, tid);
+				Menu men = new Menu(rs.getString("item_id"), rs.getString("name"), rs.getString("vegetarian").charAt(0), 
+						rs.getString("item_type_id"), rs.getString("description"), tName, 
+						rs.getString("photo"), price);
 				menArr.add(men);
 			}
 			return menArr;
@@ -113,7 +148,22 @@ public class MenuServices implements Service<Menu> {
 		return null;
 	}
 
-
-
+	private String getTimeName(ArrayList<TimeSlots> timeArr, String id){
+		String tName="";
+		for(TimeSlots tim:timeArr){
+			if(tim.getSlot_ID().equals(id))
+				tName = tim.getTimeName();
+		}
+		return tName;
+	}
+	
+	private String getTimeID(ArrayList<TimeSlots> timeArr, String name){
+		String id="";
+		for(TimeSlots tim:timeArr){
+			if(tim.getTimeName().equals(name))
+				id = tim.getSlot_ID();
+		}
+		return id;
+	}
 
 }
