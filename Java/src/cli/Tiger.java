@@ -75,6 +75,10 @@ public class Tiger{
 	    
 		UserService us = new UserService(con);
 		User candidate = us.getByEmail(email);
+		if(candidate == null){
+			System.out.println("Wrong email");
+			firstScreen();
+		}
 		if(password.equals(candidate.getPassword())){
 			currentUser = candidate;
 			currentOrder = new Order();
@@ -91,7 +95,7 @@ public class Tiger{
 	    	System.out.println("Wrong email or password");
 	    	try {
 				TimeUnit.SECONDS.sleep(1);
-				loginScreen();
+				firstScreen();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -155,7 +159,7 @@ public class Tiger{
 		if(input==2) currentOrderScreen();    	
 		if(input==3) accountScreen();
 		if(input==4) storeDetailsScreen();   	
-		if(input==5) loginScreen();
+		if(input==5) firstScreen();
 		if(input==6) {
 			System.out.println("Goodbye");
     		System.exit(0);
@@ -172,7 +176,7 @@ public class Tiger{
 	    else menuItemScreen(menus.get(input-1));
 	}
 	public static void menuItemScreen(Menu menu){
-		System.out.println(menu.getName());
+		System.out.println("\n*" + menu.getName() + "*");
 		System.out.println(menu.getDescription());
 		System.out.println("$" + menu.getPrice());
 		System.out.println("1. Enter Quantity");
@@ -197,27 +201,69 @@ public class Tiger{
 		System.out.println("Method: " +currentOrder.getDelivery_method_id());
 		System.out.println("Status: " +currentOrder.getDelivery_status_id());
 		System.out.println("1. Cancel");
-		System.out.println("2. View Items");
+		System.out.println("2. View\\Edit Items");
 		System.out.println("3. Edit Order");
 		System.out.println("4. Submit Order");
 		System.out.println("5. Go Back");
 	    int input = sc.nextInt();
 	    if(input==1 && confirm()) sw.cancelOrder(currentOrder);
-	    if(input==2) viewOrderItems(currentOrder);
+	    if(input==2) viewEditOrderItems(currentOrder);
 	    if(input==3) editOrder(currentOrder);
 	    if(input==4 && confirm()) sw.submitOrder(currentOrder);
 	    else if(input==5) homeScreen();
 	}
-
-	private static void editOrder(Order order) {
-		// TODO Auto-generated method stub
+	
+	private static void editOrder(Order currentOrder2) {
 		System.out.println("\n*Edit Order*");
+		ArrayList<String> options = new ArrayList<String>();
+		options.add("Edit Tip");
+		options.add("Edit delivery time");
+		options.add("Edit Instructions");
+		options.add("Edit Delivery Method");
+		options.add("Edit Store");
+		options.add("Go Back");
+		int count = 0;
+		for(String option : options) {
+			count++;
+			System.out.println(count + ". " + option);
+		}
+	    int input = sc.nextInt();
+    		if(input==1){
+    			int newTip = Integer.parseInt(editString());
+    			currentOrder.setTip(newTip);
+    			System.out.println("Tip Changed to: $" + newTip);
+    		}
+    		if(input==2){
+    			int newDelivery_timestamp = Integer.parseInt(editString());
+    			currentOrder.setDelivery_timestamp(newDelivery_timestamp);
+    			System.out.println("Delivery Time Changed to: " + newDelivery_timestamp);
+    		}
+    		if(input==3){
+    			String newInstructions = editString();
+    			currentOrder.setInstuctions(newInstructions);
+    			System.out.println("Instructions Changed to: " + newInstructions);
+    		}
+    		if(input==4){
+    			String newDelivery_method = editString();
+    			currentOrder.setDelivery_method_id(newDelivery_method);
+    			System.out.println("Delivery Method Changed to: " + newDelivery_method);
+    		}
+    		if(input==5){
+    			String newStore = editString();
+    			currentOrder.setStore_id(newStore);
+    			System.out.println("Delivery Method Changed to: " + newStore);
+    		}
 
+    		if(input==6) homeScreen();
+	    
+	    OrderService os = new OrderService(con);
+	    os.update(currentOrder);
+	    currentOrderScreen();
 		
 	}
-	
+
 	//TODO get item from item id here
-	private static void viewOrderItems(Order order) {
+	private static void viewEditOrderItems(Order order) {
 		System.out.println("*View Items*");
 		ArrayList<String> itemIds = currentOrder.getItem_ids();
 		ArrayList<Menu> items = sw.getMenuItems(itemIds);
@@ -359,7 +405,7 @@ public class Tiger{
 	}
 
 	public static boolean confirm(){
-		System.out.println("\n*Confirm*");
+		System.out.println("\n1*Confirm*");
 		System.out.println("1. Yes");
 		System.out.println("2. No");
 	    int input = sc.nextInt();
