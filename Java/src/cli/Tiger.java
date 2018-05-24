@@ -65,9 +65,12 @@ public class Tiger{
 	    
 		UserService us = new UserService(con);
 		User candidate = us.getByEmail(email);
-	    
-	    currentUser = candidate;
-	    if(currentUser != null) homeScreen();
+		if(password.equals(candidate.getPassword())){
+			currentUser = candidate;
+			currentOrder = sw.getOrCreateCurrentOrder(currentUser);
+	    	System.out.println("Logged In");
+	    	homeScreen();
+	    }
 	    else{
 	    	System.out.println("Wrong email or password");
 	    	try {
@@ -91,7 +94,7 @@ public class Tiger{
 	    String first = sc.next();
 		System.out.println("Enter last name:");
 	    String last = sc.next();
-		System.out.println("Enter street:");
+		/*System.out.println("Enter street:");
 	    String street = sc.next();
 		System.out.println("Enter city:");
 	    String city = sc.next();
@@ -102,9 +105,12 @@ public class Tiger{
 		System.out.println("Enter zip:");
 	    String zip = sc.next();
 		System.out.println("Enter status:");
-	    String status = sc.next();
-
-	    if(sw.register(first, last, email, password, street, city, state, country, zip, status)) homeScreen();
+	    String status = sc.next();*/
+	    //, street, city, state, country, zip, status
+	    if(sw.register(first, last, email, password)) {
+	    	System.out.println("Registered");
+	    	homeScreen();
+	    }
 	    else{
 	    	System.out.println("Wrong email or password");
 	    	try {
@@ -120,6 +126,7 @@ public class Tiger{
 	}
 
 	public static void homeScreen(){
+		System.out.println("Home");
 		ArrayList<String> options = new ArrayList<String>();
 		options.add("Menu");
 		options.add("Order");
@@ -127,7 +134,12 @@ public class Tiger{
 		options.add("Store Details");
 		options.add("Contact");
 		options.add("Logout");
-		ServiceWrapper.printOptions(options);
+		options.add("Quit");
+		int count = 0;
+		for(String option : options) {
+			count++;
+			System.out.println(count + ". " + option);
+		}
 		Scanner sc = new Scanner(System.in);
 	    int input = sc.nextInt();
 	    switch(input){
@@ -144,6 +156,7 @@ public class Tiger{
     		case 6:
     			loginScreen();
     		case 7:
+    			System.out.println("Goodbye");
     			System.exit(0);
 	    }
 	    sc.close();
@@ -157,19 +170,19 @@ public class Tiger{
 	    int input = sc.nextInt();
 	    if(input==menus.size()+1) homeScreen();
 	    else if(input==menus.size()+2) System.exit(0);
-	    else menuItemScreen(menus.get(input));
+	    else menuItemScreen(menus.get(input-1));
 	    sc.close();
 	}
 	public static void menuItemScreen(Menu menu){
 		System.out.println(menu.getName());
 		System.out.println(menu.getDescription());
-		System.out.println(menu.getPrice());
+		System.out.println("$" + menu.getPrice());
 		System.out.println("1. Enter Quantity");
 		System.out.println("2. Go Back");
 		Scanner sc = new Scanner(System.in);
 	    int input = sc.nextInt();
 	    if(input==1) itemQuantityScreen(menu);
-	    else if(input==2) System.exit(0);
+	    else if(input==2) menuScreen();
 	    sc.close();
 	}
 	//TODO finish this
