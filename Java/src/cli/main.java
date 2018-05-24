@@ -7,12 +7,17 @@ import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 import domain.Menu;
+import domain.Order;
+import domain.User;
 import services.MenuServices;
+import services.OrderService;
 
 public class main {
 
 	public static ServiceWrapper sw;
 	public static Connection con;
+	public static User currentUser;
+	public static Order currentOrder;
 
 	
 	public static void main(String[] args) {
@@ -57,7 +62,8 @@ public class main {
 	    String email = sc.next();
 		System.out.println("Enter password:");
 	    String password = sc.next();
-	    if(sw.login(email, password)) homeScreen();
+	    currentUser = sw.login(email, password);
+	    if(currentUser != null) homeScreen();
 	    else{
 	    	System.out.println("Wrong email or password");
 	    	try {
@@ -123,7 +129,7 @@ public class main {
     		case 1:
     			menuScreen();
     		case 2:
-    			orderScreen();    	
+    			currentOrderScreen();    	
     		case 3:
     			accountScreen();
     		case 4:
@@ -141,25 +147,78 @@ public class main {
 	public static void menuScreen(){
 		MenuServices ms = new MenuServices(con);
 		ArrayList<Menu> menus = ms.getAll();
-		sw.printMenuOptions(menus);
+		ServiceWrapper.printMenuItems(menus);
 		Scanner sc = new Scanner(System.in);
 	    int input = sc.nextInt();
 	    if(input==menus.size()+1) homeScreen();
 	    else if(input==menus.size()+2) System.exit(0);
 	    else itemScreen(menus.get(input));
+	    sc.close();
 	}
 	public static void itemScreen(Menu menu){
 		System.out.println(menu.getName());
 		System.out.println(menu.getDescription());
 		System.out.println(menu.getPrice());
 		System.out.println("1. Enter Quantity");
-		System.out.println(menu.getPrice());
+		System.out.println("2. Go Back");
+		Scanner sc = new Scanner(System.in);
+	    int input = sc.nextInt();
+	    if(input==1) itemQuantityScreen(menu);
+	    else if(input==2) System.exit(0);
+	    sc.close();
 	}
-	public static void orderScreen(){
-		
+	public static void itemQuantityScreen(Menu menu){
+		System.out.println("Enter Quantity");
+		Scanner sc = new Scanner(System.in);
+	    int input = sc.nextInt();
+	    //OrderItemService ois = new OrderItemService(con);
+	    for(int i=0;i<input;i++){
+	    	//create order item and it to item
+	    }
+	    sc.close();
 	}
+	public static void currentOrderScreen() {
+		System.out.println("Placed: " +currentOrder.getPlaced_timestamp());
+		System.out.println("Delivered: " +currentOrder.getDelivery_timestamp());
+		System.out.println("Total price: " +currentOrder.getTotal_price());
+		System.out.println("Method: " +currentOrder.getDelivery_method_id());
+		System.out.println("Status: " +currentOrder.getDelivery_status_id());
+		System.out.println("1. Cancel");
+		System.out.println("2. Go Back");
+		Scanner sc = new Scanner(System.in);
+	    int input = sc.nextInt();
+	    if(input==1 && confirm()) sw.cancelOrder(currentOrder);
+	    else if(input==2) System.exit(0);
+	    sc.close();
+	}
+
 	public static void accountScreen(){
 		
+	}
+	public static void allOrdersScreen(){
+		OrderService os = new OrderService(con);
+		ArrayList<Order> orders = os.getUserOrders(currentUser.getUserId());
+		ServiceWrapper.printOrders(orders);
+		Scanner sc = new Scanner(System.in);
+	    int input = sc.nextInt();
+	    if(input==orders.size()+1) homeScreen();
+	    else if(input==orders.size()+2) System.exit(0);
+	    else oldOrderScreen(orders.get(input));
+	    sc.close();
+	}
+	public static void oldOrderScreen(Order order) {
+		System.out.println("Placed: " +order.getPlaced_timestamp());
+		System.out.println("Delivered: " +order.getDelivery_timestamp());
+		System.out.println("Total price: " +order.getTotal_price());
+		System.out.println("Method: " +order.getDelivery_method_id());
+		System.out.println("Status: " +order.getDelivery_status_id());
+		System.out.println("1. Reorder");
+		System.out.println("3. Go Back");
+		Scanner sc = new Scanner(System.in);
+	    int input = sc.nextInt();
+	    if(input==1 && confirm()) sw.reOrder(order);
+	    else if(input==2) System.exit(0);
+	    sc.close();
 	}
 	public static void storeDetailsScreen(){
 		
@@ -167,7 +226,15 @@ public class main {
 	public static void contactScreen(){
 		
 	}
-
+	public static boolean confirm(){
+		System.out.println("1. Yes");
+		System.out.println("2. No");
+		Scanner sc = new Scanner(System.in);
+	    int input = sc.nextInt();
+	    sc.close();
+	    if(input==1) return true;
+	    return false;
+	}
 	
 
 

@@ -10,6 +10,7 @@ import domain.Card;
 
 import domain.IdException;
 import domain.Menu;
+import domain.Order;
 import domain.User;
 import services.UserService;
 
@@ -24,12 +25,13 @@ public class ServiceWrapper {
 
 	}
 
-	public Boolean login(String email, String password){
+	public User login(String email, String password){
 		
 		UserService us = new UserService(con);
 		User candidate = us.getByEmail(email);
-		if(password == candidate.getPassword()) return true;
-		else return false;
+		System.out.println(candidate.getFirstName());
+		if(password.equals(candidate.getPassword())) return candidate;
+		else return null;
 	}
 	
 	public boolean register(String firstName, String lastName, String email, String password, String street, String city, String state, String country, String zip, String userStatus){
@@ -58,7 +60,7 @@ public class ServiceWrapper {
 		
 	}
 	
-	public static void printMenuOptions(ArrayList<Menu> menus){
+	public static void printMenuItems(ArrayList<Menu> menus){
 		int count = 0;
 		for(Menu menu: menus){
 			count++;
@@ -68,10 +70,25 @@ public class ServiceWrapper {
 		System.out.println(count++ + "Go Quit");
 	}
 
+	public static void printOrders(ArrayList<Order> orders){
+		int count = 0;
+		for(Order order: orders){
+			count++;
+			System.out.println(count + order.getPlaced_timestamp());
+		}
+		System.out.println(count++ + "Go Back");
+		System.out.println(count++ + "Go Quit");
+	}
 
+	public void cancelOrder(Order order) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void reOrder(Order order) {
+		// TODO Auto-generated method stub
+		
+	}
 	
-	//getUserCards is in cardsservices
-	//getUserLocations is  in locationservices
-
 
 }

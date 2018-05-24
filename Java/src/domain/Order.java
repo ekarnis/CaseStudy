@@ -42,10 +42,6 @@ public class Order {
 	public Order() {
 		super();
 	}
-
-	
-
-	
 	
 	public ArrayList<String> getItem_ids() {
 		return item_ids;
