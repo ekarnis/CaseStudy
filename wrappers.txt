@@ -2,3 +2,10 @@ bool login(String username, string password)
 
 bool register(String email, etc)
 
+ArrayList<Card> getUserCards(String userID)
+
+ArrayList<Locations> getUserLocations(String userID)
+
+ArrayList<Order> getUserOrders(String userID)
+
+

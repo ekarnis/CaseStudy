@@ -1,26 +1,26 @@
-package domain;
+package services;
 
 import java.util.ArrayList;
 
 public class Order {
 	
-	String order_id;
-	String user_id;
-	float tip;
-	float total_price;
-	int placed_timestamp;
-	int delivery_timestamp;
-	String card_id;
-	String instuctions;
-	String delivery_method_id;
-	String store_id;
-	String delivery_status_id;
+	String order_id; //varchar
+	String user_id; //varchar
+	float tip; //number(5,2)
+	float total_price;//number(7,2)
+	int placed_timestamp; //int
+	int delivery_timestamp; //int
+	String card_id; //varchar
+	String instuctions; //carchar
+	String delivery_method_id; //varchar
+	String store_id; //varchar
+	String delivery_status_id; //varchar
 	
 	//Array to hold order items rather than the order_items table
 	ArrayList<String> item_ids = new ArrayList<String>();
 
 	
-
+	
 	public Order(String order_id, String user_id, float tip, float total_price, int placed_timestamp,
 			int delivery_timestamp, String card_id, String instuctions, String delivery_method_id, String store_id,
 			String delivery_status_id, ArrayList<String> item_ids) {
@@ -44,14 +44,12 @@ public class Order {
 	}
 
 	
-
-	
 	
 	public ArrayList<String> getItem_ids() {
 		return item_ids;
 	}
 
-	public void setItem_ids(ArrayList<String> item_ids) {
+	public void setItem_ids(ArrayList<String> item_ids) { 
 		this.item_ids = (ArrayList<String>) item_ids.clone();
 	}
 
@@ -69,6 +67,22 @@ public class Order {
 
 	public void setUser_id(String user_id) {
 		this.user_id = user_id;
+	}
+
+	public float getTip() {
+		return tip;
+	}
+
+	public void setTip(float tip) {
+		this.tip = tip;
+	}
+
+	public float getTotal_price() {
+		return total_price;
+	}
+
+	public void setTotal_price(float total_price) {
+		this.total_price = total_price;
 	}
 
 	public int getPlaced_timestamp() {
@@ -127,22 +141,6 @@ public class Order {
 		this.delivery_status_id = delivery_status_id;
 	}
 
-	public float getTip() {
-		return tip;
-	}
-
-	public void setTip(float tip) {
-		this.tip = tip;
-	}
-
-	public float getTotal_price() {
-		return total_price;
-	}
-
-	public void setTotal_price(float total_price) {
-		this.total_price = total_price;
-	}
-
 	@Override
 	public String toString() {
 		return "Order [order_id=" + order_id + ", user_id=" + user_id + ", tip=" + tip + ", total_price=" + total_price
@@ -151,4 +149,6 @@ public class Order {
 				+ ", store_id=" + store_id + ", delivery_status_id=" + delivery_status_id + ", item_ids=" + item_ids
 				+ "]";
 	}
+
+	
 }

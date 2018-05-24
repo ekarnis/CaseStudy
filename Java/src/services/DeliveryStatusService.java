@@ -8,9 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import domain.DeliveryStatus;
-
-public class DeliveryStatusService implements Service<DeliveryStatus>{
+public class DeliveryStatusService {
 	
 	Connection connection;
 	
@@ -21,9 +19,48 @@ public class DeliveryStatusService implements Service<DeliveryStatus>{
 		super();
 		this.connection = connection;
 	}
+	void add(DeliveryStatus deliveryStatus){
+		try{
+			CallableStatement statement = connection.prepareCall("{call AddDeliveryStatus(?, ?)}");
+			statement.setString(1, deliveryStatus.getDelivery_status_id());
+			statement.setString(2, deliveryStatus.getDelivery_status());
+			statement.execute();
+			statement.close();
+			
+		}catch(SQLException e){
+			System.out.println(e.getMessage());
+		}	
+	}
 	
-	@Override
-	public ArrayList<DeliveryStatus> getAll(){
+	void update(DeliveryStatus deliveryStatus){
+		String statement = "UPDATE DELIVERY_STATUSES SET DELIVERY_STATUS = ?"
+				+ "WHERE DELIVERY_STATUS_ID = ?";
+		
+		try{
+			PreparedStatement preparedStatement = connection.prepareStatement(statement);
+			
+			preparedStatement.setString(1, deliveryStatus.getDelivery_status());
+			preparedStatement.setString(2, deliveryStatus.getDelivery_status_id());
+			preparedStatement.executeUpdate();
+		
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	void deleteByID(String id){
+		try{
+			
+			CallableStatement statement = connection.prepareCall("{call DeleteDeliveryStatus(?)}");
+			statement.setString(1, id);
+			statement.execute();
+			statement.close();
+			
+		}catch(SQLException e){
+			System.out.println(e.getMessage());
+		}
+	}
+	ArrayList<DeliveryStatus> getAll(){
 
 		ArrayList<DeliveryStatus> deliveryStatuses = new ArrayList<DeliveryStatus>();
 		
@@ -32,59 +69,15 @@ public class DeliveryStatusService implements Service<DeliveryStatus>{
 			ResultSet rs = statement.executeQuery("SELECT * FROM DELIVERY_STATUSES");
 			
 			while(rs.next()){
-				DeliveryStatus deliveryStatus = new DeliveryStatus(rs.getInt(1),rs.getString(2)); 
+				DeliveryStatus deliveryStatus = new DeliveryStatus(rs.getString(1),rs.getString(2)); 
 				deliveryStatuses.add(deliveryStatus);
 			}
-		}catch(Exception e){
+		}catch(SQLException e){
 			System.out.println(e.getMessage());
 		}
 		return deliveryStatuses;
 	}
-
-	@Override
-	public void deleteById(String id) {
-		try{
-			
-			CallableStatement statement = connection.prepareCall("{call DeleteDeliveryStatus(?)}");
-			statement.setString(1, id);
-			statement.execute();
-			statement.close();
-			
-		}catch(Exception e){
-			System.out.println(e.getMessage());
-		}
-	}
-	@Override
-	public boolean add(DeliveryStatus deliveryStatus) {
-		try{
-			CallableStatement statement = connection.prepareCall("{call AddDeliveryStatus(?, ?)}");
-			statement.setInt(1, deliveryStatus.getDelivery_status_id());
-			statement.setString(2, deliveryStatus.getDelivery_status());
-			statement.execute();
-			statement.close();
-			return true;
-		}catch(Exception e){
-			System.out.println(e.getMessage());
-			return false;
-		}	
-	}
-	@Override
-	public void update(DeliveryStatus deliveryStatus) {
-		String statement = "UPDATE DELIVERY_STATUSES SET DELIVERY_STATUS = ?"
-				+ "WHERE DELIVERY_STATUS_ID = ?";
-		try{
-			PreparedStatement preparedStatement = connection.prepareStatement(statement);
-			
-			preparedStatement.setString(1, deliveryStatus.getDelivery_status());
-			preparedStatement.setInt(2, deliveryStatus.getDelivery_status_id());
-			preparedStatement.executeUpdate();
-		
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-		}
-	}
-	@Override
-	public DeliveryStatus getById(String id) {
+	DeliveryStatus getByID(String id){
 		DeliveryStatus deliveryStatus = null;
 		
 		try{
@@ -94,10 +87,10 @@ public class DeliveryStatusService implements Service<DeliveryStatus>{
 			
 			resultSet.next();
 			deliveryStatus = new DeliveryStatus(
-					resultSet.getInt(1),
+					resultSet.getString(1),
 					resultSet.getString(2)
 					); 
-		}catch(Exception e){
+		}catch(SQLException e){
 			System.out.println(e.getMessage());
 		}	
 		

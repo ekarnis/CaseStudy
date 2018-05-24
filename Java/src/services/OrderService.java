@@ -8,8 +8,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import domain.Order;
-
 public class OrderService implements Service<Order>{
 	/*
 	ArrayList<Integer> item_ids = new ArrayList<Integer>();
@@ -31,17 +29,19 @@ public class OrderService implements Service<Order>{
 		try{
 			//Add order items
 			CallableStatement statement = connection.prepareCall(
-					"{call AddOrder(?,?,?,?,?,?,?,?,?)}");
+					"{call AddOrder(?,?,?,?,?,?,?,?,?,?,?)}");
 			
-			statement.setString(1,order.getOrder_id());
-			statement.setString(2,order.getUser_id());
-			statement.setInt(3,order.getPlaced_timestamp());
-			statement.setInt(4,order.getDelivery_timestamp());
-			statement.setString(5,order.getCard_id());
-			statement.setString(6,order.getInstuctions());
-			statement.setString(7,order.getDelivery_method_id());
-			statement.setString(8,order.getStore_id());
-			statement.setString(9,order.getDelivery_status_id());
+			statement.setString("ORDER_ID",order.getOrder_id());
+			statement.setString("USER_ID",order.getUser_id());
+			statement.setFloat("TIP",order.getTip());
+			statement.setFloat("TOTAL_PRICE",order.getTotal_price());
+			statement.setInt("PLACED_TIMESTAMP",order.getPlaced_timestamp());
+			statement.setInt("DELIVERY_TIMESTAMP",order.getDelivery_timestamp());
+			statement.setString("CARD_ID",order.getCard_id());
+			statement.setString("INSTRUCTIONS",order.getInstuctions());
+			statement.setString("DELIVERY_METHOD_ID",order.getDelivery_method_id());
+			statement.setString("STORE_ID",order.getStore_id());
+			statement.setString("DELIVERY_STATUS_ID",order.getDelivery_status_id());
 			statement.execute();
 			statement.close();
 			
@@ -107,15 +107,17 @@ public class OrderService implements Service<Order>{
 				}
 				
 				//Make new order
-				order = new Order(resultSetOrders.getString(1),
-						resultSetOrders.getString(2),
-						resultSetOrders.getInt(3),
-						resultSetOrders.getInt(4),
-						resultSetOrders.getString(5),
-						resultSetOrders.getString(6),
-						resultSetOrders.getString(7),
-						resultSetOrders.getString(8),
-						resultSetOrders.getString(9),
+				order = new Order(resultSetOrders.getString("ORDER_ID"),
+						resultSetOrders.getString("USER_ID"),
+						resultSetOrders.getFloat("TIP"),
+						resultSetOrders.getFloat("TOTAL_PRICE"),
+						resultSetOrders.getInt("PLACED_TIMESTAMP"),
+						resultSetOrders.getInt("DELIVERY_TIMESTAMP"),
+						resultSetOrders.getString("CARD_ID"),
+						resultSetOrders.getString("INSTRUCTIONS"),
+						resultSetOrders.getString("DELIVERY_METHOD_ID"),
+						resultSetOrders.getString("STORE_ID"),
+						resultSetOrders.getString("DELIVERY_STATUS_ID"),
 						order_items);
 				orders.add(order);
 			}
@@ -125,43 +127,135 @@ public class OrderService implements Service<Order>{
 		return orders;
 	}
 	
-	public Order getById(String id){
-		Order order = new Order();
-				try{
-					//Get Order
-					Statement statement = connection.createStatement();
-					ResultSet resultSet = statement.executeQuery(
-							"SELECT * FROM ORDERS WHERE ORDER_ID = " + id);
-					resultSet.next();
-					order.setOrder_id(resultSet.getString(1));
-					order.setUser_id(resultSet.getString(2));
-					order.setPlaced_timestamp(resultSet.getInt(3));
-					order.setDelivery_timestamp(resultSet.getInt(4));
-					order.setCard_id(resultSet.getString(5));
-					order.setInstuctions(resultSet.getString(6));
-					order.setDelivery_method_id(resultSet.getString(7));
-					order.setStore_id(resultSet.getString(8));
-					order.setDelivery_status_id(resultSet.getString(9));
-
-
-					//get order items
-					statement = connection.createStatement();
-					resultSet = statement.executeQuery(
-							"SELECT * FROM ORDER_ITEMS WHERE ORDER_ID = " + id);
-					
-					ArrayList<String> order_items = new ArrayList<String>();
-					while(resultSet.next()){
-						order_items.add(resultSet.getString("ITEM_ID"));
-					}
-					order.setItem_ids(order_items);	
-				}catch(SQLException e){
-					System.out.println(e.getMessage());
-				}	
-				
-				return order;
-	}
-	
+	@Override
 	public void update(Order order){
 		
+		try{
+			//Add order items
+			CallableStatement statement = connection.prepareCall(
+					"{call UpdateOrder(?,?,?,?,?,?,?,?,?,?,?)}");
+			
+			statement.setString("ORDER_ID",order.getOrder_id());
+			statement.setString("USER_ID",order.getUser_id());
+			statement.setFloat("TIP",order.getTip());
+			statement.setFloat("TOTAL_PRICE",order.getTotal_price());
+			statement.setInt("PLACED_TIMESTAMP",order.getPlaced_timestamp());
+			statement.setInt("DELIVERY_TIMESTAMP",order.getDelivery_timestamp());
+			statement.setString("CARD_ID",order.getCard_id());
+			statement.setString("INSTRUCTIONS",order.getInstuctions());
+			statement.setString("DELIVERY_METHOD_ID",order.getDelivery_method_id());
+			statement.setString("STORE_ID",order.getStore_id());
+			statement.setString("DELIVERY_STATUS_ID",order.getDelivery_status_id());
+			statement.execute();
+			statement.close();
+			
+			//remove all items from order_items 
+			statement = connection.prepareCall(
+					"{call DeleteOrderItems(?)}");
+			statement.setString("ORDER_ID",order.getOrder_id());
+			statement.execute();
+			statement.close();
+			
+			//Add all items in order to order_items
+			ArrayList<String> item_ids = order.getItem_ids();
+			for (String item_id: item_ids){
+				statement = connection.prepareCall(
+						"{call AddOrderItem(?,?)}");
+				statement.setString(1, order.getOrder_id());
+				statement.setString(2, item_id);
+				statement.execute();
+				statement.close();
+			}
+		}catch(SQLException e){
+			System.out.println(e.getMessage());
+		}	
 	}
+
+	@Override
+	public Order getById(String id) {
+		Order order = new Order();
+		try{
+			//Get Order
+			Statement statement = connection.createStatement();
+			ResultSet resultSet = statement.executeQuery(
+					"SELECT * FROM ORDERS WHERE ORDER_ID = " + id);
+			resultSet.next();
+			order.setOrder_id(resultSet.getString("ORDER_ID"));
+			order.setUser_id(resultSet.getString("USER_ID"));
+			order.setTip(resultSet.getFloat("TIP"));
+			order.setTip(resultSet.getFloat("TOTAL_PRICE"));
+			order.setPlaced_timestamp(resultSet.getInt("PLACED_TIMESTAMP"));
+			order.setDelivery_timestamp(resultSet.getInt("DELIVERY_TIMESTAMP"));
+			order.setCard_id(resultSet.getString("CARD_ID"));
+			order.setInstuctions(resultSet.getString("INSTRUCTIONS"));
+			order.setDelivery_method_id(resultSet.getString("DELIVERY_METHOD_ID"));
+			order.setStore_id(resultSet.getString("STORE_ID"));
+			order.setDelivery_status_id(resultSet.getString("DELIVERY_STATUS_ID"));
+
+
+			//get order items
+			statement = connection.createStatement();
+			resultSet = statement.executeQuery(
+					"SELECT * FROM ORDER_ITEMS WHERE ORDER_ID = " + id);
+			
+			ArrayList<String> order_items = new ArrayList<String>();
+			while(resultSet.next()){
+				order_items.add(resultSet.getString("ITEM_ID"));
+			}
+			order.setItem_ids(order_items);	
+		}catch(SQLException e){
+			System.out.println(e.getMessage());
+		}	
+		
+		return order;
+	}
+	
+	public ArrayList<Order> getUserOrders(String userId){
+		ArrayList<Order> orders = new ArrayList<Order>();
+		Order order;
+		ArrayList<String> order_items = new ArrayList<String>();
+		try{
+			//Get Order
+			Statement statement = connection.createStatement();
+			ResultSet resultSetOrders = statement.executeQuery("SELECT * FROM ORDERS WHERE USER_ID = '" + userId + "'");
+			
+			ResultSet resultSetItems;
+			while(resultSetOrders.next()){
+				//fetch all order items
+				statement = connection.createStatement();
+				resultSetItems = statement.executeQuery(
+						"SELECT * FROM ORDER_ITEMS WHERE ORDER_ID = " + resultSetOrders.getString("ORDER_ID"));
+				order_items.clear();
+				while(resultSetItems.next()){
+					order_items.add(resultSetItems.getString("ITEM_ID"));
+				}
+				
+				//Make new order
+				order = new Order(resultSetOrders.getString("ORDER_ID"),
+						resultSetOrders.getString("USER_ID"),
+						resultSetOrders.getFloat("TIP"),
+						resultSetOrders.getFloat("TOTAL_PRICE"),
+						resultSetOrders.getInt("PLACED_TIMESTAMP"),
+						resultSetOrders.getInt("DELIVERY_TIMESTAMP"),
+						resultSetOrders.getString("CARD_ID"),
+						resultSetOrders.getString("INSTRUCTIONS"),
+						resultSetOrders.getString("DELIVERY_METHOD_ID"),
+						resultSetOrders.getString("STORE_ID"),
+						resultSetOrders.getString("DELIVERY_STATUS_ID"),
+						order_items);
+				orders.add(order);
+			}
+		}catch(SQLException e){
+			System.out.println(e.getMessage());
+		}
+		return orders;
+		
+		
+		
+		
+	}
+	
+	
+	
+	
 }
