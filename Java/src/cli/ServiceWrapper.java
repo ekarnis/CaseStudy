@@ -1,6 +1,8 @@
 package cli;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
+import java.util.ArrayList;
 
 import domain.IdException;
 import domain.User;
@@ -10,9 +12,14 @@ public class ServiceWrapper {
 	
 	Connection con;
 	
-	public ServiceWrapper(Connection con) {
+	public ServiceWrapper() {
 		super();
-		this.con = con;
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+	        con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "hr", "hr");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public Boolean login(String email, String password){
@@ -35,6 +42,16 @@ public class ServiceWrapper {
 		}
 		
 		return result;
+		
+	}
+	public static void printOptions(ArrayList<String> options){
+		options.add("Go back");
+		options.add("Quit");
+		int count = 0;
+		for(String option : options) {
+			count++;
+			System.out.println("\n" + count + ". " + option);
+		}
 		
 	}
 

@@ -2,22 +2,28 @@ package cli;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 public class main {
 
+	public static ServiceWrapper sw;
+	
 	public static void main(String[] args) {
-
-		System.out.println("q: quit	b:go back #:select option");
-
-		initialScreen();
+		sw  = new ServiceWrapper();
+		firstScreen();
 	}
 	
-	public static void initialScreen(){
+	public static void firstScreen(){
 		ArrayList<String> options = new ArrayList<String>();
 		options.add("Login");
 		options.add("Register");
 		options.add("Menu");
-		printOptions(options);
+		int count = 0;
+		for(String option : options) {
+			count++;
+			System.out.println("\n" + count + ". " + option);
+		}
+		
 		Scanner sc = new Scanner(System.in);
 	    String input = sc.next();
 	    switch(input){
@@ -33,12 +39,22 @@ public class main {
 	    sc.close();
 
 	}
+		
 	public static void loginScreen(){
 		Scanner sc = new Scanner(System.in);
-		System.out.println("q: quit	b:go back #:select option");
-	    String input = sc.next();
-
-	    
+		System.out.println("Enter email:");
+	    String email = sc.next();
+		System.out.println("Enter password:");
+	    String password = sc.next();
+	    if(sw.login(email, password)) homeScreen();
+	    else{
+	    	System.out.println("Wrong email or password");
+	    	try {
+				TimeUnit.SECONDS.sleep(3);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+	    }
 	    
 	    sc.close();
 
@@ -49,14 +65,10 @@ public class main {
 	public static void menuScreen(){
 		
 	}
-	
-	public static void printOptions(ArrayList<String> options){
-		int count = 0;
-		for(String option : options) {
-			count++;
-			System.out.println("\n" + count + ". " + option);
-		}
+	public static void homeScreen(){
 		
 	}
+	
+
 
 }
