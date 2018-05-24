@@ -6,5 +6,6 @@
 	<classpathentry kind="lib" path="C:/Eclipse Examples/CoreJava/CoreJavaSamples/jars/ojdbc6-11.2.0.3.jar"/>
 	<classpathentry kind="lib" path="C:/Eclipse Examples/CoreJava/CoreJavaSamples/jars/ojdbc14.jar"/>
 	<classpathentry kind="lib" path="C:/Eclipse Examples/CoreJava/CoreJavaSamples/jars/ojdbc14_g.jar"/>
+	<classpathentry kind="lib" path="C:/Users/syntel.MININT-1GOAKQE/Documents/Git/CaseStudy/Java/jars/hamcrest-core-1.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

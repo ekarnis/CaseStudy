@@ -105,11 +105,22 @@ public class UserService implements Service<User>{
 		User user = null;
 		
 		try{
+			
 			PreparedStatement pstmt = connection.prepareStatement("select * from users "
-					+ "where email = ?"); 
-			pstmt.setString(1,email);
+					+ "where email like ?"); 
+			pstmt.setString(1,"eric\\@karnis.com");
 						
 			ResultSet usersRs = pstmt.executeQuery();
+			
+			//Statement usersSt = connection.createStatement();
+			/*
+			ResultSet usersRs = usersSt.executeQuery("Select * from Users "
+					+ "where email like '" + email.substring(0, email.indexOf('@')) 
+					+ "%" + email.substring(email.indexOf('@') + 1) + "'" ); 
+			*/
+			
+			//ResultSet usersRs = usersSt.executeQuery("select * from users where email like 'eric%karnis.com'");
+			
 
 			usersRs.next();
 			user = new User(

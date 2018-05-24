@@ -15,6 +15,14 @@ begin
   
 end;
 
+create or replace procedure fetch_user_by_email(email varchar)
+as 
+begin
+  select * from users
+  where email = email;
+  
+end;
+
 create or replace procedure sp_delete_user_by_id(user_num number)
 as 
 begin

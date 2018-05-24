@@ -50,7 +50,7 @@ insert into user_statuses
 
 
 insert into users
-	values ('0','Eric','Karnis','6035559577','eric@karnis.com','hey','0');
+	values ('0','Eric','Karnis','6035559577','eric\@karnis.com','hey','0');
 
 
 insert into locations
