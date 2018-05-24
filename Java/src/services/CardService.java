@@ -124,7 +124,7 @@ public class CardService implements Service<Card>{
 		
 		try{
 			Statement cardsSt = connection.createStatement();
-			ResultSet cardsRs = cardsSt.executeQuery("Select * from Cards where userId = " + userId);
+			ResultSet cardsRs = cardsSt.executeQuery("Select * from Cards where userId = '" + userId + "'");
 			
 			while(cardsRs.next()){
 				Card card = new Card(

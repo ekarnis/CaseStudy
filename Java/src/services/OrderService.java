@@ -217,7 +217,7 @@ public class OrderService implements Service<Order>{
 		try{
 			//Get Order
 			Statement statement = connection.createStatement();
-			ResultSet resultSetOrders = statement.executeQuery("SELECT * FROM ORDERS WHERE USER_ID = " + userId);
+			ResultSet resultSetOrders = statement.executeQuery("SELECT * FROM ORDERS WHERE USER_ID = '" + userId + "'");
 			
 			ResultSet resultSetItems;
 			while(resultSetOrders.next()){

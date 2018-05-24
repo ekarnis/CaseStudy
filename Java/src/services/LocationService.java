@@ -125,7 +125,7 @@ public class LocationService implements Service<Location>{
 		
 		try{
 			Statement locationsSt = connection.createStatement();
-			ResultSet locationsRs = locationsSt.executeQuery("Select * from Locations where user_id = " + userId);
+			ResultSet locationsRs = locationsSt.executeQuery("Select * from Locations where user_id = '" + userId + "'");
 			
 			while(locationsRs.next()){
 				Location location = new Location(
