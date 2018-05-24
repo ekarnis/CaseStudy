@@ -28,8 +28,8 @@ public class StoreService implements Service<Store>{
 			String storeName = store.getStoreName();
 			String phoneNumber = store.getPhoneNumber();
 			String managerId = store.getManagerId();
-			Date openTime = store.getOpenTime();
-			Date closeTime = store.getCloseTime();
+			int openTime = store.getOpenTime();
+			int closeTime = store.getCloseTime();
 			
 			CallableStatement oCSF = connection.prepareCall("{?=call sp_insert_store(?,?,?,?,?,?,?)}");
 			oCSF.setString(2, storeId);
@@ -37,8 +37,8 @@ public class StoreService implements Service<Store>{
 			oCSF.setString(4, storeName);
 			oCSF.setString(5, phoneNumber);
 			oCSF.setString(6, managerId);
-			oCSF.setDate(7, openTime);
-			oCSF.setDate(8, closeTime);
+			oCSF.setInt(7, openTime);
+			oCSF.setInt(8, closeTime);
 
 			oCSF.execute();
 			oCSF.close();
@@ -71,8 +71,8 @@ public class StoreService implements Service<Store>{
 						storesRs.getString(3),
 						storesRs.getString(4),
 						storesRs.getString(5),
-						storesRs.getDate(6),
-						storesRs.getDate(7)
+						storesRs.getInt(6),
+						storesRs.getInt(7)
 						); 
 				stores.add(store);
 			}
@@ -95,8 +95,8 @@ public class StoreService implements Service<Store>{
 					storesRs.getString(3),
 					storesRs.getString(4),
 					storesRs.getString(5),
-					storesRs.getDate(6),
-					storesRs.getDate(7)
+					storesRs.getInt(6),
+					storesRs.getInt(7)
 					);  
 		}catch(Exception e){
 			System.out.println(e.getMessage());
@@ -111,8 +111,8 @@ public class StoreService implements Service<Store>{
 			String storeName = store.getStoreName();
 			String phoneNumber = store.getPhoneNumber();
 			String managerId = store.getManagerId();
-			Date openTime = store.getOpenTime();
-			Date closeTime = store.getCloseTime();
+			int openTime = store.getOpenTime();
+			int closeTime = store.getCloseTime();
 			
 			CallableStatement oCSF = connection.prepareCall("{?=call sp_insert_store(?,?,?,?,?,?,?)}");
 			oCSF.setString(2, storeId);
@@ -120,8 +120,8 @@ public class StoreService implements Service<Store>{
 			oCSF.setString(4, storeName);
 			oCSF.setString(5, phoneNumber);
 			oCSF.setString(6, managerId);
-			oCSF.setDate(7, openTime);
-			oCSF.setDate(8, closeTime);
+			oCSF.setInt(7, openTime);
+			oCSF.setInt(8, closeTime);
 		}catch(SQLException e){
 			System.out.println(e.getMessage());
 		}	

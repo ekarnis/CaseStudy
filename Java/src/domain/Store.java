@@ -8,15 +8,15 @@ public class Store {
 	String storeName;
 	String phoneNumber;
 	String managerId;
-	Date openTime;
-	Date closeTime;
+	int openTime;
+	int closeTime;
 	
 	public Store() {
 		super();
 	}
 	
-	public Store(String storeId, String locationId, String storeName, String phoneNumber, String managerId, Date openTime,
-			Date closeTime) {
+	public Store(String storeId, String locationId, String storeName, String phoneNumber, String managerId, int openTime,
+			int closeTime) {
 		super();
 		this.storeId = storeId;
 		this.locationId = locationId;
@@ -57,16 +57,16 @@ public class Store {
 	public void setManagerId(String managerId) {
 		this.managerId = managerId;
 	}
-	public Date getOpenTime() {
+	public int getOpenTime() {
 		return openTime;
 	}
-	public void setOpenTime(Date openTime) {
+	public void setOpenTime(int openTime) {
 		this.openTime = openTime;
 	}
-	public Date getCloseTime() {
+	public int getCloseTime() {
 		return closeTime;
 	}
-	public void setCloseTime(Date closeTime) {
+	public void setCloseTime(int closeTime) {
 		this.closeTime = closeTime;
 	}
 	@Override
