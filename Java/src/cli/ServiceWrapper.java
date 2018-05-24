@@ -32,13 +32,13 @@ public class ServiceWrapper {
 		else return null;
 	}
 	
-	public boolean register(String firstName, String lastName, String email, String password){
+	public boolean register(String firstName, String lastName, String phone, String email, String password){
 		//, String street, String city, String state, String country, String zip, String userStatus
 		boolean result = false;
 		String userId = Double.toString(Math.random()* 10001);
 		String userStatusId = Double.toString(Math.random()* 10001);
-		String locationId = Double.toString(Math.random()* 10001);
-		User user = new User(userId,firstName,lastName,email,password,userStatusId,locationId);
+
+		User user = new User(userId,firstName,lastName,phone, email,password,userStatusId);
 		UserService us = new UserService(con);
 		result =  us.add(user);
 		return result;
@@ -46,7 +46,6 @@ public class ServiceWrapper {
 
 	public static void printOptions(ArrayList<String> options){
 		options.add("Go back");
-		options.add("Quit");
 		int count = 0;
 		for(String option : options) {
 			count++;
@@ -62,7 +61,6 @@ public class ServiceWrapper {
 			System.out.println(count + ". " + menu.getName());
 		}
 		System.out.println(++count + ". Go Back");
-		System.out.println(++count + ". Quit");
 	}
 
 	public static void printOrders(ArrayList<Order> orders){
@@ -72,7 +70,6 @@ public class ServiceWrapper {
 			System.out.println(count + ". " + order.getPlaced_timestamp());
 		}
 		System.out.println(count++ + ". Go Back");
-		System.out.println(count++ + ". Quit");
 	}
 
 	public void cancelOrder(Order order) {

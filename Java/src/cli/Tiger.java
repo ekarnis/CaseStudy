@@ -35,6 +35,7 @@ public class Tiger{
 	}
 	
 	public static void firstScreen(){
+		System.out.println("*Welcome*");
 		ArrayList<String> options = new ArrayList<String>();
 		options.add("Login");
 		options.add("Register");
@@ -61,7 +62,7 @@ public class Tiger{
 	}
 		
 	public static void loginScreen(){
-		System.out.println("Login");
+		System.out.println("*Login*");
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter email:");
 	    String email = sc.next();
@@ -96,7 +97,7 @@ public class Tiger{
 
 	}
 	public static void registerScreen(){
-		System.out.println("Register");
+		System.out.println("*Register*");
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter email:");
 	    String email = sc.next();
@@ -106,6 +107,8 @@ public class Tiger{
 	    String first = sc.next();
 		System.out.println("Enter last name:");
 	    String last = sc.next();
+		System.out.println("Enter phone:");
+	    String phone = sc.next();
 		/*System.out.println("Enter street:");
 	    String street = sc.next();
 		System.out.println("Enter city:");
@@ -119,7 +122,7 @@ public class Tiger{
 		System.out.println("Enter status:");
 	    String status = sc.next();*/
 	    //, street, city, state, country, zip, status
-	    if(sw.register(first, last, email, password)) {
+	    if(sw.register(first, last, phone, email, password)) {
 	    	System.out.println("Registered");
 	    	homeScreen();
 	    }
@@ -133,7 +136,7 @@ public class Tiger{
 	}
 
 	public static void homeScreen(){
-		System.out.println("Home");
+		System.out.println("*Home*");
 		ArrayList<String> options = new ArrayList<String>();
 		options.add("Menu");
 		options.add("Order");
@@ -167,14 +170,13 @@ public class Tiger{
 	}
 	
 	public static void menuScreen(){
-		System.out.println("Menu");
+		System.out.println("*Menu*");
 		MenuServices ms = new MenuServices(con);
 		ArrayList<Menu> menus = ms.getAll();
 		ServiceWrapper.printMenuItems(menus);
 		Scanner sc = new Scanner(System.in);
 	    int input = sc.nextInt();
 	    if(input==menus.size()+1) homeScreen();
-	    else if(input==menus.size()+2) System.exit(0);
 	    else menuItemScreen(menus.get(input-1));
 	    sc.close();
 	}
@@ -259,14 +261,14 @@ public class Tiger{
 	public static void submitOrder(){
 		System.out.println("*Submit*");
 
-	    OrderService os = new OrderService(con);
+	    //OrderService os = new OrderService(con);
 	    //input should be equal to number of items in order
-	    Menu menu = null;
-	    int input = 0;
-	    for(int i=0;i<input;i++){
+	    //Menu menu = null;
+	   // int input = 0;
+	    //for(int i=0;i<input;i++){
 	    	//create order item and add to item
-	    	os.addItem_id(menu.getId(), currentOrder.getOrder_id());
-	    }
+	    	//os.addItem_id(menu.getId(), currentOrder.getOrder_id());
+	   // }
 	}
 	
 	public static void accountScreen(){
@@ -292,23 +294,28 @@ public class Tiger{
     		case 1:
     			String newFirstName = editString();
     			currentUser.setFirstName(newFirstName);
-    			System.out.println("First Name Changed");
+    			System.out.println("First Name Changed to: " + newFirstName);
+    			break;
     		case 2:
     			String newLastName = editString();
     			currentUser.setLastName(newLastName);
-    			System.out.println("Last Name Changed");
+    			System.out.println("Last Name Changed to: " + newLastName);
+    			break;
     		case 3:
     			String newEmail = editString();
     			currentUser.setEmail(newEmail);
-    			System.out.println("Email Changed");
+    			System.out.println("Email Changed to: " + newEmail);
+    			break;
     		case 4:
     			String newPassword = editString();
     			currentUser.setPassword(newPassword);
-    			System.out.println("Password Changed");
+    			System.out.println("Password Changed to: " + newPassword);
+    			break;
     		case 5:
     			String newPhoneNumber = editString();
-    			currentUser.setPhoneNumber(newPhoneNumber);
-    			System.out.println("Phone Number Changed");
+    			currentUser.setPhone(newPhoneNumber);
+    			System.out.println("Phone Number Changed to: " + newPhoneNumber);
+    			break;
     		case 6:
     			editCards();
        		case 7:
@@ -331,8 +338,11 @@ public class Tiger{
 	}
 
 	private static String editString() {
-		System.out.println("");
-		return null;
+		System.out.println("Enter new value");
+		Scanner sc = new Scanner(System.in);
+	    String input = sc.next();
+	    sc.close();
+		return input;
 	}
 
 	public static void allOrdersScreen(){
@@ -343,7 +353,6 @@ public class Tiger{
 		Scanner sc = new Scanner(System.in);
 	    int input = sc.nextInt();
 	    if(input==orders.size()) homeScreen();
-	    else if(input==orders.size()+1) System.exit(0);
 	    else oldOrderScreen(orders.get(input));
 	    sc.close();
 	}
@@ -362,7 +371,7 @@ public class Tiger{
 	    	//TODO find out what the status id this thing needs is
 	    	currentOrder.setDelivery_status_id("1");
 	    }
-	    else if(input==2) System.exit(0);
+	    else if(input==2) accountScreen();
 	    sc.close();
 	}
 	public static void storeDetailsScreen(){
@@ -374,9 +383,7 @@ public class Tiger{
 		System.out.println("Close: " + currentStore.getCloseTime());
 		homeScreen();
 	}
-	public static void contactScreen(){
-		
-	}
+
 	public static boolean confirm(){
 		System.out.println("*Confirm*");
 		System.out.println("1. Yes");
