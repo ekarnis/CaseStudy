@@ -20,22 +20,24 @@ public class UserService implements Service<User>{
 	}
 	public boolean add(User user){
 		try{
+			
 			String userId = user.getUserId();
 			String firstName = user.getFirstName();
 			String lastName = user.getLastName();
+			String phone = user.getPhone();
 			String email = user.getEmail();
 			String password = user.getPassword();
 			String userStatusId = user.getUserStatusId();
-			String locationId = user.getLocationId();
 			
 			CallableStatement oCSF = connection.prepareCall("{?=call sp_insert_user(?,?,?,?,?,?,?)}");
 			oCSF.setString(2, userId);
 			oCSF.setString(3, firstName);
 			oCSF.setString(4, lastName);
-			oCSF.setString(5, email);
-			oCSF.setString(6, password);
-			oCSF.setString(7, userStatusId);
-			oCSF.setString(8, locationId);
+			oCSF.setString(5, phone);
+			oCSF.setString(6, email);
+			oCSF.setString(7, password);
+			oCSF.setString(8, userStatusId);
+			
 			oCSF.execute();
 			oCSF.close();
 			return true;
@@ -107,21 +109,12 @@ public class UserService implements Service<User>{
 		try{
 			
 			PreparedStatement pstmt = connection.prepareStatement("select * from users "
-					+ "where email like ?"); 
-			pstmt.setString(1,"eric\\@karnis.com");
+					+ "where email = ?"); 
+			pstmt.setString(1,email);
 						
 			ResultSet usersRs = pstmt.executeQuery();
 			
-			//Statement usersSt = connection.createStatement();
-			/*
-			ResultSet usersRs = usersSt.executeQuery("Select * from Users "
-					+ "where email like '" + email.substring(0, email.indexOf('@')) 
-					+ "%" + email.substring(email.indexOf('@') + 1) + "'" ); 
-			*/
 			
-			//ResultSet usersRs = usersSt.executeQuery("select * from users where email like 'eric%karnis.com'");
-			
-
 			usersRs.next();
 			user = new User(
 					usersRs.getString(1),
