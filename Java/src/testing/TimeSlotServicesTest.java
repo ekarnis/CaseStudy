@@ -2,22 +2,14 @@ package testing;
 
 import static org.junit.Assert.*;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import domain.TimeSlots;
-import services.DeliveryStatus;
-import services.DeliveryStatusService;
 import services.TimeSlotServices;
 
 public class TimeSlotServicesTest extends DatabaseTestMethods{

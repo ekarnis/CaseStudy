@@ -26,13 +26,17 @@ public class MenuServices implements Service<Menu> {
 		try {
 			ResultSet rs = con.createStatement().executeQuery("SELECT * FROM items WHERE item_id = " + id);
 			rs.next();
-			float price = rs.getFloat("price");
-			String time = getTimeName(times, rs.getString("time_slot_id"));
-			System.out.println("Got price");
-			Menu men = new Menu(rs.getString("item_id"), rs.getString("name"), 
-					rs.getString("vegetarian").charAt(0), rs.getString("item_type_id"), 
-					rs.getString("description"), time, rs.getString("photo"), price);
-			System.out.println("Got everything");
+			//float price = rs.getFloat("price");
+			//String time = getTimeName(times, rs.getString("time_slot_id"));
+			Menu men = new Menu(rs.getString("item_id"), 
+					rs.getString("name"), 
+					rs.getString("vegetarian").charAt(0), 
+					rs.getString("item_type_id"), 
+					rs.getString("description"), 
+					rs.getString("time_slot_id"), 
+					rs.getString("photo"), 
+					rs.getFloat("price"));
+			
 			return men;
 			
 		} catch (SQLException e) {
