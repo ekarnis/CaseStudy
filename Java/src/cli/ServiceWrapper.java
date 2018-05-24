@@ -52,7 +52,7 @@ public class ServiceWrapper {
 		int count = 0;
 		for(String option : options) {
 			count++;
-			System.out.println("\n" + count + ". " + option);
+			System.out.println(count + ". " + option);
 		}
 		
 	}
@@ -61,20 +61,20 @@ public class ServiceWrapper {
 		int count = 0;
 		for(Menu menu: menus){
 			count++;
-			System.out.println(count + menu.getName());
+			System.out.println(count + ". " + menu.getName());
 		}
-		System.out.println(count++ + "Go Back");
-		System.out.println(count++ + "Go Quit");
+		System.out.println(++count + ". Go Back");
+		System.out.println(++count + ". Quit");
 	}
 
 	public static void printOrders(ArrayList<Order> orders){
 		int count = 0;
 		for(Order order: orders){
 			count++;
-			System.out.println(count + order.getPlaced_timestamp());
+			System.out.println(count + ". " + order.getPlaced_timestamp());
 		}
-		System.out.println(count++ + "Go Back");
-		System.out.println(count++ + "Go Quit");
+		System.out.println(count++ + ". Go Back");
+		System.out.println(count++ + ". Quit");
 	}
 
 	public void cancelOrder(Order order) {

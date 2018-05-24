@@ -62,12 +62,9 @@ public class Tiger{
 	    String email = sc.next();
 		System.out.println("Enter password:");
 	    String password = sc.next();
-	    System.out.print(email);
-	    System.out.print(password);
 	    
 		UserService us = new UserService(con);
 		User candidate = us.getByEmail(email);
-		System.out.println(candidate.getFirstName());
 	    
 	    currentUser = candidate;
 	    if(currentUser != null) homeScreen();
