@@ -41,6 +41,14 @@ public class Order {
 
 	public Order() {
 		super();
+		this.tip = 0;
+		this.total_price = 0;
+		this.placed_timestamp = 0;
+		this.delivery_timestamp = 0;
+		this.instuctions = "";
+		this.delivery_method_id = "0";
+		this.store_id = "0";
+		this.delivery_status_id = "0";
 	}
 	
 	public ArrayList<String> getItem_ids() {

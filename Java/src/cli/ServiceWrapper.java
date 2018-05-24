@@ -32,7 +32,8 @@ public class ServiceWrapper {
 		else return null;
 	}
 	
-	public boolean register(String firstName, String lastName, String email, String password, String street, String city, String state, String country, String zip, String userStatus){
+	public boolean register(String firstName, String lastName, String email, String password){
+		//, String street, String city, String state, String country, String zip, String userStatus
 		boolean result = false;
 		String userId = Double.toString(Math.random()* 10001);
 		String userStatusId = Double.toString(Math.random()* 10001);
@@ -101,6 +102,6 @@ public class ServiceWrapper {
 		
 		return items;
 	}
-	
+
 
 }
