@@ -22,6 +22,8 @@ public class Tiger{
 	public static User currentUser;
 	public static Order currentOrder;
 	public static Store currentStore;
+	
+	static Scanner sc;
 
 	public static void main(String[] args) {
 		try {
@@ -31,7 +33,9 @@ public class Tiger{
 			e.printStackTrace();
 		}
 		sw  = new ServiceWrapper(con);
+		sc = new Scanner(System.in);
 		firstScreen();
+		sc.close();
 	}
 	
 	public static void firstScreen(){
@@ -46,7 +50,6 @@ public class Tiger{
 			System.out.println(count + ". " + option);
 		}
 		
-		Scanner sc = new Scanner(System.in);
 	    int input = sc.nextInt();
 	    switch(input){
     		case 1:
@@ -60,13 +63,11 @@ public class Tiger{
     			AdminAndManager aam = new AdminAndManager(con);
     			aam.adminScreen();
 	    }
-	    sc.close();
 
 	}
 		
 	public static void loginScreen(){
 		System.out.println("*Login*");
-		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter email:");
 	    String email = sc.next();
 		System.out.println("Enter password:");
@@ -96,12 +97,10 @@ public class Tiger{
 			}
 	    }
 
-	    sc.close();
 
 	}
 	public static void registerScreen(){
 		System.out.println("*Register*");
-		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter email:");
 	    String email = sc.next();
 		System.out.println("Enter password:");
@@ -134,7 +133,6 @@ public class Tiger{
 			loginScreen();
 	    }
 	    
-	    sc.close();
 
 	}
 
@@ -152,7 +150,6 @@ public class Tiger{
 			count++;
 			System.out.println(count + ". " + option);
 		}
-		Scanner sc = new Scanner(System.in);
 	    int input = sc.nextInt();
 		if(input==1) menuScreen();
 		if(input==2) currentOrderScreen();    	
@@ -163,7 +160,6 @@ public class Tiger{
 			System.out.println("Goodbye");
     		System.exit(0);
 	    }
-	    sc.close();
 	}
 	
 	public static void menuScreen(){
@@ -171,11 +167,9 @@ public class Tiger{
 		MenuServices ms = new MenuServices(con);
 		ArrayList<Menu> menus = ms.getAll();
 		ServiceWrapper.printMenuItems(menus);
-		Scanner sc = new Scanner(System.in);
 	    int input = sc.nextInt();
 	    if(input==menus.size()+1) homeScreen();
 	    else menuItemScreen(menus.get(input-1));
-	    sc.close();
 	}
 	public static void menuItemScreen(Menu menu){
 		System.out.println(menu.getName());
@@ -183,21 +177,17 @@ public class Tiger{
 		System.out.println("$" + menu.getPrice());
 		System.out.println("1. Enter Quantity");
 		System.out.println("2. Go Back");
-		Scanner sc = new Scanner(System.in);
 	    int input = sc.nextInt();
 	    if(input==1) itemQuantityScreen(menu);
 	    else if(input==2) menuScreen();
-	    sc.close();
 	}
 	//TODO finish this
 	public static void itemQuantityScreen(Menu menu){
 		System.out.println("Enter Quantity");
-		Scanner sc = new Scanner(System.in);
 	    int input = sc.nextInt();
 	    for(int i=0;i<input;i++) currentOrder.addItem_id(menu.getId());
 		System.out.println("Item(s) added");
 		menuScreen();
-	    sc.close();
 	}
 	public static void currentOrderScreen() {
 		System.out.println("*Current Order*");
@@ -211,14 +201,12 @@ public class Tiger{
 		System.out.println("3. Edit Order");
 		System.out.println("4. Submit Order");
 		System.out.println("5. Go Back");
-		Scanner sc = new Scanner(System.in);
 	    int input = sc.nextInt();
 	    if(input==1 && confirm()) sw.cancelOrder(currentOrder);
 	    if(input==2) viewOrderItems(currentOrder);
 	    if(input==3) editOrder(currentOrder);
 	    if(input==4 && confirm()) sw.submitOrder(currentOrder);
 	    else if(input==5) homeScreen();
-	    sc.close();
 	}
 
 	private static void editOrder(Order order) {
@@ -236,12 +224,10 @@ public class Tiger{
 		ArrayList<Menu> items = sw.getMenuItems(itemIds);
 		System.out.println("Menu items: " + items);
 		ServiceWrapper.printMenuItems(items);
-		Scanner sc = new Scanner(System.in);
 	    int input = sc.nextInt();
 	    if(input==items.size()) homeScreen();
 	    else if(input==items.size()+1) currentOrderScreen();
 	    else orderItemScreen(items.get(input));
-	    sc.close();
 	}
 	public static void orderItemScreen(Menu menu){
 		/*System.out.println(menu.getName());
@@ -252,8 +238,7 @@ public class Tiger{
 		Scanner sc = new Scanner(System.in);
 	    int input = sc.nextInt();
 	    if(input==1) itemQuantityScreen(menu);
-	    else if(input==2) System.exit(0);
-	    sc.close();*/
+	    else if(input==2) System.exit(0);*/
 	}
 
 	//TODO
@@ -287,7 +272,6 @@ public class Tiger{
 			count++;
 			System.out.println(count + ". " + option);
 		}
-		Scanner sc = new Scanner(System.in);
 	    int input = sc.nextInt();
     		if(input==1){
     			String newFirstName = editString();
@@ -323,7 +307,6 @@ public class Tiger{
 	    UserService us = new UserService(con);
 	    us.update(currentUser);
 	    accountScreen();
-	    sc.close();
 	}
 	private static void editLocations() {
 		// TODO Auto-generated method stub
@@ -337,9 +320,7 @@ public class Tiger{
 
 	private static String editString() {
 		System.out.println("Enter new value");
-		Scanner sc = new Scanner(System.in);
 	    String inp = sc.next();
-	    sc.close();
 		return inp;
 	}
 
@@ -348,11 +329,9 @@ public class Tiger{
 		OrderService os = new OrderService(con);
 		ArrayList<Order> orders = os.getUserOrders(currentUser.getUserId());
 		ServiceWrapper.printOrders(orders);
-		Scanner sc = new Scanner(System.in);
 	    int input = sc.nextInt();
 	    if(input==orders.size()) homeScreen();
 	    else oldOrderScreen(orders.get(input));
-	    sc.close();
 	}
 	public static void oldOrderScreen(Order order) {
 		System.out.println("Placed: " +order.getPlaced_timestamp());
@@ -362,7 +341,6 @@ public class Tiger{
 		System.out.println("Status: " +order.getDelivery_status_id());
 		System.out.println("1. Reorder");
 		System.out.println("2. Go Back");
-		Scanner sc = new Scanner(System.in);
 	    int input = sc.nextInt();
 	    if(input==1 && confirm()) {
 	    	currentOrder=order;
@@ -370,7 +348,6 @@ public class Tiger{
 	    	currentOrder.setDelivery_status_id("1");
 	    }
 	    else if(input==2) accountScreen();
-	    sc.close();
 	}
 	public static void storeDetailsScreen(){
 		System.out.println("*Store*");
@@ -386,9 +363,7 @@ public class Tiger{
 		System.out.println("*Confirm*");
 		System.out.println("1. Yes");
 		System.out.println("2. No");
-		Scanner sc = new Scanner(System.in);
 	    int input = sc.nextInt();
-	    sc.close();
 	    if(input==1) return true;
 	    return false;
 	}
