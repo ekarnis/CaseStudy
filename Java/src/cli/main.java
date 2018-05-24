@@ -30,7 +30,7 @@ public class main {
 		ArrayList<String> options = new ArrayList<String>();
 		options.add("Login");
 		options.add("Register");
-		options.add("Menu");
+		options.add("Quit");
 		int count = 0;
 		for(String option : options) {
 			count++;
@@ -38,15 +38,13 @@ public class main {
 		}
 		
 		Scanner sc = new Scanner(System.in);
-	    String input = sc.next();
+	    int input = sc.nextInt();
 	    switch(input){
-    		case "1":
+    		case 1:
     			loginScreen();
-    		case "2":
+    		case 2:
     			registerScreen();    	
-    		case "3":
-    			menuScreen();
-    		case "q":
+    		case 3:
     			System.exit(0);
 	    }
 	    sc.close();
@@ -109,11 +107,7 @@ public class main {
 	    sc.close();
 
 	}
-	public static void menuScreen(){
-		MenuServices ms = new MenuServices(con);
-		ArrayList<Menu> menu = ms.getAll();
-		
-	}
+
 	public static void homeScreen(){
 		ArrayList<String> options = new ArrayList<String>();
 		options.add("Menu");
@@ -124,25 +118,42 @@ public class main {
 		options.add("Logout");
 		ServiceWrapper.printOptions(options);
 		Scanner sc = new Scanner(System.in);
-	    String input = sc.next();
+	    int input = sc.nextInt();
 	    switch(input){
-    		case "1":
+    		case 1:
     			menuScreen();
-    		case "2":
+    		case 2:
     			orderScreen();    	
-    		case "3":
+    		case 3:
     			accountScreen();
-    		case "4":
+    		case 4:
     			storeDetailsScreen();
-    		case "5":
+    		case 5:
     			contactScreen();    	
-    		case "6":
+    		case 6:
     			loginScreen();
-    		case "q":
+    		case 7:
     			System.exit(0);
 	    }
 	    sc.close();
-
+	}
+	
+	public static void menuScreen(){
+		MenuServices ms = new MenuServices(con);
+		ArrayList<Menu> menus = ms.getAll();
+		sw.printMenuOptions(menus);
+		Scanner sc = new Scanner(System.in);
+	    int input = sc.nextInt();
+	    if(input==menus.size()+1) homeScreen();
+	    else if(input==menus.size()+2) System.exit(0);
+	    else itemScreen(menus.get(input));
+	}
+	public static void itemScreen(Menu menu){
+		System.out.println(menu.getName());
+		System.out.println(menu.getDescription());
+		System.out.println(menu.getPrice());
+		System.out.println("1. Enter Quantity");
+		System.out.println(menu.getPrice());
 	}
 	public static void orderScreen(){
 		

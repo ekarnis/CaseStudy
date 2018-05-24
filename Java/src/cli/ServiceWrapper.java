@@ -9,6 +9,7 @@ import domain.Card;
 
 
 import domain.IdException;
+import domain.Menu;
 import domain.User;
 import services.UserService;
 
@@ -18,7 +19,7 @@ public class ServiceWrapper {
 	
 	
 	
-	public ServiceWrapper(con) {
+	public ServiceWrapper(Connection con) {
 		super();
 
 	}
@@ -56,6 +57,17 @@ public class ServiceWrapper {
 		}
 		
 	}
+	
+	public static void printMenuOptions(ArrayList<Menu> menus){
+		int count = 0;
+		for(Menu menu: menus){
+			count++;
+			System.out.println(count + menu.getName());
+		}
+		System.out.println(count++ + "Go Back");
+		System.out.println(count++ + "Go Quit");
+	}
+
 
 	
 	//getUserCards is in cardsservices
