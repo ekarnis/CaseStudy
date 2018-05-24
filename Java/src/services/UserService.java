@@ -140,14 +140,14 @@ public class UserService implements Service<User>{
 			String password = user.getPassword();
 			String userStatusId = user.getUserStatusId();
 			
-			CallableStatement oCSF = connection.prepareCall("{?=call sp_update_user(?,?,?,?,?,?,?)}");
-			oCSF.setString(2, userId);
-			oCSF.setString(3, firstName);
-			oCSF.setString(4, lastName);
-			oCSF.setString(5, phone);
-			oCSF.setString(6, email);
-			oCSF.setString(7, password);
-			oCSF.setString(8, userStatusId);
+			CallableStatement oCSF = connection.prepareCall("{call sp_update_user(?,?,?,?,?,?,?)}");
+			oCSF.setString(1, userId);
+			oCSF.setString(2, firstName);
+			oCSF.setString(3, lastName);
+			oCSF.setString(4, phone);
+			oCSF.setString(5, email);
+			oCSF.setString(6, password);
+			oCSF.setString(7, userStatusId);
 			oCSF.execute();
 			oCSF.close();
 		}catch(SQLException e){

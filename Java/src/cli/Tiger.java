@@ -151,20 +151,14 @@ public class Tiger{
 		}
 		Scanner sc = new Scanner(System.in);
 	    int input = sc.nextInt();
-	    switch(input){
-    		case 1:
-    			menuScreen();
-    		case 2:
-    			currentOrderScreen();    	
-    		case 3:
-    			accountScreen();
-    		case 4:
-    			storeDetailsScreen();   	
-    		case 5:
-    			loginScreen();
-    		case 6:
-    			System.out.println("Goodbye");
-    			System.exit(0);
+		if(input==1) menuScreen();
+		if(input==2) currentOrderScreen();    	
+		if(input==3) accountScreen();
+		if(input==4) storeDetailsScreen();   	
+		if(input==5) loginScreen();
+		if(input==6) {
+			System.out.println("Goodbye");
+    		System.exit(0);
 	    }
 	    sc.close();
 	}
@@ -235,14 +229,14 @@ public class Tiger{
 	private static void viewOrderItems(Order order) {
 		System.out.println("*View Items*");
 		ArrayList<String> itemIds = currentOrder.getItem_ids();
-		System.out.println("ORder items: " + itemIds);
+		System.out.println("Order items: " + itemIds);
 		ArrayList<Menu> items = sw.getMenuItems(itemIds);
 		System.out.println("Menu items: " + items);
 		ServiceWrapper.printMenuItems(items);
 		Scanner sc = new Scanner(System.in);
 	    int input = sc.nextInt();
 	    if(input==items.size()) homeScreen();
-	    else if(input==items.size()+1) System.exit(0);
+	    else if(input==items.size()+1) currentOrderScreen();
 	    else orderItemScreen(items.get(input));
 	    sc.close();
 	}
@@ -292,42 +286,40 @@ public class Tiger{
 		}
 		Scanner sc = new Scanner(System.in);
 	    int input = sc.nextInt();
-	    switch(input){
-    		case 1:
+    		if(input==1){
     			String newFirstName = editString();
     			currentUser.setFirstName(newFirstName);
     			System.out.println("First Name Changed to: " + newFirstName);
-    			break;
-    		case 2:
+    		}
+    		if(input==2){
     			String newLastName = editString();
     			currentUser.setLastName(newLastName);
     			System.out.println("Last Name Changed to: " + newLastName);
-    			break;
-    		case 3:
+    		}
+    		if(input==3){
     			String newEmail = editString();
     			currentUser.setEmail(newEmail);
     			System.out.println("Email Changed to: " + newEmail);
-    			break;
-    		case 4:
+    		}
+    		if(input==4){
     			String newPassword = editString();
     			currentUser.setPassword(newPassword);
     			System.out.println("Password Changed to: " + newPassword);
-    			break;
-    		case 5:
+    		}
+    		if(input==5){
+
     			String newPhoneNumber = editString();
     			currentUser.setPhone(newPhoneNumber);
     			System.out.println("Phone Number Changed to: " + newPhoneNumber);
-    			break;
-    		case 6:
-    			editCards();
-       		case 7:
-       			editLocations();
-    		case 8:
-    			allOrdersScreen();
-    		case 9:
-    			homeScreen();
-	    }
+    		}
+    		if(input==6) editCards();
+    		if(input==7) editLocations();
+    		if(input==8) allOrdersScreen();
+    		if(input==9) homeScreen();
 	    sc.close();
+	    UserService us = new UserService(con);
+	    us.update(currentUser);
+	    accountScreen();
 	}
 	private static void editLocations() {
 		// TODO Auto-generated method stub
@@ -342,9 +334,9 @@ public class Tiger{
 	private static String editString() {
 		System.out.println("Enter new value");
 		Scanner sc = new Scanner(System.in);
-	    String input = sc.next();
+	    String inp = sc.next();
 	    sc.close();
-		return input;
+		return inp;
 	}
 
 	public static void allOrdersScreen(){

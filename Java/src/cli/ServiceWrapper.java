@@ -100,9 +100,7 @@ public class ServiceWrapper {
 		for (String itemId:itemIds){
 			items.add(ms.getById(itemId));
 		}
-		
-		
-		
+
 		return items;
 	}
 
