@@ -58,7 +58,9 @@ public class Order {
 	public void setItem_ids(ArrayList<String> item_ids) { 
 		this.item_ids = (ArrayList<String>) item_ids.clone();
 	}
-
+	public void addItem_id(String item_id){
+		this.item_ids.add(item_id);
+	}
 	public String getOrder_id() {
 		return order_id;
 	}

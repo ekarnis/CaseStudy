@@ -117,12 +117,7 @@ public class Tiger{
 	    }
 	    else{
 	    	System.out.println("Wrong email or password");
-	    	try {
-				TimeUnit.SECONDS.sleep(3);
-				loginScreen();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+			loginScreen();
 	    }
 	    
 	    sc.close();
@@ -194,11 +189,9 @@ public class Tiger{
 		System.out.println("Enter Quantity");
 		Scanner sc = new Scanner(System.in);
 	    int input = sc.nextInt();
-	    OrderService os = new OrderService(con);
-	    for(int i=0;i<input;i++){
-	    	//create order item and add to item
-	    	os.addItem_id(menu.getId());
-	    }
+	    for(int i=0;i<input;i++) currentOrder.addItem_id(menu.getId());
+		System.out.println("Item(s) added");
+		menuScreen();
 	    sc.close();
 	}
 	public static void currentOrderScreen() {
@@ -229,15 +222,15 @@ public class Tiger{
 	
 	//TODO get item from item id here
 	private static void viewOrderItems(Order order) {
-		/*ArrayList<String> items = order.getItem_ids();
-		ArrayList<String> itemNames = sw.getItemNames();
-		ServiceWrapper.printOptions(items);
+		ArrayList<String> itemIds = currentOrder.getItem_ids();
+		ArrayList<Menu> items = sw.getMenuItems(itemIds);
+		ServiceWrapper.printMenuItems(items);
 		Scanner sc = new Scanner(System.in);
 	    int input = sc.nextInt();
-	    if(input==items.size()+1) homeScreen();
-	    else if(input==items.size()+2) System.exit(0);
+	    if(input==items.size()) homeScreen();
+	    else if(input==items.size()+1) System.exit(0);
 	    else orderItemScreen(items.get(input));
-	    sc.close();*/
+	    sc.close();
 	}
 	public static void orderItemScreen(Menu menu){
 		/*System.out.println(menu.getName());
@@ -252,6 +245,18 @@ public class Tiger{
 	    sc.close();*/
 	}
 
+	//TODO
+	public static void submitOrder(){
+	    OrderService os = new OrderService(con);
+	    //input should be equal to number of items in order
+	    Menu menu = null;
+	    int input = 0;
+	    for(int i=0;i<input;i++){
+	    	//create order item and add to item
+	    	os.addItem_id(menu.getId(), currentOrder.getOrder_id());
+	    }
+	}
+	
 	public static void accountScreen(){
 		
 	}
@@ -261,8 +266,8 @@ public class Tiger{
 		ServiceWrapper.printOrders(orders);
 		Scanner sc = new Scanner(System.in);
 	    int input = sc.nextInt();
-	    if(input==orders.size()+1) homeScreen();
-	    else if(input==orders.size()+2) System.exit(0);
+	    if(input==orders.size()) homeScreen();
+	    else if(input==orders.size()+1) System.exit(0);
 	    else oldOrderScreen(orders.get(input));
 	    sc.close();
 	}
