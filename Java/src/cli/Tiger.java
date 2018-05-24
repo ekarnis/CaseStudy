@@ -11,15 +11,15 @@ import domain.Order;
 import domain.User;
 import services.MenuServices;
 import services.OrderService;
+import services.UserService;
 
-public class main {
+public class Tiger{
 
 	public static ServiceWrapper sw;
 	public static Connection con;
 	public static User currentUser;
 	public static Order currentOrder;
 
-	
 	public static void main(String[] args) {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -62,7 +62,14 @@ public class main {
 	    String email = sc.next();
 		System.out.println("Enter password:");
 	    String password = sc.next();
-	    currentUser = sw.login(email, password);
+	    System.out.print(email);
+	    System.out.print(password);
+	    
+		UserService us = new UserService(con);
+		User candidate = us.getByEmail(email);
+		System.out.println(candidate.getFirstName());
+	    
+	    currentUser = candidate;
 	    if(currentUser != null) homeScreen();
 	    else{
 	    	System.out.println("Wrong email or password");
@@ -73,6 +80,7 @@ public class main {
 				e.printStackTrace();
 			}
 	    }
+
 	    sc.close();
 
 	}
@@ -206,7 +214,7 @@ public class main {
 	
 	//TODO get item from item id here
 	private static void viewOrderItems(Order order) {
-		ArrayList<String> items = order.getItem_ids();
+		/*ArrayList<String> items = order.getItem_ids();
 		ArrayList<String> itemNames = sw.getItemNames();
 		ServiceWrapper.printOptions(items);
 		Scanner sc = new Scanner(System.in);
@@ -214,10 +222,10 @@ public class main {
 	    if(input==items.size()+1) homeScreen();
 	    else if(input==items.size()+2) System.exit(0);
 	    else orderItemScreen(items.get(input));
-	    sc.close();
+	    sc.close();*/
 	}
 	public static void orderItemScreen(Menu menu){
-		System.out.println(menu.getName());
+		/*System.out.println(menu.getName());
 		System.out.println(menu.getDescription());
 		System.out.println(menu.getPrice());
 		System.out.println("1. Enter Quantity");
@@ -226,7 +234,7 @@ public class main {
 	    int input = sc.nextInt();
 	    if(input==1) itemQuantityScreen(menu);
 	    else if(input==2) System.exit(0);
-	    sc.close();
+	    sc.close();*/
 	}
 
 	public static void accountScreen(){

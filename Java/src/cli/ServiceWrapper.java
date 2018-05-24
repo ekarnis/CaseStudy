@@ -37,16 +37,12 @@ public class ServiceWrapper {
 	
 	public boolean register(String firstName, String lastName, String email, String password, String street, String city, String state, String country, String zip, String userStatus){
 		boolean result = false;
-		try{
-			String userId = Double.toString(Math.random()* 10001);
-			String userStatusId = Double.toString(Math.random()* 10001);
-			String locationId = Double.toString(Math.random()* 10001);
-			User user = new User(userId,firstName,lastName,email,password,userStatusId,locationId);
-			UserService us = new UserService(con);
-			result =  us.add(user);
-		}catch(IdException idEx){
-			System.out.println(idEx);
-		}
+		String userId = Double.toString(Math.random()* 10001);
+		String userStatusId = Double.toString(Math.random()* 10001);
+		String locationId = Double.toString(Math.random()* 10001);
+		User user = new User(userId,firstName,lastName,email,password,userStatusId,locationId);
+		UserService us = new UserService(con);
+		result =  us.add(user);
 		return result;
 	}
 
