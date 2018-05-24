@@ -13,6 +13,21 @@ BEGIN
     DeliveryStatusID);
 END;
 
+CREATE OR REPLACE PROCEDURE UpdateOrder(OrderID VARCHAR2, UserID VARCHAR2, 
+Tip NUMBER, TotalPrice NUMBER, PlacedTimestamp NUMBER, DeliveryTimestamp NUMBER,
+CardID VARCHAR2, Instructions VARCHAR2, DeliveryMethodID VARCHAR2, 
+StoreID VARCHAR2, DeliveryStatusID VARCHAR2)
+AS
+BEGIN
+  UPDATE ORDERS
+  SET USER_ID=UserID, TIP=Tip, TOTAL_PRICE=TotalPrice, 
+  PLACED_TIMESTAMP=PlacedTimestamp, DELIVERY_TIMESTAMP=DeliveryTimestamp, 
+  CARD_ID=CardID, INSTRUCTIONS=Instructions, 
+  DELIVERY_METHOD_ID=DeliveryMethodID, STORE_ID=StoreID, 
+  DELIVERY_STATUS_ID=DeliveryStatusID
+  WHERE ORDER_ID=OrderID;
+END;
+
 CREATE OR REPLACE PROCEDURE DeleteOrder(OrderID VARCHAR2)
 AS
 BEGIN

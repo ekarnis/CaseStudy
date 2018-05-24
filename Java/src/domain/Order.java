@@ -43,14 +43,10 @@ public class Order {
 		super();
 	}
 
-	@Override
-	public String toString() {
-		return "Order [order_id=" + order_id + ", user_id=" + user_id + ", placed_timestamp=" + placed_timestamp
-				+ ", delivery_timestamp=" + delivery_timestamp + ", card_id=" + card_id + ", instuctions=" + instuctions
-				+ ", delivery_method_id=" + delivery_method_id + ", store_id=" + store_id + ", delivery_status_id="
-				+ delivery_status_id + ", item_ids=" + item_ids + "]";
-	}
+	
 
+	
+	
 	public ArrayList<String> getItem_ids() {
 		return item_ids;
 	}
@@ -129,5 +125,30 @@ public class Order {
 
 	public void setDelivery_status_id(String delivery_status_id) {
 		this.delivery_status_id = delivery_status_id;
+	}
+
+	public float getTip() {
+		return tip;
+	}
+
+	public void setTip(float tip) {
+		this.tip = tip;
+	}
+
+	public float getTotal_price() {
+		return total_price;
+	}
+
+	public void setTotal_price(float total_price) {
+		this.total_price = total_price;
+	}
+
+	@Override
+	public String toString() {
+		return "Order [order_id=" + order_id + ", user_id=" + user_id + ", tip=" + tip + ", total_price=" + total_price
+				+ ", placed_timestamp=" + placed_timestamp + ", delivery_timestamp=" + delivery_timestamp + ", card_id="
+				+ card_id + ", instuctions=" + instuctions + ", delivery_method_id=" + delivery_method_id
+				+ ", store_id=" + store_id + ", delivery_status_id=" + delivery_status_id + ", item_ids=" + item_ids
+				+ "]";
 	}
 }

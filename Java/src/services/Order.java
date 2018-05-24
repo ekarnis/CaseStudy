@@ -6,8 +6,8 @@ public class Order {
 	
 	String order_id; //varchar
 	String user_id; //varchar
-	String tip; //number(5,2)
-	String total_price;//number(7,2)
+	float tip; //number(5,2)
+	float total_price;//number(7,2)
 	int placed_timestamp; //int
 	int delivery_timestamp; //int
 	String card_id; //varchar
@@ -19,7 +19,9 @@ public class Order {
 	//Array to hold order items rather than the order_items table
 	ArrayList<String> item_ids = new ArrayList<String>();
 
-	public Order(String order_id, String user_id, String tip, String total_price, int placed_timestamp,
+	
+	
+	public Order(String order_id, String user_id, float tip, float total_price, int placed_timestamp,
 			int delivery_timestamp, String card_id, String instuctions, String delivery_method_id, String store_id,
 			String delivery_status_id, ArrayList<String> item_ids) {
 		super();
@@ -36,19 +38,12 @@ public class Order {
 		this.delivery_status_id = delivery_status_id;
 		this.item_ids = item_ids;
 	}
-	
+
 	public Order() {
 		super();
 	}
 
-	@Override
-	public String toString() {
-		return "Order [order_id=" + order_id + ", user_id=" + user_id + ", tip=" + tip + ", total_price=" + total_price
-				+ ", placed_timestamp=" + placed_timestamp + ", delivery_timestamp=" + delivery_timestamp + ", card_id="
-				+ card_id + ", instuctions=" + instuctions + ", delivery_method_id=" + delivery_method_id
-				+ ", store_id=" + store_id + ", delivery_status_id=" + delivery_status_id + ", item_ids=" + item_ids
-				+ "]";
-	}
+	
 	
 	public ArrayList<String> getItem_ids() {
 		return item_ids;
@@ -74,19 +69,19 @@ public class Order {
 		this.user_id = user_id;
 	}
 
-	public String getTip() {
+	public float getTip() {
 		return tip;
 	}
 
-	public void setTip(String tip) {
+	public void setTip(float tip) {
 		this.tip = tip;
 	}
 
-	public String getTotal_price() {
+	public float getTotal_price() {
 		return total_price;
 	}
 
-	public void setTotal_price(String total_price) {
+	public void setTotal_price(float total_price) {
 		this.total_price = total_price;
 	}
 
@@ -145,4 +140,15 @@ public class Order {
 	public void setDelivery_status_id(String delivery_status_id) {
 		this.delivery_status_id = delivery_status_id;
 	}
+
+	@Override
+	public String toString() {
+		return "Order [order_id=" + order_id + ", user_id=" + user_id + ", tip=" + tip + ", total_price=" + total_price
+				+ ", placed_timestamp=" + placed_timestamp + ", delivery_timestamp=" + delivery_timestamp + ", card_id="
+				+ card_id + ", instuctions=" + instuctions + ", delivery_method_id=" + delivery_method_id
+				+ ", store_id=" + store_id + ", delivery_status_id=" + delivery_status_id + ", item_ids=" + item_ids
+				+ "]";
+	}
+
+	
 }
