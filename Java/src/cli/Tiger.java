@@ -316,10 +316,11 @@ public class Tiger{
     		if(input==7) editLocations();
     		if(input==8) allOrdersScreen();
     		if(input==9) homeScreen();
-	    sc.close();
+	    
 	    UserService us = new UserService(con);
 	    us.update(currentUser);
 	    accountScreen();
+	    sc.close();
 	}
 	private static void editLocations() {
 		// TODO Auto-generated method stub
