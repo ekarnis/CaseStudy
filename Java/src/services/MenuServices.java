@@ -20,11 +20,15 @@ public class MenuServices implements Service<Menu> {
 	}
 
 	@Override
-	public Menu getById(String id){
-		ArrayList<TimeSlots> times = timServ.getAll();
-		
+	public Menu getById(String id){		
 		try {
-			ResultSet rs = con.createStatement().executeQuery("SELECT * FROM items WHERE item_id = " + id);
+			
+			PreparedStatement preparedStatement = con.prepareStatement(
+					"SELECT * FROM items WHERE item_id = ?");
+			preparedStatement.setString(1, id);
+			ResultSet rs = preparedStatement.executeQuery( );
+			
+			
 			rs.next();
 			//float price = rs.getFloat("price");
 			//String time = getTimeName(times, rs.getString("time_slot_id"));

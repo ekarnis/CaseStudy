@@ -18,13 +18,13 @@ public class MenuServicesTest extends DatabaseTestMethods{
 	@Test
 	public void getByIDTest(){
 		MenuServices ms = new MenuServices(con);
-		Menu m = ms.getById("2");
+		Menu m = ms.getById("3");
 		
 		Statement statement;
 		try {
 			statement = con.createStatement();
 			ResultSet rs = statement.executeQuery(
-					"SELECT * FROM ITEMS WHERE ITEM_ID = '2'");
+					"SELECT * FROM ITEMS WHERE ITEM_ID = '3'");
 			
 			rs.next();
 			Menu mtest = new Menu(rs.getString(1), 

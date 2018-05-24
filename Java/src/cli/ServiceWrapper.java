@@ -2,6 +2,9 @@ package cli;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 
@@ -20,6 +23,7 @@ public class ServiceWrapper {
 	
 	public ServiceWrapper(Connection con) {
 		super();
+		this.con = con;
 
 	}
 
@@ -92,9 +96,12 @@ public class ServiceWrapper {
 		MenuServices ms = new MenuServices(con);
 		ArrayList<Menu> items = new ArrayList<Menu>();
 		
+		
 		for (String itemId:itemIds){
 			items.add(ms.getById(itemId));
 		}
+		
+		
 		
 		return items;
 	}

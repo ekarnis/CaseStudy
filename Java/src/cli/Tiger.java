@@ -235,7 +235,9 @@ public class Tiger{
 	private static void viewOrderItems(Order order) {
 		System.out.println("*View Items*");
 		ArrayList<String> itemIds = currentOrder.getItem_ids();
+		System.out.println("ORder items: " + itemIds);
 		ArrayList<Menu> items = sw.getMenuItems(itemIds);
+		System.out.println("Menu items: " + items);
 		ServiceWrapper.printMenuItems(items);
 		Scanner sc = new Scanner(System.in);
 	    int input = sc.nextInt();
