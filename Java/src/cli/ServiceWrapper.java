@@ -18,14 +18,9 @@ public class ServiceWrapper {
 	
 	
 	
-	public ServiceWrapper() {
+	public ServiceWrapper(con) {
 		super();
-		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-	        con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "pass", "pass");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+
 	}
 
 	public Boolean login(String email, String password){
@@ -36,19 +31,19 @@ public class ServiceWrapper {
 		else return false;
 	}
 	
-	public boolean register(String userId, String firstName, String lastName, String email, String password, String userStatusId,
-			String locationId){
+	public boolean register(String firstName, String lastName, String email, String password, String street, String city, String state, String country, String zip, String userStatus){
 		boolean result = false;
 		try{
+			String userId = Double.toString(Math.random()* 10001);
+			String userStatusId = Double.toString(Math.random()* 10001);
+			String locationId = Double.toString(Math.random()* 10001);
 			User user = new User(userId,firstName,lastName,email,password,userStatusId,locationId);
 			UserService us = new UserService(con);
 			result =  us.add(user);
 		}catch(IdException idEx){
 			System.out.println(idEx);
 		}
-		
 		return result;
-		
 	}
 
 	public static void printOptions(ArrayList<String> options){
