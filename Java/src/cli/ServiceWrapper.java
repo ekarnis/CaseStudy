@@ -12,6 +12,7 @@ import domain.IdException;
 import domain.Menu;
 import domain.Order;
 import domain.User;
+import services.OrderService;
 import services.UserService;
 
 public class ServiceWrapper {
@@ -81,8 +82,9 @@ public class ServiceWrapper {
 	}
 
 	public void cancelOrder(Order order) {
-		// TODO Auto-generated method stub
-		
+		order.setDelivery_status_id("3");
+		OrderService os = new OrderService(con);
+		os.update(order);
 	}
 
 	public void submitOrder(Order currentOrder) {
