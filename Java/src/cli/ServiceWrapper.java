@@ -5,13 +5,10 @@ import java.sql.DriverManager;
 import java.util.ArrayList;
 
 
-import domain.Card;
+import domain.*;
 
 
-import domain.IdException;
-import domain.Menu;
-import domain.Order;
-import domain.User;
+import services.MenuServices;
 import services.OrderService;
 import services.UserService;
 
@@ -86,11 +83,23 @@ public class ServiceWrapper {
 	public void submitOrder(Order currentOrder) {
 		// TODO Auto-generated method stub
 		
+		currentOrder.setDelivery_status_id("0");
+		OrderService os = new OrderService(con);
+		os.add(currentOrder);
+		
 	}
 
-	public ArrayList<String> getItemNames() {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Menu> getMenuItems(ArrayList<String> itemIds) {
+		
+		MenuServices ms = new MenuServices(con);
+		
+		ArrayList<Menu> items = new ArrayList<Menu>();
+		
+		for (String itemId:itemIds){
+			items.add(ms.getById(itemId));
+		}
+		
+		return items;
 	}
 	
 

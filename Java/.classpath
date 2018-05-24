@@ -2,10 +2,10 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/syntel.MININT-DO5C1AM/Documents/April30-JavaOPA/Java Programming/jars/hamcrest-core-1.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/syntel.MININT-DO5C1AM/Documents/April30-JavaOPA/Java Programming/jars/junit-4.11.jar"/>
-	<classpathentry kind="lib" path="C:/Users/syntel.MININT-DO5C1AM/Documents/April30-JavaOPA/Java Programming/jars/ojdbc6-11.2.0.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/syntel.MININT-DO5C1AM/Documents/April30-JavaOPA/Java Programming/jars/ojdbc14.jar"/>
-	<classpathentry kind="lib" path="C:/Users/syntel.MININT-DO5C1AM/Documents/April30-JavaOPA/Java Programming/jars/ojdbc14_g.jar"/>
+	<classpathentry kind="lib" path="C:/Users/syntel.MININT-1GOAKQE/Documents/Git/CaseStudy/Java/jars/hamcrest-core-1.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/syntel.MININT-1GOAKQE/Documents/Git/CaseStudy/Java/jars/junit-4.11.jar"/>
+	<classpathentry kind="lib" path="C:/Users/syntel.MININT-1GOAKQE/Documents/Git/CaseStudy/Java/jars/ojdbc6-11.2.0.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/syntel.MININT-1GOAKQE/Documents/Git/CaseStudy/Java/jars/ojdbc14.jar"/>
+	<classpathentry kind="lib" path="C:/Users/syntel.MININT-1GOAKQE/Documents/Git/CaseStudy/Java/jars/ojdbc14_g.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
