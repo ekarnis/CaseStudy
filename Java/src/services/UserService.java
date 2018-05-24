@@ -2,6 +2,7 @@ package services;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -104,9 +105,12 @@ public class UserService implements Service<User>{
 		User user = null;
 		
 		try{
-			Statement usersSt = connection.createStatement();
-			ResultSet usersRs = usersSt.executeQuery("Select * from Users where email = " + email);
-			
+			PreparedStatement pstmt = connection.prepareStatement("select * from users "
+					+ "where email = ?"); 
+			pstmt.setString(1,email);
+						
+			ResultSet usersRs = pstmt.executeQuery();
+
 			usersRs.next();
 			user = new User(
 					usersRs.getString(1),
