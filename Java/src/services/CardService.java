@@ -117,6 +117,30 @@ public class CardService implements Service<Card>{
 			System.out.println(e.getMessage());
 		}	
 	}
+	
+	public ArrayList<Card> getUserCards(String userId){
+
+		ArrayList<Card> cards = new ArrayList<Card>();
+		
+		try{
+			Statement cardsSt = connection.createStatement();
+			ResultSet cardsRs = cardsSt.executeQuery("Select * from Cards where userId = " + userId);
+			
+			while(cardsRs.next()){
+				Card card = new Card(
+						cardsRs.getString(1),
+						cardsRs.getString(2),
+						cardsRs.getString(3),
+						cardsRs.getDate(4),
+						cardsRs.getString(5)
+						); 
+				cards.add(card);
+			}
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
+		return cards;
+	}
 
 
 }

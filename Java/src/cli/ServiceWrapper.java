@@ -4,6 +4,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.ArrayList;
 
+
+import domain.Card;
+
+
 import domain.IdException;
 import domain.User;
 import services.UserService;
@@ -44,6 +48,7 @@ public class ServiceWrapper {
 		return result;
 		
 	}
+
 	public static void printOptions(ArrayList<String> options){
 		options.add("Go back");
 		options.add("Quit");
@@ -54,5 +59,10 @@ public class ServiceWrapper {
 		}
 		
 	}
+
+	
+	//getUserCards is in cardsservices
+	//getUserLocations is  in locationservices
+
 
 }

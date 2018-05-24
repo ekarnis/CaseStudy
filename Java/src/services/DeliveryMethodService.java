@@ -6,9 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.ArrayList;
-
-import domain.DeliveryMethod;
 
 public class DeliveryMethodService implements Service<DeliveryMethod>{
 	
@@ -26,7 +25,7 @@ public class DeliveryMethodService implements Service<DeliveryMethod>{
 	public boolean add(DeliveryMethod deliveryMethod){
 		try{
 			CallableStatement statement = connection.prepareCall("{call AddDeliveryMethod(?, ?)}");
-			statement.setInt(1, deliveryMethod.getDelivery_method_id());
+			statement.setString(1, deliveryMethod.getDelivery_method_id());
 			statement.setString(2, deliveryMethod.getDelivery_method());
 			statement.execute();
 			statement.close();
@@ -46,7 +45,7 @@ public class DeliveryMethodService implements Service<DeliveryMethod>{
 			PreparedStatement preparedStatement = connection.prepareStatement(statement);
 			
 			preparedStatement.setString(1, deliveryMethod.getDelivery_method());
-			preparedStatement.setInt(2, deliveryMethod.getDelivery_method_id());
+			preparedStatement.setString(2, deliveryMethod.getDelivery_method_id());
 			preparedStatement.executeUpdate();
 		
 		} catch (SQLException e) {
@@ -64,7 +63,7 @@ public class DeliveryMethodService implements Service<DeliveryMethod>{
 			ResultSet rs = statement.executeQuery("SELECT * FROM DELIVERY_METHODS");
 			
 			while(rs.next()){
-				DeliveryMethod deliveryMethod = new DeliveryMethod(rs.getInt(1),rs.getString(2)); 
+				DeliveryMethod deliveryMethod = new DeliveryMethod(rs.getString(1),rs.getString(2)); 
 				deliverMethods.add(deliveryMethod);
 			}
 		}catch(Exception e){
@@ -84,7 +83,7 @@ public class DeliveryMethodService implements Service<DeliveryMethod>{
 			
 			resultSet.next();
 			deliveryMethod = new DeliveryMethod(
-					resultSet.getInt(1),
+					resultSet.getString(1),
 					resultSet.getString(2)
 					); 
 		}catch(Exception e){

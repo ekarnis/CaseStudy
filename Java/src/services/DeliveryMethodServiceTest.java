@@ -15,7 +15,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class DeliveryStatusServiceTest {
+public class DeliveryMethodServiceTest {
 	private static final String DB_DRIVER = "oracle.jdbc.driver.OracleDriver";
 	private static final String DB_CONNECTION = "jdbc:oracle:thin:@localhost:1521:XE";
 	private static final String DB_USER = "chandler";
@@ -76,20 +76,20 @@ public class DeliveryStatusServiceTest {
 	@Test
 	public void addTest() {
 		
-		DeliveryStatus ds = new DeliveryStatus("5", "Trashed");
-		DeliveryStatusService dss = new DeliveryStatusService(con);
+		DeliveryMethod dm = new DeliveryMethod("20", "Test");
+		DeliveryMethodService dms = new DeliveryMethodService(con);
 		
-		dss.add(ds);
+		dms.add(dm);
 		
 		Statement statement;
 		try {
 			statement = con.createStatement();
 			ResultSet rs = statement.executeQuery(
-					"SELECT * FROM DELIVERY_STATUSES WHERE DELIVER_STATUS_ID = '5'");
+					"SELECT * FROM DELIVERY_METHODS WHERE DELIVER_METHOD_ID = '5'");
 			rs.next();
-			
-			assertEquals("5",rs.getString("DELIVERY_STATUS_ID"));
-			assertEquals("Trashed",rs.getString("DELIVERY_STATUS"));
+						
+			assertEquals("20",rs.getString("DELIVERY_METHOD_ID"));
+			assertEquals("Test",rs.getString("DELIVERY_METHOD"));
 			
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -98,24 +98,18 @@ public class DeliveryStatusServiceTest {
 	
 	@Test
 	public void updateTest() {
-		
-		DeliveryStatus ds = new DeliveryStatus("5", "Trashed");
-		DeliveryStatusService dss = new DeliveryStatusService(con);
-		
-		dss.add(ds);
-		
-		ds.setDelivery_status_id("7");
-		ds.setDelivery_status("Money");
-		dss.update(ds);
+		DeliveryMethod dm = new DeliveryMethod("1", "Test");
+		DeliveryMethodService dms = new DeliveryMethodService(con);
+		dms.update(dm);
 		Statement statement;
 		try {
 			statement = con.createStatement();
 			ResultSet rs = statement.executeQuery(
-					"SELECT * FROM DELIVERY_STATUSES WHERE DELIVER_STATUS_ID = '7'");
+					"SELECT * FROM DELIVERY_STATUSES WHERE DELIVER_STATUS_ID = '1'");
 			rs.next();
 			
-			assertEquals("7",rs.getString("DELIVERY_STATUS_ID"));
-			assertEquals("Money",rs.getString("DELIVERY_STATUS"));
+			assertEquals("1",rs.getString("DELIVERY_STATUS_ID"));
+			assertEquals("Test",rs.getString("DELIVERY_STATUS"));
 			
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());

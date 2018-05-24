@@ -119,4 +119,29 @@ public class LocationService implements Service<Location>{
 		}	
 	}
 	
+	public ArrayList<Location> getUserLocations(String userId){
+
+		ArrayList<Location> locations = new ArrayList<Location>();
+		
+		try{
+			Statement locationsSt = connection.createStatement();
+			ResultSet locationsRs = locationsSt.executeQuery("Select * from Locations where user_id = " + userId);
+			
+			while(locationsRs.next()){
+				Location location = new Location(
+						locationsRs.getString(1),
+						locationsRs.getString(2),
+						locationsRs.getString(3),
+						locationsRs.getString(4),
+						locationsRs.getString(5),
+						locationsRs.getString(6)
+						); 
+				locations.add(location);
+			}
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
+		return locations;
+	}
+	
 }
