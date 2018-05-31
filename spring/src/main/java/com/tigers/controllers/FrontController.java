@@ -8,6 +8,6 @@ public class FrontController {
 	
 	@RequestMapping("/")
 	public String index() {
-		return "home";
+		return "menu";
 	}
 }
