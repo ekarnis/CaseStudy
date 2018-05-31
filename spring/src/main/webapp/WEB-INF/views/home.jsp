@@ -11,11 +11,11 @@
 <body>
 	<nav>
 		<div id="nav_container">
-			<a href="home.jsp">Home </a>
-			<a href="menu.jsp">Menu </a>
-			<a href="about.jsp">About </a>
-			<a href="contact.jsp">Contact </a>
-			<a href="register.jsp">Register/Login</a>
+			<a href="home.htm">Home </a>
+			<a href="menu.htm">Menu </a>
+			<a href="about.htm">About </a>
+			<a href="contact.htm">Contact </a>
+			<a href="login.htm">Register/Login</a>
 			<a></a>
 		</div>
 	</nav>

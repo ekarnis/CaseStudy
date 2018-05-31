@@ -11,11 +11,11 @@
 
 	<nav>
 		<div id="nav_container">
-			<a href="home.html">Home </a>
-			<a href="menu.html">Menu </a>
-			<a href="about.html">About </a>
-			<a href="contact.html">Contact </a>
-			<a href="register.html">Register/Login</a>
+			<a href="home.htm">Home </a>
+			<a href="menu.htm">Menu </a>
+			<a href="about.htm">About </a>
+			<a href="contact.htm">Contact </a>
+			<a href="login.htm">Register/Login</a>
 			<a></a>
 		</div>
 	</nav>

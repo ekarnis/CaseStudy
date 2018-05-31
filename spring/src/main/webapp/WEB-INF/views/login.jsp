@@ -2,12 +2,11 @@
 <html>
 <head>
 	<meta charset="ISO-8859-1">
-	<title>Register</title>
+	<title>Login </title>
 	<link rel="stylesheet" type="text/css" href="css/universal.css">
 	<link rel="stylesheet" type="text/css" href="css/register.css">
 	<script src="home.js"></script>
 </head>
-
 <body>
 	<nav>
 		<div id="nav_container">
@@ -19,29 +18,24 @@
 			<a></a>
 		</div>
 	</nav>
-	
 	<div id="main_container">
 		<div id="spacer"></div>
 		<div id="section_container">
 			<section>
 				<div id="form_container">
 					<form>
-					  Email:<input type="email" name="email" placeholder="example@test.com">
+					  Email<br>
+					  <input type="email" name="email" value="example@test.com">
 					  <br>
-					  Password:<input type="password" name="password">
-					  <br>
-					  Confirm Password:<input type="password" name="confirmPassword">
-					  <br>
-					  First Name:<input type="text" name="firstName" placeholder="First Name">
-					  <br>
-					  Last Name:<input type="text" name="lastName" placeholder="Last Name">
-					  <br>
+					  Password<br>
+					  <input type="password" name="password">
 					  <br><br>
 					  <input type="submit" value="Submit">
 					</form> 
 				</div>
 			</section>
 		</div>
+
 	</div>
 
 	<footer>
