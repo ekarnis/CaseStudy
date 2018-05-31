@@ -3,8 +3,8 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Mummy's Restaurant </title>
-<link rel="stylesheet" type="text/css" href="universal.css">
-<link rel="stylesheet" type="text/css" href="home.css">
+<link rel="stylesheet" type="text/css" href="./universal.css">
+<link rel="stylesheet" type="text/css" href="./home.css">
 <script src="home.js"></script>
 </head>
 <body>
@@ -23,7 +23,7 @@
 		<div id="spacer"></div>
 		<div id="jumbotron">
 			<div id="title_container">
-				<h1 id="title">Mummy's Restaraunt</h1>
+				<h1 id="title">Mummy's Restaurant</h1>
 			</div>
 		</div>
 		<section>
