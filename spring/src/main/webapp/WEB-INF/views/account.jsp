@@ -3,8 +3,8 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Account </title>
-<link rel="stylesheet" type="text/css" href="universal.css">
-<link rel="stylesheet" type="text/css" href="account.css">
+<link rel="stylesheet" type="text/css" href="css/universal.css">
+<link rel="stylesheet" type="text/css" href="css/account.css">
 <script src="home.js"></script>
 </head>
 <body>

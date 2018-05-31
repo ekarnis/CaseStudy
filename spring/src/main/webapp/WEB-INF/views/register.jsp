@@ -3,8 +3,8 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Register/Login </title>
-<link rel="stylesheet" type="text/css" href="universal.css">
-<link rel="stylesheet" type="text/css" href="register.css">
+<link rel="stylesheet" type="text/css" href="css/universal.css">
+<link rel="stylesheet" type="text/css" href="css/register.css">
 <script src="home.js"></script>
 </head>
 <body>

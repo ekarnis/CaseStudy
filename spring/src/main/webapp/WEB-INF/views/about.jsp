@@ -3,8 +3,8 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>About</title>
-<link rel="stylesheet" type="text/css" href="universal.css">
-<link rel="stylesheet" type="text/css" href="about.css">
+<link rel="stylesheet" type="text/css" href="css/universal.css">
+<link rel="stylesheet" type="text/css" href="css/about.css">
 </head>
 <body>
 
