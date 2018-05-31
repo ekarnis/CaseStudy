@@ -1,20 +1,23 @@
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="ISO-8859-1">
-	<title>Login </title>
-	<link rel="stylesheet" type="text/css" href="css/universal.css">
-	<link rel="stylesheet" type="text/css" href="css/register.css">
-	<script src="home.js"></script>
+<meta charset="ISO-8859-1">
+<title>Register/Login </title>
+<link rel="stylesheet" type="text/css" href="/css/universal.css">
+<link rel="stylesheet" type="text/css" href="/css/login.css">
+<script src="home.js"></script>
 </head>
 <body>
+
 	<nav>
 		<div id="nav_container">
-			<a href="home.htm">Home </a>
-			<a href="menu.htm">Menu </a>
-			<a href="about.htm">About </a>
-			<a href="contact.htm">Contact </a>
-			<a href="login.htm">Register/Login</a>
+			<a href="home">Home </a>
+			<a href="menu">Menu </a>
+			<a href="about">About </a>
+			<a href="contact">Contact </a>
+			<a href="login">Login </a>
+			<a href="register">Register </a>
 			<a></a>
 		</div>
 	</nav>
@@ -23,15 +26,17 @@
 		<div id="section_container">
 			<section>
 				<div id="form_container">
-					<form>
+					<form:form method="POST" modelAttribute="user" class="form-horizontal">
 					  Email<br>
-					  <input type="email" name="email" value="example@test.com">
+					  <form:input type="email" path="email" placeholder="example@test.com" />
+					  <form:errors path="email" cssClass="error" />
 					  <br>
 					  Password<br>
-					  <input type="password" name="password">
+					  <form:input type="password" path="password" />
+					  <form:errors path="password" cssClass="error" />
 					  <br><br>
 					  <input type="submit" value="Submit">
-					</form> 
+					</form:form> 
 				</div>
 			</section>
 		</div>
