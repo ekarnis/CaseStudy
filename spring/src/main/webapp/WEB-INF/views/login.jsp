@@ -37,7 +37,7 @@
 					  <form:errors path="password" cssClass="error" />
 					  <br><br>
 					  <input type="submit" value="Login">
-					  <input type="button" name="register" value="Register" onclick="window.location='register'"></td>
+					  <input type="button" name="register" value="Register" onclick="window.location='register'">
 					  
 					</form:form> 
 				</div>
