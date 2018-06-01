@@ -2,14 +2,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Register/Login </title>
-<link rel="stylesheet" type="text/css" href="/css/universal.css">
-<link rel="stylesheet" type="text/css" href="/css/login.css">
-<script src="home.js"></script>
+	<meta charset="ISO-8859-1">
+	<title>Register/Login </title>
+	<link rel="stylesheet" type="text/css" href="/css/universal.css">
+	<link rel="stylesheet" type="text/css" href="/css/login.css">
+	<script src="home.js"></script>
 </head>
-<body>
 
+<body>
 	<nav>
 		<div id="nav_container">
 			<a href="home">Home </a>
@@ -21,6 +21,7 @@
 			<a></a>
 		</div>
 	</nav>
+	
 	<div id="main_container">
 		<div id="spacer"></div>
 		<div id="section_container">

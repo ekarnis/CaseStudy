@@ -1,3 +1,4 @@
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,20 +26,36 @@
 		<div id="section_container">
 			<section>
 				<div id="form_container">
-					<form>
-					  Email:<input type="email" name="email" placeholder="example@test.com">
-					  <br>
-					  Password:<input type="password" name="password">
-					  <br>
-					  Confirm Password:<input type="password" name="confirmPassword">
-					  <br>
-					  First Name:<input type="text" name="firstName" placeholder="First Name">
-					  <br>
-					  Last Name:<input type="text" name="lastName" placeholder="Last Name">
-					  <br>
-					  <br><br>
-					  <input type="submit" value="Submit">
-					</form> 
+					<form:form method="POST" modelAttribute="user" class="form-horizontal">
+						<div>
+							Email:<form:input type="email" path="email" placeholder="example@test.com" />
+					  		<form:errors path="email" cssClass="error" />
+					  	</div>
+					  	
+					  	<div>
+					  		Password:<form:input type="password" path="password" />
+					  		<form:errors path="password" cssClass="error" />
+					  	</div>
+					  
+					  	<div>
+					  		Confirm Password:<form:input type="password" path="password" />
+					  		<form:errors path="password" cssClass="error" />
+					  	</div>
+					  	
+					  	<div>
+					  		First Name:<form:input type="text" path="firstName" placeholder="First Name" />
+					  		<form:errors path="firstName" cssClass="error" />
+					  	</div>
+					  	
+					  	<div>
+					  		Last Name:<form:input type="text" name="lastName" placeholder="Last Name" />
+					  		<form:errors path="lastName" cssClass="error" />
+					  	</div>
+					  	
+					  	<div>
+					  		<input type="submit" value="Submit">
+					  	</div>
+					</form:form> 
 				</div>
 			</section>
 		</div>

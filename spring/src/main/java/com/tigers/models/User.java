@@ -1,6 +1,5 @@
 package com.tigers.models;
 
-import java.util.ArrayList;
 
 public class User {
 	
@@ -94,7 +93,4 @@ public class User {
 		return "User [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", phone=" + phone
 				+ ", email=" + email + ", password=" + password + ", userStatusId=" + userStatusId + "]";
 	}
-
-	
-	
 }
