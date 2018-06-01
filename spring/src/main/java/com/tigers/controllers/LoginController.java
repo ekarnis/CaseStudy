@@ -29,6 +29,12 @@ public class LoginController {
             //return "registration";
 		}
         System.out.println("Login should be successful");
+        
+        // method calls here for submitting user information?
+        // create temp user based on return of getByEmail, check if null, and proceed if valid; otherwise give an error
+        System.out.println("email: " + user.getEmail() + " and pass: " + user.getPassword());
+        
+        
         return "login"; // loginSuccess page/session home page?
 	}
 	

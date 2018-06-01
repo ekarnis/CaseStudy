@@ -11,6 +11,6 @@ public class Application {
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
 	}
-	
+		
 	//addresourcehandler to change location of view pages (from webapp to something else, etc.)
 }
