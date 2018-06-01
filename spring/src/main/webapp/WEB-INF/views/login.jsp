@@ -12,7 +12,7 @@
 <body>
 	<nav>
 		<div id="nav_container">
-			<a href="home">Home </a>
+			<a href="/">Home </a>
 			<a href="menu">Menu </a>
 			<a href="about">About </a>
 			<a href="contact">Contact </a>
@@ -36,7 +36,9 @@
 					  <form:input type="password" path="password" />
 					  <form:errors path="password" cssClass="error" />
 					  <br><br>
-					  <input type="submit" value="Submit">
+					  <input type="submit" value="Login">
+					  <input type="button" name="register" value="Register" onclick="window.location='register'"></td>
+					  
 					</form:form> 
 				</div>
 			</section>
