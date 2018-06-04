@@ -12,12 +12,12 @@
 <body>
 	<nav>
 		<div id="nav_container">
-			<a href="home.htm">Home </a>
-			<a href="menu.htm">Menu </a>
-			<a href="about.htm">About </a>
-			<a href="contact.htm">Contact </a>
-			<a href="login.htm">Login</a>
-			<a href="register.htm">Register</a>
+			<a href="home">Home </a>
+			<a href="menu">Menu </a>
+			<a href="about">About </a>
+			<a href="contact">Contact </a>
+			<a href="login">Login</a>
+			<a href="register">Register</a>
 		</div>
 	</nav>
 	
