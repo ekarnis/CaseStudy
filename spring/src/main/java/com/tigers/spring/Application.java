@@ -13,4 +13,6 @@ public class Application {
 	}
 		
 	//addresourcehandler to change location of view pages (from webapp to something else, etc.)
+	
+	
 }
