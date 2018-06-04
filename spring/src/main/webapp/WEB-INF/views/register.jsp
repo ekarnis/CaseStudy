@@ -16,8 +16,8 @@
 			<a href="menu.htm">Menu </a>
 			<a href="about.htm">About </a>
 			<a href="contact.htm">Contact </a>
-			<a href="login.htm">Register/Login</a>
-			<a></a>
+			<a href="login.htm">Login</a>
+			<a href="register.htm">Register</a>
 		</div>
 	</nav>
 	
@@ -33,13 +33,13 @@
 					  	</div>
 					  	
 					  	<div>
-					  		Password:<form:input type="password" path="password" />
+					  		Password:<form:input type="password" path="password" id="password" />
 					  		<form:errors path="password" cssClass="error" />
 					  	</div>
 					  
 					  	<div>
-					  		Confirm Password:<form:input type="password" path="password" />
-					  		<form:errors path="password" cssClass="error" />
+					  		Confirm Password:<form:input type="password" path="confirmPassword" id="confirmPassword" />
+					  		<form:errors path="confirmPassword" cssClass="error" />
 					  	</div>
 					  	
 					  	<div>
@@ -48,7 +48,7 @@
 					  	</div>
 					  	
 					  	<div>
-					  		Last Name:<form:input type="text" name="lastName" placeholder="Last Name" />
+					  		Last Name:<form:input type="text" path="lastName" placeholder="Last Name" />
 					  		<form:errors path="lastName" cssClass="error" />
 					  	</div>
 					  	

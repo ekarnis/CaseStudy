@@ -71,7 +71,8 @@ public class UserService implements Service<User>{
 						usersRs.getString(4),
 						usersRs.getString(5),
 						usersRs.getString(6),
-						usersRs.getString(7)
+						usersRs.getString(7),
+						usersRs.getString(8)
 						); 
 				users.add(user);
 			}
@@ -95,7 +96,8 @@ public class UserService implements Service<User>{
 					usersRs.getString(4),
 					usersRs.getString(5),
 					usersRs.getString(6),
-					usersRs.getString(7)
+					usersRs.getString(7),
+					usersRs.getString(8)
 					); 
 		}catch(Exception e){
 			System.out.println(e.getMessage());
@@ -123,7 +125,8 @@ public class UserService implements Service<User>{
 					usersRs.getString(4),
 					usersRs.getString(5),
 					usersRs.getString(6),
-					usersRs.getString(7)
+					usersRs.getString(7),
+					usersRs.getString(8)
 					); 
 		}catch(Exception e){
 			System.out.println(e.getMessage());
@@ -139,6 +142,7 @@ public class UserService implements Service<User>{
 			String phone = user.getPhone();
 			String email = user.getEmail();
 			String password = user.getPassword();
+			String confirmPassword = user.getConfirmPassword();
 			String userStatusId = user.getUserStatusId();
 			
 			CallableStatement oCSF = connection.prepareCall("{call sp_update_user(?,?,?,?,?,?,?)}");
@@ -148,7 +152,8 @@ public class UserService implements Service<User>{
 			oCSF.setString(4, phone);
 			oCSF.setString(5, email);
 			oCSF.setString(6, password);
-			oCSF.setString(7, userStatusId);
+			oCSF.setString(7, confirmPassword);
+			oCSF.setString(8, userStatusId);
 			oCSF.execute();
 			oCSF.close();
 		}catch(SQLException e){

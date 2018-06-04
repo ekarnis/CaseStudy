@@ -8,5 +8,4 @@ public interface Service<E> {
 	public void update(E obj);
 	public E getById(String id);
 	public ArrayList<E> getAll();
-
 }
