@@ -1,12 +1,11 @@
 package com.tigers.services;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface Service<E> {
-	public void deleteById(String id);
-	public boolean add(E obj);
+	public void delete(String id);
+	public void add(E obj);
 	public void update(E obj);
-	public E getById(String id);
-	public ArrayList<E> getAll();
-
+	public E get(String id);
+	public List<E> list();
 }

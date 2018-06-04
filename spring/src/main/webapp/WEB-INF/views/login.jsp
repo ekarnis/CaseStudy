@@ -2,14 +2,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Register/Login </title>
-<link rel="stylesheet" type="text/css" href="/css/universal.css">
-<link rel="stylesheet" type="text/css" href="/css/login.css">
-<script src="home.js"></script>
+	<meta charset="ISO-8859-1">
+	<title>Register/Login </title>
+	<link rel="stylesheet" type="text/css" href="/css/universal.css">
+	<link rel="stylesheet" type="text/css" href="/css/login.css">
+	<script src="home.js"></script>
 </head>
-<body>
 
+<body>
 	<nav>
 		<div id="nav_container">
 			<a href="/">Home </a>
@@ -21,6 +21,7 @@
 			<a></a>
 		</div>
 	</nav>
+	
 	<div id="main_container">
 		<div id="spacer"></div>
 		<div id="section_container">
@@ -36,7 +37,7 @@
 					  <form:errors path="password" cssClass="error" />
 					  <br><br>
 					  <input type="submit" value="Login">
-					  <input type="button" name="register" value="Register" onclick="window.location='register'"></td>
+					  <input type="button" name="register" value="Register" onclick="window.location='register'">
 					  
 					</form:form> 
 				</div>
