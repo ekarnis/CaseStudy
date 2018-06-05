@@ -8,16 +8,26 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import javax.annotation.Resource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.stereotype.Component;
+
 import com.tigers.models.User;
 
-
+// should use @Service tag
+@Component
 public class UserService implements Service<User>{
 	
-	Connection connection;
+	//Connection connection;
+	@Autowired
+    private JdbcTemplate jdbcTemplate;
 	
-	public UserService(Connection connection) {
+	public UserService() {
 		super();
-		this.connection = connection;
+		//this.connection = connection;
 	}
 	public boolean add(User user){
 		try{
@@ -30,23 +40,27 @@ public class UserService implements Service<User>{
 			String password = user.getPassword();
 			String userStatusId = user.getUserStatusId();
 			
-			CallableStatement oCSF = connection.prepareCall("{call sp_insert_user(?,?,?,?,?,?,?)}");
-			oCSF.setString(1, userId);
-			oCSF.setString(2, firstName);
-			oCSF.setString(3, lastName);
-			oCSF.setString(4, phone);
-			oCSF.setString(5, email);
-			oCSF.setString(6, password);
-			oCSF.setString(7, userStatusId);
+			/*
+			jdbcTemplate = new JdbcTemplate();
+			DriverManagerDataSource dataSource = new DriverManagerDataSource();
+			dataSource.setDriverClassName("oracle.jdbc.driver.OracleDriver");
+	        dataSource.setUrl("jdbc:oracle:thin:@localhost:1521:XE");
+	        dataSource.setUsername("db_uSpring");
+	        dataSource.setPassword("pass");      
+			jdbcTemplate.setDataSource(dataSource);*/
+			System.out.println("About to print jdbctemplate");
+			System.out.println(jdbcTemplate.getDataSource());
+			System.out.println(jdbcTemplate);
+			System.out.println("Should have printed jdbctemplate");
+			jdbcTemplate.update("call sp_insert_user(?,?,?,?,?,?,?)", userId, firstName, lastName, phone, email, password, userStatusId);
 			
-			oCSF.execute();
-			oCSF.close();
 			return true;
-		}catch(SQLException e){
+		}catch(Exception e){
+			System.out.println("error");
 			System.out.println(e.getMessage());
 			return false;
 		}	
-	}
+	}/*
 	public void deleteById(String id){
 		try{
 			Statement usersSt = connection.createStatement();
@@ -154,6 +168,26 @@ public class UserService implements Service<User>{
 		}catch(SQLException e){
 			System.out.println(e.getMessage());
 		}	
+	}*/
+	@Override
+	public void deleteById(String id) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void update(User obj) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public User getById(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public ArrayList<User> getAll() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

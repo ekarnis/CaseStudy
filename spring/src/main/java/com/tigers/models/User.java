@@ -18,7 +18,7 @@ public class User {
 	}
 
 	
-
+	
 	public User(String userId, String firstName, String lastName, String phone, String email, String password,
 			String userStatusId) {
 		super();
