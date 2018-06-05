@@ -11,11 +11,66 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 
+import javax.annotation.Resource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.stereotype.Component;
+
 import com.tigers.models.User;
 
-
+// should use @Service tag
+@Component
 public class UserService implements Service<User>{
 	
+	//Connection connection;
+	@Autowired
+    private JdbcTemplate jdbcTemplate;
+	
+	public UserService() {
+		super();
+		//this.connection = connection;
+	}
+	public boolean add(User user){
+		try{
+			
+			String userId = user.getUserId();
+			String firstName = user.getFirstName();
+			String lastName = user.getLastName();
+			String phone = user.getPhone();
+			String email = user.getEmail();
+			String password = user.getPassword();
+			String userStatusId = user.getUserStatusId();
+			
+			/*
+			jdbcTemplate = new JdbcTemplate();
+			DriverManagerDataSource dataSource = new DriverManagerDataSource();
+			dataSource.setDriverClassName("oracle.jdbc.driver.OracleDriver");
+	        dataSource.setUrl("jdbc:oracle:thin:@localhost:1521:XE");
+	        dataSource.setUsername("db_uSpring");
+	        dataSource.setPassword("pass");      
+			jdbcTemplate.setDataSource(dataSource);*/
+			System.out.println("About to print jdbctemplate");
+			System.out.println(jdbcTemplate.getDataSource());
+			System.out.println(jdbcTemplate);
+			System.out.println("Should have printed jdbctemplate");
+			jdbcTemplate.update("call sp_insert_user(?,?,?,?,?,?,?)", userId, firstName, lastName, phone, email, password, userStatusId);
+			
+			return true;
+		}catch(Exception e){
+			System.out.println("error");
+			System.out.println(e.getMessage());
+			return false;
+		}	
+	}/*
+	public void deleteById(String id){
+		try{
+			Statement usersSt = connection.createStatement();
+			usersSt.executeQuery("Delete from users where user_id = "+id);
+		}catch(SQLException e){
+			System.out.println(e.getMessage());
+		}
 	private JdbcTemplate jdbcTemplate;
 	
 	public UserService(DataSource dataSource) {
@@ -50,6 +105,7 @@ public class UserService implements Service<User>{
 	public void delete(String id){
 		String query = "DELETE FROM Users WHERE Users.user_id = ?";
 		jdbcTemplate.update(query, id);
+
 	}
 	
 	
@@ -135,6 +191,26 @@ public class UserService implements Service<User>{
 			}
 		});
 	}
+	@Override
+	public void deleteById(String id) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void update(User obj) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public User getById(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public ArrayList<User> getAll() {
+		// TODO Auto-generated method stub
+		return null;
+  }
 	
 	
 	/*
@@ -153,6 +229,7 @@ public class UserService implements Service<User>{
 		
 		jdbcTemplate.update(query, userId, firstName, lastName,
 							phone, email, password, userStatusId);
+
 	}
 	
 	
