@@ -31,7 +31,7 @@ public class LoginController {
 	public String loginSubmit(@Valid User user, BindingResult result, ModelMap model) {
 		if(result.hasErrors()) {
             System.out.println("There were some errors");
-            //return "registration";
+            //return "register";
 		}
         System.out.println("Login should be successful");
         
