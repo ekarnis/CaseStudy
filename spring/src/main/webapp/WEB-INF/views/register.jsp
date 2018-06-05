@@ -26,7 +26,7 @@
 		<div id="section_container">
 			<section>
 				<div id="form_container">
-					<form:form method="POST" modelAttribute="user" class="form-horizontal">
+					<form:form method="POST" modelAttribute="user" class="form-horizontal" action="registerSubmit">
 						<div>
 							Email:<form:input type="email" path="email" placeholder="example@test.com" />
 					  		<form:errors path="email" cssClass="error" />
@@ -50,6 +50,11 @@
 					  	<div>
 					  		Last Name:<form:input type="text" path="lastName" placeholder="Last Name" />
 					  		<form:errors path="lastName" cssClass="error" />
+					  	</div>
+					  	
+					  	<div>
+					  		Phone Number:<form:input type="text" path="phoneNumber" placeholder="123-123-1234" />
+					  		<form:errors path="phoneNumber" cssClass="error" />
 					  	</div>
 					  	
 					  	<div>

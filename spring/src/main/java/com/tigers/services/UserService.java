@@ -31,10 +31,13 @@ public class UserService implements Service<User>{
 		String userId = user.getUserId();
 		String firstName = user.getFirstName();
 		String lastName = user.getLastName();
-		String phone = user.getPhone();
+		String phone = user.getPhoneNumber();
 		String email = user.getEmail();
 		String password = user.getPassword();
 		String userStatusId = user.getUserStatusId();
+		
+		long unixTime = System.currentTimeMillis() / 1000L;
+		userId = "" + unixTime;
 		
 		String query = "{CALL sp_insert_user(?,?,?,?,?,?,?)}";
 		
@@ -67,7 +70,7 @@ public class UserService implements Service<User>{
 				user.setUserId(rs.getString("user_id"));
 				user.setFirstName(rs.getString("first"));
 				user.setLastName(rs.getString("last"));
-				user.setPassword(rs.getString("phone"));
+				user.setPhoneNumber(rs.getString("phone"));
 				user.setEmail(rs.getString("email"));
 				user.setPassword(rs.getString("password"));
 				user.setUserStatusId(rs.getString("user_status_id"));
@@ -96,7 +99,7 @@ public class UserService implements Service<User>{
 					user.setUserId(rs.getString("user_id"));
 					user.setFirstName(rs.getString("first"));
 					user.setLastName(rs.getString("last"));
-					user.setPhone(rs.getString("phone"));
+					user.setPhoneNumber(rs.getString("phone"));
 					user.setEmail(rs.getString("email"));
 					user.setPassword(rs.getString("password"));
 					user.setUserStatusId(rs.getString("user_status_id"));
@@ -124,7 +127,7 @@ public class UserService implements Service<User>{
 					user.setUserId(rs.getString("user_id"));
 					user.setFirstName(rs.getString("first"));
 					user.setLastName(rs.getString("last"));
-					user.setPhone(rs.getString("phone"));
+					user.setPhoneNumber(rs.getString("phone"));
 					user.setEmail(rs.getString("email"));
 					user.setPassword(rs.getString("password"));
 					user.setUserStatusId(rs.getString("user_status_id"));
@@ -144,7 +147,7 @@ public class UserService implements Service<User>{
 		String userId = user.getUserId();
 		String firstName = user.getFirstName();
 		String lastName = user.getLastName();
-		String phone = user.getPhone();
+		String phone = user.getPhoneNumber();
 		String email = user.getEmail();
 		String password = user.getPassword();
 		String userStatusId = user.getUserStatusId();
@@ -154,6 +157,4 @@ public class UserService implements Service<User>{
 		jdbcTemplate.update(query, userId, firstName, lastName,
 							phone, email, password, userStatusId);
 	}
-	
-	
 }
