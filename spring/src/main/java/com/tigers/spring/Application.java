@@ -19,7 +19,6 @@ import org.springframework.web.servlet.view.JstlView;
 
 @SpringBootApplication
 @ComponentScan(basePackages="com.tigers")
-@PropertySource("classpath:application.properties")
 public class Application {
 
 	//<bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor"/>
