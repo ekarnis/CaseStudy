@@ -1,6 +1,5 @@
 package com.tigers.models;
 
-import java.util.ArrayList;
 
 public class User {
 	
@@ -10,6 +9,7 @@ public class User {
 	String phone;
 	String email;
 	String password;
+	String confirmPassword;
 	String userStatusId;
 	
 	//ArrayList<Card> cards = new ArrayList<Card>();
@@ -17,10 +17,9 @@ public class User {
 		super();
 	}
 
-	
-	
+
 	public User(String userId, String firstName, String lastName, String phone, String email, String password,
-			String userStatusId) {
+			String confirmPassword, String userStatusId) {
 		super();
 		this.userId = userId;
 		this.firstName = firstName;
@@ -28,10 +27,9 @@ public class User {
 		this.phone = phone;
 		this.email = email;
 		this.password = password;
+		this.confirmPassword = confirmPassword;
 		this.userStatusId = userStatusId;
 	}
-
-
 
 	public String getUserId() {
 		return userId;
@@ -73,12 +71,20 @@ public class User {
 		this.email = email;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
 	}
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getPassword() {
+		return password;
 	}
 
 	public String getUserStatusId() {
@@ -94,7 +100,4 @@ public class User {
 		return "User [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", phone=" + phone
 				+ ", email=" + email + ", password=" + password + ", userStatusId=" + userStatusId + "]";
 	}
-
-	
-	
 }
