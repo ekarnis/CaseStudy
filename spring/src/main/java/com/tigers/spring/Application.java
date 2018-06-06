@@ -23,4 +23,5 @@ public class Application {
 		CommonAnnotationBeanPostProcessor BeanPostProcessor = new CommonAnnotationBeanPostProcessor();
 		return BeanPostProcessor;
 	}*/
+
 }

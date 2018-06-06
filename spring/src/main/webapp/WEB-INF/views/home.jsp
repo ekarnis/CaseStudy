@@ -1,3 +1,5 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -11,12 +13,23 @@
 <body>
 	<nav>
 		<div id="nav_container">
-			<a href="home">Home </a>
+			<a href="/">Home </a>
 			<a href="menu">Menu </a>
 			<a href="about">About </a>
 			<a href="contact">Contact </a>
-			<a href="login">Login</a>
-			<a href="register">Register</a>
+			<c:choose>
+			    <c:when test="${sessionScope.currentUser!=null}">
+			        account and logout buttons
+			        <a href="logout">Logout</a>
+			        <!-- Need to have sessions blocking account/logout pages with redirect so that they can't be accessed without logging in -->
+			        <br />
+			    </c:when>    
+			    <c:otherwise>
+			        <a href="login">Login</a>
+					<a href="register">Register</a> 
+			        <br />
+			    </c:otherwise>
+			</c:choose>
 		</div>
 	</nav>
 	

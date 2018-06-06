@@ -8,10 +8,16 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
+
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.tigers.models.User;
+
 
 // should use @Service tag
 @Component
@@ -24,27 +30,28 @@ public class UserService implements Service<User> {
 	public UserService() {
 		super();
 	}
+}	
+
 	
 	
+	/*
+	 * Add a new user object
+	 */
 	@Override
 	public void add(User user){
-		try {
-			String userId = getPK();
-			String firstName = user.getFirstName();
-			String lastName = user.getLastName();
-			String phone = user.getPhoneNumber();
-			String email = user.getEmail();
-			String password = user.getPassword();
-			String userStatusId = user.getUserStatusId();
-			
-			String query = "{CALL sp_insert_user(?,?,?,?,?,?,?)}";
-			
-			jdbcTemplate.update(query, userId, firstName, lastName, phone, email, password, userStatusId);
-			System.out.println("UserService:  User added.");
-		} catch(Exception e) {
-			System.out.println("UserService:  Failed to add user.");
-			System.out.println(e.getMessage());
-		}	
+		String userId = user.getUserId();
+		String firstName = user.getFirstName();
+		String lastName = user.getLastName();
+		String phone = user.getPhone();
+		String email = user.getEmail();
+		String password = user.getPassword();
+		String userStatusId = user.getUserStatusId();
+		
+		String query = "{CALL sp_insert_user(?,?,?,?,?,?,?)}";
+		
+		jdbcTemplate.update(query, userId, firstName, lastName,
+							phone, email, password, userStatusId);
+
 	}
 	
 	
@@ -90,7 +97,9 @@ public class UserService implements Service<User> {
 	 */
 	@Override
 	public User get(String id){
+
 		String query = "SELECT * FROM Users WHERE Users.user_id LIKE '" + id + "'";
+
 		
 		return jdbcTemplate.query(query, new ResultSetExtractor<User>() {
 			
@@ -118,7 +127,9 @@ public class UserService implements Service<User> {
 	 * Return user object by email
 	 */
 	public User getUserByEmail(String email){
+
 		String query = "SELECT * FROM Users WHERE Users.email LIKE '" + email + "'";
+
 		
 		return jdbcTemplate.query(query, new ResultSetExtractor<User>() {
 			
@@ -161,6 +172,37 @@ public class UserService implements Service<User> {
 
 	}
 	
+	// does session need to be passed in?
+	public String loginValidation(User user, HttpSession session) 
+	{
+		
+		User tempUser = getUserByEmail(user.getEmail());
+		
+		if (tempUser != null) {
+        	System.out.println("User exists");
+        	if (tempUser.getPassword().equals(user.getPassword())) {
+        		// successful login
+        		System.out.println("passwords match");
+        		session.setAttribute("currentUser", tempUser);
+        		return "home";
+        	}
+        	// set currentuser in session and throw to home page
+        	
+        	else {
+        		// invalid password
+        		// below should be an alert or error page instead of a print statement
+        		System.out.println("Invalid login/password combination. Please try logging in again.");
+        		return "login";
+        	}
+    	
+    }
+	    else {
+	    	System.out.println("User doesn't exist");
+	    	// give error
+	    	System.out.println("No account associated with that email. Please re-enter your information or register an account.");
+	    	return "login";
+	    }
+	}
 	
 	/*
 	 * Gets a new, unique userId based on Unix time in string format
