@@ -35,7 +35,6 @@ public class RegisterController {
             //return "register";
 		}
         userService.add(user);
-        System.out.println("User registration successful");
         return "home";
 	}
 }

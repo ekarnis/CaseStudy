@@ -4,28 +4,52 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import javax.sql.DataSource;
-
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.tigers.models.User;
 
-
-public class UserService implements Service<User>{
+// should use @Service tag
+@Component
+public class UserService implements Service<User> {
 	
-	private JdbcTemplate jdbcTemplate;
+	//Connection connection;
+	@Autowired
+    private JdbcTemplate jdbcTemplate;
 	
-	public UserService(DataSource dataSource) {
-		jdbcTemplate = new JdbcTemplate(dataSource);
+	public UserService() {
+		super();
+	}
+	
+	@Override
+	public void add(User user){
+		try {
+			String userId = user.getUserId();
+			String firstName = user.getFirstName();
+			String lastName = user.getLastName();
+			String phone = user.getPhoneNumber();
+			String email = user.getEmail();
+			String password = user.getPassword();
+			String userStatusId = user.getUserStatusId();
+			
+			long unixTime = System.currentTimeMillis() / 1000L;
+			userId = "" + unixTime;
+			
+			jdbcTemplate.update("CALL sp_insert_user(?,?,?,?,?,?,?)", userId, firstName, lastName, phone, email, password, userStatusId);
+			System.out.println("UserService:  User added.");
+		} catch(Exception e) {
+			System.out.println("UserService:  Failed to add user.");
+			System.out.println(e.getMessage());
+		}	
 	}
 	
 	
 	/*
 	 * Add a new user object
-	 */
 	@Override
 	public void add(User user){
 		String userId = user.getUserId();
@@ -44,6 +68,7 @@ public class UserService implements Service<User>{
 		jdbcTemplate.update(query, userId, firstName, lastName,
 							phone, email, password, userStatusId);
 	}
+	*/
 	
 	
 	/*
@@ -139,7 +164,6 @@ public class UserService implements Service<User>{
 		});
 	}
 	
-	
 	/*
 	 * Update an existing user with new user values
 	 */
@@ -156,5 +180,6 @@ public class UserService implements Service<User>{
 		
 		jdbcTemplate.update(query, userId, firstName, lastName,
 							phone, email, password, userStatusId);
+
 	}
 }
