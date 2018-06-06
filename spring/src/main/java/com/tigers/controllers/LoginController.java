@@ -34,14 +34,13 @@ public class LoginController {
 	public String loginSubmit(@Valid User user, BindingResult result, ModelMap model, HttpSession session) {
 		if(result.hasErrors()) {
             System.out.println("There were some errors");
-            //return "register";
+            return "login";
 		}
-        System.out.println("Login should be successful");
-        
-        // method calls here for submitting user information?
-        // create temp user based on return of getByEmail, check if null, and proceed if valid; otherwise give an error
         System.out.println("email: " + user.getEmail() + " and pass: " + user.getPassword());
+        //TODO:  use userService.getUserByEmail(email) to verify login information
+        //       build the user object in order to create a session
         
+
         
         //User testUser = new User("8","Salad","Manlet IV","6666665544","salad4@gmail.com","pass", "pass", "2");
         //UserService userService = new UserService();
@@ -51,6 +50,7 @@ public class LoginController {
         // Useful link for how to do sessions
         //https://stackoverflow.com/questions/18791645/how-to-use-session-attributes-in-spring-mvc
         return userService.loginValidation(user, session); // loginSuccess page/session home page?
+
 	}
 	
 	
