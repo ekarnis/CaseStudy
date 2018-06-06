@@ -10,6 +10,10 @@ public class IndexController {
 	
 	@RequestMapping("/")
 	public String index(HttpSession session) {
+		if (session.getAttribute("currentUser") == null)
+		{
+			System.out.println("session is null");
+		}
 		System.out.println(session.getAttribute("currentUser"));
 		return "home";
 	}
