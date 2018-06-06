@@ -18,11 +18,11 @@ th {
 <body>
 	<nav>
 		<div id="nav_container">
-			<a href="home.html">Home </a>
-			<a href="menu.html">Menu </a>
-			<a href="about.html">About </a>
-			<a href="contact.html">Contact </a>
-			<a href="register.html">Register/Login</a>
+			<a href="home.htm">Home </a>
+			<a href="menu.htm">Menu </a>
+			<a href="about.htm">About </a>
+			<a href="contact.htm">Contact </a>
+			<a href="login.htm">Register/Login</a>
 			<a></a>
 		</div>
 	</nav>
@@ -33,7 +33,7 @@ th {
 	  <tr><td>Hamburger</td><td><img src="Hamburger.jpg" width="150"></td><td>An amazing hamburger with lettuce, tomatoes, and ketchup</td><td>$3.50</td><td><button>Add</button></td></tr>  
 	  <tr><td>Resturant</td><td><img src="Restaurants.jpg" width="150"></td><td>Why would you eat a restaurant?</td><td>$99999.99</td><td><button>Add</button></td></tr>  
 	  <tr><td>Fries</td><td><img src="Fries.jpg" width="150"></td><td>Delicous hand cut fries with sea salt</td><td>$1.50</td><td><button>Add</button></td></tr>  
-		</table>
+		</table>  
 	</div>
 
 	<footer>

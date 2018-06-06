@@ -3,7 +3,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Menu</title>
-<link rel="stylesheet" href="universal.css">
+<link rel="stylesheet" href="css/universal.css">
 <style type="text/css">
 td {
   text-align: center;
@@ -33,7 +33,7 @@ th {
 	  <tr><td>Hamburger</td><td><img src="Hamburger.jpg" width="150"></td><td>An amazing hamburger with lettuce, tomatoes, and ketchup</td><td>$3.50</td><td><button>Add</button></td></tr>  
 	  <tr><td>Resturant</td><td><img src="Restaurants.jpg" width="150"></td><td>Why would you eat a restaurant?</td><td>$99999.99</td><td><button>Add</button></td></tr>  
 	  <tr><td>Fries</td><td><img src="Fries.jpg" width="150"></td><td>Delicous hand cut fries with sea salt</td><td>$1.50</td><td><button>Add</button></td></tr>  
-		</table>  
+		</table>
 	</div>
 
 	<footer>

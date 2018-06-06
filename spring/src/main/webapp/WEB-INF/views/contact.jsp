@@ -2,20 +2,20 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Register/Login </title>
-<link rel="stylesheet" type="text/css" href="universal.css">
-<link rel="stylesheet" type="text/css" href="register.css">
+<title>Contact</title>
+<link rel="stylesheet" type="text/css" href="css/universal.css">
+<link rel="stylesheet" type="text/css" href="css/register.css">
 <script src="home.js"></script>
 </head>
 <body>
 
 	<nav>
 		<div id="nav_container">
-			<a href="home.html">Home </a>
-			<a href="menu.html">Menu </a>
-			<a href="about.html">About </a>
-			<a href="contact.html">Contact </a>
-			<a href="register.html">Register/Login</a>
+			<a href="home.htm">Home </a>
+			<a href="menu.htm">Menu </a>
+			<a href="about.htm">About </a>
+			<a href="contact.htm">Contact </a>
+			<a href="login.htm">Register/Login</a>
 			<a></a>
 		</div>
 	</nav>
@@ -28,8 +28,8 @@
 					  Email<br>
 					  <input type="email" name="email" value="example@test.com">
 					  <br>
-					  Password<br>
-					  <input type="password" name="password">
+					  Message<br>
+					  <input type="text" name="password">
 					  <br><br>
 					  <input type="submit" value="Submit">
 					</form> 
