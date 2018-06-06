@@ -31,23 +31,14 @@ public class LoginController {
 	public String loginSubmit(@Valid User user, BindingResult result, ModelMap model) {
 		if(result.hasErrors()) {
             System.out.println("There were some errors");
-            //return "register";
+            return "login";
 		}
-        System.out.println("Login should be successful");
-        
-        // method calls here for submitting user information?
-        // create temp user based on return of getByEmail, check if null, and proceed if valid; otherwise give an error
         System.out.println("email: " + user.getEmail() + " and pass: " + user.getPassword());
+        //TODO:  use userService.getUserByEmail(email) to verify login information
+        //       build the user object in order to create a session
         
-        
-        User testUser = new User("6","Salad","Manlet","6666665544","salad2@gmail.com","pass", "pass","2");
-        //UserService userService = new UserService();
-        
-        System.out.println("Trying to add user");
-        userService.add(testUser);
-        
-        
-        return "login"; // loginSuccess page/session home page?
+        //TODO:  return to home page with user session info
+        return "home";
 	}
 	
 	

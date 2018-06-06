@@ -26,7 +26,7 @@
 		<div id="section_container">
 			<section>
 				<div id="form_container">
-					<form:form method="POST" modelAttribute="user" class="form-horizontal" action="registerSubmit">
+					<form:form method="POST" modelAttribute="user" class="form-horizontal">
 						<div>
 							Email:<form:input type="email" path="email" placeholder="example@test.com" />
 					  		<form:errors path="email" cssClass="error" />

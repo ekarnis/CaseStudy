@@ -24,16 +24,18 @@ public class RegisterController {
 	public String register(ModelMap model) {
 		User user = new User();
         model.addAttribute("user", user);
-        System.out.println("Created user object for register");
+        System.out.println("RegisterController:  Created user object for register");
         return "register";
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
 	public String registerSubmit(@Valid User user, BindingResult result, ModelMap model) {
 		if(result.hasErrors()) {
-            System.out.println("There were some errors");
+            System.out.println("RegisterController:  invalid result");
+            return "register";
 		}
         userService.add(user);
-        return "home";
+        
+        return "login";
 	}
 }

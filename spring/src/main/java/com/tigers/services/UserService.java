@@ -25,10 +25,11 @@ public class UserService implements Service<User> {
 		super();
 	}
 	
+	
 	@Override
 	public void add(User user){
 		try {
-			String userId = user.getUserId();
+			String userId = getPK();
 			String firstName = user.getFirstName();
 			String lastName = user.getLastName();
 			String phone = user.getPhoneNumber();
@@ -36,10 +37,9 @@ public class UserService implements Service<User> {
 			String password = user.getPassword();
 			String userStatusId = user.getUserStatusId();
 			
-			long unixTime = System.currentTimeMillis() / 1000L;
-			userId = "" + unixTime;
+			String query = "{CALL sp_insert_user(?,?,?,?,?,?,?)}";
 			
-			jdbcTemplate.update("CALL sp_insert_user(?,?,?,?,?,?,?)", userId, firstName, lastName, phone, email, password, userStatusId);
+			jdbcTemplate.update(query, userId, firstName, lastName, phone, email, password, userStatusId);
 			System.out.println("UserService:  User added.");
 		} catch(Exception e) {
 			System.out.println("UserService:  Failed to add user.");
@@ -49,34 +49,11 @@ public class UserService implements Service<User> {
 	
 	
 	/*
-	 * Add a new user object
-	@Override
-	public void add(User user){
-		String userId = user.getUserId();
-		String firstName = user.getFirstName();
-		String lastName = user.getLastName();
-		String phone = user.getPhoneNumber();
-		String email = user.getEmail();
-		String password = user.getPassword();
-		String userStatusId = user.getUserStatusId();
-		
-		long unixTime = System.currentTimeMillis() / 1000L;
-		userId = "" + unixTime;
-		
-		String query = "{CALL sp_insert_user(?,?,?,?,?,?,?)}";
-		
-		jdbcTemplate.update(query, userId, firstName, lastName,
-							phone, email, password, userStatusId);
-	}
-	*/
-	
-	
-	/*
 	 * Delete an existing user by user id
 	 */
 	@Override
 	public void delete(String id){
-		String query = "DELETE FROM Users WHERE Users.user_id = ?";
+		String query = "DELETE FROM Users WHERE Users.user_id LIKE ?";
 		jdbcTemplate.update(query, id);
 	}
 	
@@ -113,7 +90,7 @@ public class UserService implements Service<User> {
 	 */
 	@Override
 	public User get(String id){
-		String query = "SELECT * FROM Users WHERE User.user_id = " + id;
+		String query = "SELECT * FROM Users WHERE Users.user_id LIKE '" + id + "'";
 		
 		return jdbcTemplate.query(query, new ResultSetExtractor<User>() {
 			
@@ -141,7 +118,7 @@ public class UserService implements Service<User> {
 	 * Return user object by email
 	 */
 	public User getUserByEmail(String email){
-		String query = "SELECT * FROM Users WHERE User.email = " + email;
+		String query = "SELECT * FROM Users WHERE Users.email LIKE '" + email + "'";
 		
 		return jdbcTemplate.query(query, new ResultSetExtractor<User>() {
 			
@@ -164,6 +141,7 @@ public class UserService implements Service<User> {
 		});
 	}
 	
+	
 	/*
 	 * Update an existing user with new user values
 	 */
@@ -181,5 +159,14 @@ public class UserService implements Service<User> {
 		jdbcTemplate.update(query, userId, firstName, lastName,
 							phone, email, password, userStatusId);
 
+	}
+	
+	
+	/*
+	 * Gets a new, unique userId based on Unix time in string format
+	 */
+	private String getPK() {
+		long unixTime = System.currentTimeMillis() / 1000L;
+		return "" + unixTime;
 	}
 }
