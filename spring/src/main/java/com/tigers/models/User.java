@@ -6,7 +6,7 @@ public class User {
 	String userId;
 	String firstName;
 	String lastName;
-	String phone;
+	String phoneNumber;
 	String email;
 	String password;
 	String confirmPassword;
@@ -17,14 +17,13 @@ public class User {
 		super();
 	}
 
-
-	public User(String userId, String firstName, String lastName, String phone, String email, String password,
+	public User(String userId, String firstName, String lastName, String phoneNumber, String email, String password,
 			String confirmPassword, String userStatusId) {
 		super();
 		this.userId = userId;
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.phone = phone;
+		this.phoneNumber = phoneNumber;
 		this.email = email;
 		this.password = password;
 		this.confirmPassword = confirmPassword;
@@ -55,12 +54,12 @@ public class User {
 		this.lastName = lastName;
 	}
 
-	public String getPhone() {
-		return phone;
+	public String getPhoneNumber() {
+		return phoneNumber;
 	}
 
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
 	public String getEmail() {
@@ -97,7 +96,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", phone=" + phone
+		return "User [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", phoneNumber=" + phoneNumber
 				+ ", email=" + email + ", password=" + password + ", userStatusId=" + userStatusId + "]";
 	}
 }

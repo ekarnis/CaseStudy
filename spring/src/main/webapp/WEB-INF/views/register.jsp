@@ -53,6 +53,11 @@
 					  	</div>
 					  	
 					  	<div>
+					  		Phone Number:<form:input type="text" path="phoneNumber" placeholder="123-123-1234" />
+					  		<form:errors path="phoneNumber" cssClass="error" />
+					  	</div>
+					  	
+					  	<div>
 					  		<input type="submit" value="Submit">
 					  	</div>
 					</form:form> 
