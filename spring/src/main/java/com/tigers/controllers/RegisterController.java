@@ -32,7 +32,6 @@ public class RegisterController {
 	public String registerSubmit(@Valid User user, BindingResult result, ModelMap model) {
 		if(result.hasErrors()) {
             System.out.println("There were some errors");
-            //return "register";
 		}
         userService.add(user);
         return "home";
