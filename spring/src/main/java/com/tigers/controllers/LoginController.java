@@ -40,7 +40,7 @@ public class LoginController {
         System.out.println("email: " + user.getEmail() + " and pass: " + user.getPassword());
         
         
-        User testUser = new User("6","Salad","Manlet","6666665544","salad2@gmail.com","pass","2");
+        User testUser = new User("6","Salad","Manlet","6666665544","salad2@gmail.com","pass", "pass", "2");
         //UserService userService = new UserService();
         
         System.out.println("Trying to add user");

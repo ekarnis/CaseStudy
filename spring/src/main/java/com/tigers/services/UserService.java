@@ -1,36 +1,29 @@
 package com.tigers.services;
 
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
-
-import javax.sql.DataSource;
-
-import org.springframework.dao.DataAccessException;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.ResultSetExtractor;
-import org.springframework.jdbc.core.RowMapper;
-
-import javax.annotation.Resource;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.stereotype.Component;
 
 import com.tigers.models.User;
 
-// should use @Service tag
-@Component
+
 public class UserService implements Service<User>{
 	
-	//Connection connection;
 	@Autowired
-    private JdbcTemplate jdbcTemplate;
+	JdbcTemplate jTemp;
 	
-	public UserService() {
+	Connection connection;
+	
+	public UserService(Connection connection) {
 		super();
-		//this.connection = connection;
+		this.connection = connection;
 	}
 	public boolean add(User user){
 		try{
@@ -43,27 +36,23 @@ public class UserService implements Service<User>{
 			String password = user.getPassword();
 			String userStatusId = user.getUserStatusId();
 			
-			/*
-			jdbcTemplate = new JdbcTemplate();
-			DriverManagerDataSource dataSource = new DriverManagerDataSource();
-			dataSource.setDriverClassName("oracle.jdbc.driver.OracleDriver");
-	        dataSource.setUrl("jdbc:oracle:thin:@localhost:1521:XE");
-	        dataSource.setUsername("db_uSpring");
-	        dataSource.setPassword("pass");      
-			jdbcTemplate.setDataSource(dataSource);*/
-			System.out.println("About to print jdbctemplate");
-			System.out.println(jdbcTemplate.getDataSource());
-			System.out.println(jdbcTemplate);
-			System.out.println("Should have printed jdbctemplate");
-			jdbcTemplate.update("call sp_insert_user(?,?,?,?,?,?,?)", userId, firstName, lastName, phone, email, password, userStatusId);
+			CallableStatement oCSF = connection.prepareCall("{call sp_insert_user(?,?,?,?,?,?,?)}");
+			oCSF.setString(1, userId);
+			oCSF.setString(2, firstName);
+			oCSF.setString(3, lastName);
+			oCSF.setString(4, phone);
+			oCSF.setString(5, email);
+			oCSF.setString(6, password);
+			oCSF.setString(7, userStatusId);
 			
+			oCSF.execute();
+			oCSF.close();
 			return true;
-		}catch(Exception e){
-			System.out.println("error");
+		}catch(SQLException e){
 			System.out.println(e.getMessage());
 			return false;
 		}	
-	}/*
+	}
 	public void deleteById(String id){
 		try{
 			Statement usersSt = connection.createStatement();
@@ -71,165 +60,109 @@ public class UserService implements Service<User>{
 		}catch(SQLException e){
 			System.out.println(e.getMessage());
 		}
-	private JdbcTemplate jdbcTemplate;
-	
-	public UserService(DataSource dataSource) {
-		jdbcTemplate = new JdbcTemplate(dataSource);
 	}
-	
-	
-	/*
-	 * Add a new user object
-	 */
-	@Override
-	public void add(User user){
-		String userId = user.getUserId();
-		String firstName = user.getFirstName();
-		String lastName = user.getLastName();
-		String phone = user.getPhone();
-		String email = user.getEmail();
-		String password = user.getPassword();
-		String userStatusId = user.getUserStatusId();
-		
-		String query = "{CALL sp_insert_user(?,?,?,?,?,?,?)}";
-		
-		jdbcTemplate.update(query, userId, firstName, lastName,
-							phone, email, password, userStatusId);
-	}
-	
-	
-	/*
-	 * Delete an existing user by user id
-	 */
-	@Override
-	public void delete(String id){
-		String query = "DELETE FROM Users WHERE Users.user_id = ?";
-		jdbcTemplate.update(query, id);
+	public ArrayList<User> getAll(){
 
-	}
-	
-	
-	/*
-	 * Return List of all existing users
-	 */
-	@Override
-	public List<User> list(){
-		String query = "SELECT * FROM Users";
-		List<User> users = jdbcTemplate.query(query, new RowMapper<User>() {
-
-			@Override
-			public User mapRow(ResultSet rs, int rowNum) throws SQLException {
-				User user = new User();
-				user.setUserId(rs.getString("user_id"));
-				user.setFirstName(rs.getString("first"));
-				user.setLastName(rs.getString("last"));
-				user.setPassword(rs.getString("phone"));
-				user.setEmail(rs.getString("email"));
-				user.setPassword(rs.getString("password"));
-				user.setUserStatusId(rs.getString("user_status_id"));
-				
-				return user;
+		ArrayList<User> users = new ArrayList<User>();
+		
+		try{
+			Statement usersSt = connection.createStatement();
+			ResultSet usersRs = usersSt.executeQuery("Select * from Users");
+			
+			while(usersRs.next()){
+				User user = new User(
+						usersRs.getString(1),
+						usersRs.getString(2),
+						usersRs.getString(3),
+						usersRs.getString(4),
+						usersRs.getString(5),
+						usersRs.getString(6),
+						usersRs.getString(6),
+						usersRs.getString(7)
+						); 
+				users.add(user);
 			}
-		});
-		
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
 		return users;
 	}
-	
-	
-	/*
-	 * Return user object by user id
-	 */
-	@Override
-	public User get(String id){
-		String query = "SELECT * FROM Users WHERE User.user_id = " + id;
+	public User getById(String id){
+		User user = null;
 		
-		return jdbcTemplate.query(query, new ResultSetExtractor<User>() {
+		try{
+			Statement usersSt = connection.createStatement();
+			ResultSet usersRs = usersSt.executeQuery("Select * from Users where user_id = " + id);
 			
-			@Override
-			public User extractData(ResultSet rs) throws SQLException, DataAccessException {
-				if(rs.next()) {
-					User user = new User();
-					user.setUserId(rs.getString("user_id"));
-					user.setFirstName(rs.getString("first"));
-					user.setLastName(rs.getString("last"));
-					user.setPhone(rs.getString("phone"));
-					user.setEmail(rs.getString("email"));
-					user.setPassword(rs.getString("password"));
-					user.setUserStatusId(rs.getString("user_status_id"));
-					
-					return user;
-				}
-				return null;
-			}
-		});
+			usersRs.next();
+			user = new User(
+					usersRs.getString(1),
+					usersRs.getString(2),
+					usersRs.getString(3),
+					usersRs.getString(4),
+					usersRs.getString(5),
+					usersRs.getString(6),
+					usersRs.getString(6),
+					usersRs.getString(7)
+					); 
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}	
+		
+		return user;
 	}
 	
-	
-	/*
-	 * Return user object by email
-	 */
-	public User getUserByEmail(String email){
-		String query = "SELECT * FROM Users WHERE User.email = " + email;
+	public User getByEmail(String email){
+		User user = null;
 		
-		return jdbcTemplate.query(query, new ResultSetExtractor<User>() {
+		try{
 			
-			@Override
-			public User extractData(ResultSet rs) throws SQLException, DataAccessException {
-				if(rs.next()) {
-					User user = new User();
-					user.setUserId(rs.getString("user_id"));
-					user.setFirstName(rs.getString("first"));
-					user.setLastName(rs.getString("last"));
-					user.setPhone(rs.getString("phone"));
-					user.setEmail(rs.getString("email"));
-					user.setPassword(rs.getString("password"));
-					user.setUserStatusId(rs.getString("user_status_id"));
-					
-					return user;
-				}
-				return null;
-			}
-		});
-	}
-	@Override
-	public void deleteById(String id) {
-		// TODO Auto-generated method stub
+			PreparedStatement pstmt = connection.prepareStatement("select * from users "
+					+ "where email = ?"); 
+			pstmt.setString(1,email);
+						
+			ResultSet usersRs = pstmt.executeQuery();
+			
+			usersRs.next();
+			user = new User(
+					usersRs.getString(1),
+					usersRs.getString(2),
+					usersRs.getString(3),
+					usersRs.getString(4),
+					usersRs.getString(5),
+					usersRs.getString(6),
+					usersRs.getString(6),
+					usersRs.getString(7)
+					); 
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}	
 		
+		return user;
 	}
-	@Override
-	public void update(User obj) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public User getById(String id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public ArrayList<User> getAll() {
-		// TODO Auto-generated method stub
-		return null;
-  }
-	
-	
-	/*
-	 * Update an existing user with new user values
-	 */
-	public void update(User user) {
-		String userId = user.getUserId();
-		String firstName = user.getFirstName();
-		String lastName = user.getLastName();
-		String phone = user.getPhone();
-		String email = user.getEmail();
-		String password = user.getPassword();
-		String userStatusId = user.getUserStatusId();
-		
-		String query = "{CALL sp_update_user(?,?,?,?,?,?,?)}";
-		
-		jdbcTemplate.update(query, userId, firstName, lastName,
-							phone, email, password, userStatusId);
-
+	public void update(User user){
+		try{
+			String userId = user.getUserId();
+			String firstName = user.getFirstName();
+			String lastName = user.getLastName();
+			String phone = user.getPhone();
+			String email = user.getEmail();
+			String password = user.getPassword();
+			String userStatusId = user.getUserStatusId();
+			
+			CallableStatement oCSF = connection.prepareCall("{call sp_update_user(?,?,?,?,?,?,?)}");
+			oCSF.setString(1, userId);
+			oCSF.setString(2, firstName);
+			oCSF.setString(3, lastName);
+			oCSF.setString(4, phone);
+			oCSF.setString(5, email);
+			oCSF.setString(6, password);
+			oCSF.setString(7, userStatusId);
+			oCSF.execute();
+			oCSF.close();
+		}catch(SQLException e){
+			System.out.println(e.getMessage());
+		}	
 	}
 	
 	
