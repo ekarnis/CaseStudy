@@ -48,8 +48,8 @@ public class LoginController {
         
         //System.out.println("Trying to add user");
         
-        
-        
+        // Useful link for how to do sessions
+        //https://stackoverflow.com/questions/18791645/how-to-use-session-attributes-in-spring-mvc
         return userService.loginValidation(user, session); // loginSuccess page/session home page?
 	}
 	
