@@ -13,13 +13,14 @@
 <body>
 	<nav>
 		<div id="nav_container">
-			<a href="home">Home </a>
+			<a href="/">Home </a>
 			<a href="menu">Menu </a>
 			<a href="about">About </a>
 			<a href="contact">Contact </a>
 			<c:choose>
 			    <c:when test="${sessionScope.currentUser!=null}">
 			        account and logout buttons
+			        <a href="logout">Logout</a>
 			        <!-- Need to have sessions blocking account/logout pages with redirect so that they can't be accessed without logging in -->
 			        <br />
 			    </c:when>    
@@ -43,10 +44,6 @@
 		<section>
 			<article>
 				<h3>Menu</h3>
-				<c:if test="${sessionScope.currentUser!=null}" > 
-   				test
-				</c:if>
-
 				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 			</article>
 			
