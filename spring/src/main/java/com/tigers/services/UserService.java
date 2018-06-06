@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -19,6 +20,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.stereotype.Component;
 
 import com.tigers.models.User;
+
 
 // should use @Service tag
 @Component
@@ -32,7 +34,7 @@ public class UserService implements Service<User>{
 		super();
 		//this.connection = connection;
 	}
-	public boolean add(User user){
+	/*public boolean add(User user){
 		try{
 			
 			String userId = user.getUserId();
@@ -43,14 +45,7 @@ public class UserService implements Service<User>{
 			String password = user.getPassword();
 			String userStatusId = user.getUserStatusId();
 			
-			/*
-			jdbcTemplate = new JdbcTemplate();
-			DriverManagerDataSource dataSource = new DriverManagerDataSource();
-			dataSource.setDriverClassName("oracle.jdbc.driver.OracleDriver");
-	        dataSource.setUrl("jdbc:oracle:thin:@localhost:1521:XE");
-	        dataSource.setUsername("db_uSpring");
-	        dataSource.setPassword("pass");      
-			jdbcTemplate.setDataSource(dataSource);*/
+			
 			System.out.println("About to print jdbctemplate");
 			System.out.println(jdbcTemplate.getDataSource());
 			System.out.println(jdbcTemplate);
@@ -63,7 +58,9 @@ public class UserService implements Service<User>{
 			System.out.println(e.getMessage());
 			return false;
 		}	
-	}/*
+	}*/
+	
+	/*
 	public void deleteById(String id){
 		try{
 			Statement usersSt = connection.createStatement();
@@ -141,7 +138,7 @@ public class UserService implements Service<User>{
 	 */
 	@Override
 	public User get(String id){
-		String query = "SELECT * FROM Users WHERE User.user_id = " + id;
+		String query = "SELECT * FROM Users WHERE Users.user_id = " + id;
 		
 		return jdbcTemplate.query(query, new ResultSetExtractor<User>() {
 			
@@ -169,7 +166,7 @@ public class UserService implements Service<User>{
 	 * Return user object by email
 	 */
 	public User getUserByEmail(String email){
-		String query = "SELECT * FROM Users WHERE User.email = " + email;
+		String query = "SELECT * FROM Users WHERE Users.email = " + "'" + email + "'";
 		
 		return jdbcTemplate.query(query, new ResultSetExtractor<User>() {
 			
@@ -191,26 +188,6 @@ public class UserService implements Service<User>{
 			}
 		});
 	}
-	@Override
-	public void deleteById(String id) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void update(User obj) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public User getById(String id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public ArrayList<User> getAll() {
-		// TODO Auto-generated method stub
-		return null;
-  }
 	
 	
 	/*
@@ -232,5 +209,36 @@ public class UserService implements Service<User>{
 
 	}
 	
+	// does session need to be passed in?
+	public String loginValidation(User user, HttpSession session) 
+	{
+		
+		User tempUser = getUserByEmail(user.getEmail());
+		
+		if (tempUser != null) {
+        	System.out.println("User exists");
+        	if (tempUser.getPassword().equals(user.getPassword())) {
+        		// successful login
+        		System.out.println("passwords match");
+        		session.setAttribute("currentUser", tempUser);
+        		return "home";
+        	}
+        	// set currentuser in session and throw to home page
+        	
+        	else {
+        		// invalid password
+        		// below should be an alert or error page instead of a print statement
+        		System.out.println("Invalid login/password combination. Please try logging in again.");
+        		return "login";
+        	}
+    	
+    }
+	    else {
+	    	System.out.println("User doesn't exist");
+	    	// give error
+	    	System.out.println("No account associated with that email. Please re-enter your information or register an account.");
+	    	return "login";
+	    }
+	}
 	
 }

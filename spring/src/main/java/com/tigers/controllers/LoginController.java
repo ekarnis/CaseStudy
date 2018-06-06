@@ -1,8 +1,10 @@
 package com.tigers.controllers;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -14,6 +16,7 @@ import com.tigers.services.UserService;
 
 @Controller
 @RequestMapping("/login")
+//@Scope("session")
 public class LoginController {
 	
 	@Autowired
@@ -28,7 +31,7 @@ public class LoginController {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public String loginSubmit(@Valid User user, BindingResult result, ModelMap model) {
+	public String loginSubmit(@Valid User user, BindingResult result, ModelMap model, HttpSession session) {
 		if(result.hasErrors()) {
             System.out.println("There were some errors");
             //return "register";
@@ -40,14 +43,14 @@ public class LoginController {
         System.out.println("email: " + user.getEmail() + " and pass: " + user.getPassword());
         
         
-        User testUser = new User("7","Salad","Manlet III","6666665544","salad3@gmail.com","pass","2");
+        //User testUser = new User("8","Salad","Manlet IV","6666665544","salad4@gmail.com","pass", "pass", "2");
         //UserService userService = new UserService();
         
-        System.out.println("Trying to add user");
-        userService.add(testUser);
+        //System.out.println("Trying to add user");
         
         
-        return "login"; // loginSuccess page/session home page?
+        
+        return userService.loginValidation(user, session); // loginSuccess page/session home page?
 	}
 	
 	

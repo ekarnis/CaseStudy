@@ -44,28 +44,7 @@ public class Application {
 	}*/
 	
 	
-	
 
-
-	@Bean
-	public DataSource getDataSource() {
-		final String SERVER = "localhost";
-		final String PORT = "1521";
-		final String USERNAME = "phase2";
-		final String PASSWORD = "drew123";
-		
-		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		dataSource.setDriverClassName("oracle.jdbc.driver.OracleDriver");
-		dataSource.setUrl("jdbc:oracle:thin:@" + SERVER + ":" + PORT + ":XE");
-		dataSource.setUsername(USERNAME);
-		dataSource.setPassword(PASSWORD);
-		
-		return dataSource;
-	}
 	
-	@Bean
-	public UserService getUserService() {
-		return new UserService(getDataSource());
-	}
 
 }
