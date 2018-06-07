@@ -1,142 +1,133 @@
 package com.tigers.services;
 import com.tigers.models.Menu;
 import com.tigers.models.TimeSlots;
+import com.tigers.models.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
 @Component
 public class MenuServices implements Service<Menu> {
-	Connection con;
-	TimeSlotServices timServ;
+	
 	
 	@Autowired
     private JdbcTemplate jdbcTemplate;
 	
-	public MenuServices(Connection con) {
+	public MenuServices() {
 		super();
-		this.con = con;
-		timServ = new TimeSlotServices(con);
 	}
 
 	@Override
-	public Menu get(String id){		
-		try {
-			
-			PreparedStatement preparedStatement = con.prepareStatement(
-					"SELECT * FROM items WHERE item_id = ?");
-			preparedStatement.setString(1, id);
-			ResultSet rs = preparedStatement.executeQuery( );
-			
-			
-			rs.next();
-			//float price = rs.getFloat("price");
-			//String time = getTimeName(times, rs.getString("time_slot_id"));
-			Menu men = new Menu(rs.getString("item_id"), 
-					rs.getString("name"), 
-					rs.getString("vegetarian").charAt(0), 
-					rs.getString("item_type_id"), 
-					rs.getString("description"), 
-					rs.getString("time_slot_id"), 
-					rs.getString("photo"), 
-					rs.getFloat("price"));
-			
-			return men;
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public Menu get(String id){	
 		
-		return null;
+		String query = "SELECT * FROM items WHERE item_id = ?";
 		
-	}
-
-	@Override
-	public ArrayList<Menu> list(){
-		ArrayList<Menu> menArr = new ArrayList<Menu>();
-		ArrayList<TimeSlots> times = timServ.list();
-		try {
-			ResultSet rs = con.createStatement().executeQuery("SELECT * FROM items");
-			while(rs.next()){
-				float price = rs.getFloat("price");
-				String tid = rs.getString("time_slot_id");
-				String tName = getTimeName(times, tid);
-				Menu men = new Menu(rs.getString("item_id"), rs.getString("name"), rs.getString("vegetarian").charAt(0), 
-						rs.getString("item_type_id"), rs.getString("description"), tName, 
-						rs.getString("photo"), price);
-				menArr.add(men);
+		return jdbcTemplate.query(query, new ResultSetExtractor<Menu>() {
+			@Override
+			public Menu extractData(ResultSet rs) throws SQLException, DataAccessException {
+				if(rs.next()) {
+					Menu men = new Menu();
+					men.setId(rs.getString("item_id"));
+					men.setName(rs.getString("name"));
+					men.setDescription(rs.getString("description"));
+					men.setPhoto(rs.getString("photo"));
+					men.setPrice(rs.getFloat("price"));
+					men.setSlot_ID(rs.getString("time_slot_id"));
+					men.setType(rs.getString("item_type_id"));
+					men.setVegetarian(rs.getString("vegetarian").charAt(0));
+					
+					return men;
+				}
+				return null;
 			}
-			return menArr;
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		});
 		
-		return null;
+		
+	}
+
+	@Override
+	public List<Menu> list(){
+		
+		String query = "SELECT * FROM Items";
+		List<Menu> menArr = jdbcTemplate.query(query, new RowMapper<Menu>() {
+
+			@Override
+			public Menu mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Menu men = new Menu();
+				men.setId(rs.getString("item_id"));
+				men.setName(rs.getString("name"));
+				men.setDescription(rs.getString("description"));
+				men.setPhoto(rs.getString("photo"));
+				men.setPrice(rs.getFloat("price"));
+				men.setSlot_ID(rs.getString("time_slot_id"));
+				men.setType(rs.getString("item_type_id"));
+				men.setVegetarian(rs.getString("vegetarian").charAt(0));
+				
+				return men;
+			}
+		});
+		
+		return menArr;
+		
+		
 		
 	}
 	
 	
 	public void add(Menu men){		
-		try{
-								
-			//con.setAutoCommit(false);
-			PreparedStatement preStmt = con.prepareStatement("insert into items values(?,?,?,?,?,?,?,?)");
-			preStmt.setString(1, men.getId());
-			preStmt.setString(2, men.getName());
-			preStmt.setString(3, ("" + men.getVegetarian()));
-			preStmt.setString(4, men.getType());
-			preStmt.setString(5, men.getDescription());
-			preStmt.setString(6, men.getSlot_ID());
-			preStmt.setString(7, men.getPhoto());
-			preStmt.setFloat(8, men.getPrice());
-			preStmt.executeUpdate(); //Data is not yet committed
-			System.out.println("Inserted");
-		}catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
+		String id = men.getId();
+		String name = men.getName();
+		String veg = men.getVegetarian() + "";
+		String type = men.getType();
+		String desc = men.getDescription();
+		String time = men.getSlot_ID();
+		String pic = men.getPhoto();
+		float price = men.getPrice();
+		
+		String query = "insert into items values(?,?,?,?,?,?,?,?)";
+		
+		jdbcTemplate.update(query, id, name, veg, type, desc, time, pic, price);
+		
 	}
 	
 	public void delete(String id){
-		try {
-			con.createStatement().executeQuery("DELETE FROM items WHERE item_id = " + id);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		String query = "DELETE FROM items WHERE item_id = ?";
+		jdbcTemplate.update(query, id);
 	}
 	
 	@Override
 	public void update(Menu men){
-		ArrayList<TimeSlots> times = timServ.list();
-		String timeId = getTimeID(times, men.getSlot_ID());
-		try {
-			PreparedStatement preStmt = con.prepareStatement("UPDATE items SET name=?, vegetarian=?, item_type_id=?, description=?, time_slot_id=?, photo=?, price=? WHERE item_id=?");
-			preStmt.setString(1, men.getName());
-			preStmt.setString(2, ("" + men.getVegetarian()));
-			preStmt.setString(3, men.getType());
-			preStmt.setString(4, men.getDescription());
-			preStmt.setString(5, timeId);
-			preStmt.setString(6, men.getPhoto());
-			preStmt.setFloat(7, men.getPrice());
-			preStmt.setString(8, men.getId());
-			preStmt.executeUpdate();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		//ArrayList<TimeSlots> times = timServ.list();
+		//String timeId = getTimeID(times, men.getSlot_ID());
+		
+		String id = men.getId();
+		String name = men.getName();
+		String veg = men.getVegetarian() + "";
+		String type = men.getType();
+		String desc = men.getDescription();
+		String time = men.getSlot_ID();
+		String pic = men.getPhoto();
+		float price = men.getPrice();
+		String query = "UPDATE items SET name=?, vegetarian=?, item_type_id=?, description=?, time_slot_id=?, photo=?, price=? WHERE item_id=?";
+		jdbcTemplate.update(query, name, veg, type, desc, time, pic, price, id);
+		
 	}
 	
+	
+	//TODO update with jdbc template
+	/*
 	public ArrayList<Menu> getByType(String type){
 		ArrayList<Menu> menArr = new ArrayList<Menu>();
 		ArrayList<TimeSlots> times = timServ.list();
@@ -161,6 +152,7 @@ public class MenuServices implements Service<Menu> {
 		return null;
 	}
 
+	
 	private String getTimeName(ArrayList<TimeSlots> timeArr, String id){
 		String tName="";
 		for(TimeSlots tim:timeArr){
@@ -178,5 +170,6 @@ public class MenuServices implements Service<Menu> {
 		}
 		return id;
 	}
+	*/
 
 }

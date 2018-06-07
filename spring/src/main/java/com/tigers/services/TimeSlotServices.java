@@ -8,16 +8,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 @Component
 public class TimeSlotServices implements Service<TimeSlots>	{
 
-	Connection con;
+	@Autowired
+    private JdbcTemplate jdbcTemplate;
 	
-	public TimeSlotServices(Connection con) {
+	public TimeSlotServices() {
 		super();
-		this.con = con;
 	}
 	
 	@Override
