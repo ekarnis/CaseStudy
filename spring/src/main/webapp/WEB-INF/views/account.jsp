@@ -36,25 +36,6 @@
 		<section>
 			<h2 id="title">Account</h2>
 		</section>
-
-		<section>
-			<article>
-				<h3>Current Order</h3>
-				<p>Lorem <button type="button">Click Me!</button> </p>
-				<p>Lorem <button type="button">Click Me!</button> </p>
-				<p>Lorem <button type="button">Click Me!</button> </p>
-				<p>Lorem <button type="button">Click Me!</button> </p>	
-			</article>
-		</section>
-		<section>
-			<article>
-				<h3>Past Orders</h3>
-				<p>Lorem <button type="button">Click Me!</button> </p>
-				<p>Lorem <button type="button">Click Me!</button> </p>
-				<p>Lorem <button type="button">Click Me!</button> </p>
-				<p>Lorem <button type="button">Click Me!</button> </p>	
-			</article>
-		</section>
 		<section>
 			<article>
 				<h3>Account Settings</h3>
@@ -73,7 +54,12 @@
 				<p>Lorem <button type="button">Click Me!</button> </p>	
 			</article>
 		</section>
-
+		
+		<section>
+			<article>
+				<a href="orders">Order History</a>
+			</article>
+		</section>
 	</div>
 
 	<footer>
