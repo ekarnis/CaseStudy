@@ -30,7 +30,6 @@ public class UserService implements Service<User> {
 	public UserService() {
 		super();
 	}
-}	
 
 	
 	
@@ -42,7 +41,7 @@ public class UserService implements Service<User> {
 		String userId = user.getUserId();
 		String firstName = user.getFirstName();
 		String lastName = user.getLastName();
-		String phone = user.getPhone();
+		String phone = user.getPhoneNumber();
 		String email = user.getEmail();
 		String password = user.getPassword();
 		String userStatusId = user.getUserStatusId();
