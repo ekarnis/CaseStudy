@@ -1,16 +1,13 @@
 package com.tigers.services;
 
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 
 import com.tigers.models.Order;
@@ -218,68 +215,61 @@ public class OrderService implements Service<Order>{
 	/*
 	@Override
 	public Order get(String orderId) {
-		List<String> itemIds = getOrderItems(orderId);
 		String query = "SELECT * FROM ORDERS WHERE order_id = '" + orderId + "'";
 		
-		
-		return order;
-	}
-	
-	
-	public ArrayList<Order> getUserOrders(String userId){
-		ArrayList<Order> orders = new ArrayList<Order>();
-		Order order;
-		ArrayList<String> order_items = new ArrayList<String>();
-		try{
-			//Get Order
-			Statement statement = connection.createStatement();
-			ResultSet resultSetOrders = statement.executeQuery("SELECT * FROM ORDERS WHERE USER_ID = '" + userId + "'");
+		return jdbcTemplate.query(query, new ResultSetExtractor<Order>() {
 			
-			ResultSet resultSetItems;
-			while(resultSetOrders.next()){
-				//fetch all order items
-				statement = connection.createStatement();
-				resultSetItems = statement.executeQuery(
-						"SELECT * FROM ORDER_ITEMS WHERE ORDER_ID = " + resultSetOrders.getString("ORDER_ID"));
-				order_items.clear();
-				while(resultSetItems.next()){
-					order_items.add(resultSetItems.getString("ITEM_ID"));
+			@Override
+			public Order extractData(ResultSet rs) throws SQLException, DataAccessException {
+				if(rs.next()) {
+					Order order = new Order();
+					order.setOrderId(rs.getString("order_id"));
+					order.setUserId(rs.getString("user_id"));
+					order.setTip(rs.getFloat("tip"));
+					order.setTotalPrice(rs.getFloat("total_price"));
+					order.setPlacedTimestamp(rs.getInt("placed_timestamp"));
+					order.setDeliveryTimestamp(rs.getInt("delivery_timestamp"));
+					order.setCardId(rs.getString("card_id"));
+					order.setInstuctions(rs.getString("instructions"));
+					order.setDeliveryMethodId(rs.getString("delivery_method_id"));
+					order.setStoreId(rs.getString("store_id"));
+					order.setDeliveryStatusId(rs.getString("delivery_status_id"));
+					order.setItemIds(getOrderItems(order.getOrderId()));
+					
+					return order;
 				}
-				
-				//Make new order
-				order = new Order(resultSetOrders.getString("ORDER_ID"),
-						resultSetOrders.getString("USER_ID"),
-						resultSetOrders.getFloat("TIP"),
-						resultSetOrders.getFloat("TOTAL_PRICE"),
-						resultSetOrders.getInt("PLACED_TIMESTAMP"),
-						resultSetOrders.getInt("DELIVERY_TIMESTAMP"),
-						resultSetOrders.getString("CARD_ID"),
-						resultSetOrders.getString("INSTRUCTIONS"),
-						resultSetOrders.getString("DELIVERY_METHOD_ID"),
-						resultSetOrders.getString("STORE_ID"),
-						resultSetOrders.getString("DELIVERY_STATUS_ID"),
-						order_items);
-				orders.add(order);
+				return null;
 			}
-		}catch(SQLException e){
-			System.out.println(e.getMessage());
-		}
+		});
+	}
+	
+	
+	public List<Order> getUserOrders(String userId) {
+		String query = "SELECT * FROM ORDERS WHERE user_id = '" + userId + "'";
+		List<Order> orders = jdbcTemplate.query(query, new RowMapper<Order>() {
+			
+			@Override
+			public Order mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Order order = new Order();
+				order.setOrderId(rs.getString("order_id"));
+				order.setUserId(rs.getString("user_id"));
+				order.setTip(rs.getFloat("tip"));
+				order.setTotalPrice(rs.getFloat("total_price"));
+				order.setPlacedTimestamp(rs.getInt("placed_timestamp"));
+				order.setDeliveryTimestamp(rs.getInt("delivery_timestamp"));
+				order.setCardId(rs.getString("card_id"));
+				order.setInstuctions(rs.getString("instructions"));
+				order.setDeliveryMethodId(rs.getString("delivery_method_id"));
+				order.setStoreId(rs.getString("store_id"));
+				order.setDeliveryStatusId(rs.getString("delivery_status_id"));
+				order.setItemIds(getOrderItems(order.getOrderId()));
+				
+				return order;
+			}
+		});
+		
 		return orders;
-	}
-	
-	
-	public void addItem_id(String item_id, String order_id) { 
-		try{
-			CallableStatement statement = connection.prepareCall(
-					"{call AddOrderItem(?,?)}");
-			statement.setString(1, order_id);
-			statement.setString(2, item_id);
-			statement.execute();
-			statement.close();
-		}catch(SQLException e){
-			System.out.println(e.getMessage());
-		}
-	}
+	} 
 	
 	
 	/*
