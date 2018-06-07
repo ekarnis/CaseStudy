@@ -42,12 +42,8 @@ th {
 	</nav>
 	<div id="main_container">
 		<h1>Menu</h1>
-		<table>  
-	  <tr><th>Item</th><th>Picture</th><th>Description</th><th>Price</th><th>Add</th></tr>  
-	  <tr><td>Hamburger</td><td><img src="Hamburger.jpg" width="150"></td><td>An amazing hamburger with lettuce, tomatoes, and ketchup</td><td>$3.50</td><td><button>Add</button></td></tr>  
-	  <tr><td>Resturant</td><td><img src="Restaurants.jpg" width="150"></td><td>Why would you eat a restaurant?</td><td>$99999.99</td><td><button>Add</button></td></tr>  
-	  <tr><td>Fries</td><td><img src="Fries.jpg" width="150"></td><td>Delicous hand cut fries with sea salt</td><td>$1.50</td><td><button>Add</button></td></tr>  
-		</table>  
+		${items}
+		
 	</div>
 
 	<footer>
