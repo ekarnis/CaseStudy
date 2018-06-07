@@ -46,13 +46,13 @@ public class OrderController {
 		for(Order order : orders) {
 			// deliveryStatusId of "2" := "delivered"
 			if(order.getDeliveryStatusId().equals("2")) {
-				orderTable +=		"<tr>"
-						+ "				<td>" + order.getOrderId() + "</td>"
-						+ "				<td>" + order.getTotalPrice() + "</td>"
-						+ "				<td>" + order.getPlacedTimestamp() + "</td>"
-						+ "				<td>" + order.getDeliveryTimestamp() + "</td>"
-						+ "				<td>" + order.getInstuctions() + "</td>"
-						+ "			</tr>";
+				orderTable +=	"<tr>"
+						+ "			<td>" + order.getOrderId() + "</td>"
+						+ "			<td>" + order.getTotalPrice() + "</td>"
+						+ "			<td>" + order.getPlacedTimestamp() + "</td>"
+						+ "			<td>" + order.getDeliveryTimestamp() + "</td>"
+						+ "			<td>" + order.getInstuctions() + "</td>"
+						+ "		</tr>";
 			}
 		}
 		orderTable += "</table>";
