@@ -21,7 +21,7 @@
 			    <c:when test="${sessionScope.currentUser!=null}">
 			        account and logout buttons
 			        <a href="logout">Logout</a>
-			        <!-- Need to have sessions blocking account/logout pages with redirect so that they can't be accessed without logging in -->
+			        <!-- Need to have sessions blocking account/logout pages/URLs with redirect so that they can't be accessed without logging in -->
 			        <br />
 			    </c:when>    
 			    <c:otherwise>

@@ -30,7 +30,6 @@ public class UserService implements Service<User> {
 	public UserService() {
 		super();
 	}
-}	
 
 	
 	
@@ -42,7 +41,7 @@ public class UserService implements Service<User> {
 		String userId = user.getUserId();
 		String firstName = user.getFirstName();
 		String lastName = user.getLastName();
-		String phone = user.getPhone();
+		String phone = user.getPhoneNumber();
 		String email = user.getEmail();
 		String password = user.getPassword();
 		String userStatusId = user.getUserStatusId();
@@ -184,7 +183,7 @@ public class UserService implements Service<User> {
         		// successful login
         		System.out.println("passwords match");
         		session.setAttribute("currentUser", tempUser);
-        		return "home";
+        		return "redirect:/";
         	}
         	// set currentuser in session and throw to home page
         	
