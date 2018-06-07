@@ -40,6 +40,4 @@ public class LoginController {
         //TODO:  return to home page with user session info
         return "home";
 	}
-	
-	
 }

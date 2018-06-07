@@ -18,21 +18,53 @@ th {
 <body>
 	<nav>
 		<div id="nav_container">
-			<a href="home.htm">Home </a>
-			<a href="menu.htm">Menu </a>
-			<a href="about.htm">About </a>
-			<a href="contact.htm">Contact </a>
-			<a href="login.htm">Register/Login</a>
-			<a></a>
+			<a href="home">Home </a>
+			<a href="menu">Menu </a>
+			<a href="about">About </a>
+			<a href="contact">Contact </a>
+			<a href="login">Login</a>
+			<a href="register">Register</a>
 		</div>
 	</nav>
 	<div id="main_container">
 		<h1>Orders</h1>
 		<table>  
-	  <tr><th>Order Id</th><th>User Id</th><th>Placed time</th><th>Instructions</th><th>Delivery Method</th><th>Store</th><th>Delivery Status</th></tr>  
-	  <tr><td>123</td><td>312</td><td>23:40 May 23, 2018</td><td>make it good</td><td>hand</td><td>deer valley</td><td>omw</td></tr>  
-	  <tr><td>123</td><td>312</td><td>23:40 May 23, 2018</td><td>make it good</td><td>hand</td><td>deer valley</td><td>omw</td></tr>  
-	  <tr><td>123</td><td>312</td><td>23:40 May 23, 2018</td><td>make it good</td><td>hand</td><td>deer valley</td><td>omw</td></tr>  
+	  		<tr>
+	  			<th>Order Id</th>
+	  			<th>User Id</th>
+	  			<th>Placed time</th>
+	  			<th>Instructions</th>
+	  			<th>Delivery Method</th>
+	  			<th>Store</th>
+	  			<th>Delivery Status</th>
+	  		</tr>  
+	  		<tr>
+	  			<td>123</td>
+	  			<td>312</td>
+	  			<td>23:40 May 23, 2018</td>
+	  			<td>make it good</td>
+	  			<td>hand</td>
+	  			<td>deer valley</td>
+	  			<td>omw</td>
+	  		</tr>  
+	  		<tr>
+	  			<td>123</td>
+	  			<td>312</td>
+	  			<td>23:40 May 23, 2018</td>
+	  			<td>make it good</td>
+	  			<td>hand</td>
+	  			<td>deer valley</td>
+	  			<td>omw</td>
+	  		</tr>  
+	  		<tr>
+	  			<td>123</td>
+	  			<td>312</td>
+	  			<td>23:40 May 23, 2018</td>
+	  			<td>make it good</td>
+	  			<td>hand</td>
+	  			<td>deer valley</td>
+	  			<td>omw</td>
+	  		</tr>  
 		</table>  
 	</div>
 

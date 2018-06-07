@@ -17,7 +17,6 @@ import com.tigers.models.User;
 @Component
 public class UserService implements Service<User> {
 	
-	//Connection connection;
 	@Autowired
     private JdbcTemplate jdbcTemplate;
 	
@@ -25,7 +24,9 @@ public class UserService implements Service<User> {
 		super();
 	}
 	
-	
+	/*
+	 * Inserts a new user object
+	 */
 	@Override
 	public void add(User user){
 		try {
@@ -53,13 +54,13 @@ public class UserService implements Service<User> {
 	 */
 	@Override
 	public void delete(String id){
-		String query = "DELETE FROM Users WHERE Users.user_id LIKE ?";
+		String query = "DELETE FROM Users WHERE Users.user_id = ?";
 		jdbcTemplate.update(query, id);
 	}
 	
 	
 	/*
-	 * Return List of all existing users
+	 * Return list of all existing users
 	 */
 	@Override
 	public List<User> list(){
@@ -89,8 +90,8 @@ public class UserService implements Service<User> {
 	 * Return user object by user id
 	 */
 	@Override
-	public User get(String id){
-		String query = "SELECT * FROM Users WHERE Users.user_id LIKE '" + id + "'";
+	public User get(String userId){
+		String query = "SELECT * FROM Users WHERE Users.user_id = '" + userId + "'";
 		
 		return jdbcTemplate.query(query, new ResultSetExtractor<User>() {
 			
@@ -118,7 +119,7 @@ public class UserService implements Service<User> {
 	 * Return user object by email
 	 */
 	public User getUserByEmail(String email){
-		String query = "SELECT * FROM Users WHERE Users.email LIKE '" + email + "'";
+		String query = "SELECT * FROM Users WHERE Users.email = '" + email + "'";
 		
 		return jdbcTemplate.query(query, new ResultSetExtractor<User>() {
 			
@@ -145,6 +146,7 @@ public class UserService implements Service<User> {
 	/*
 	 * Update an existing user with new user values
 	 */
+	@Override
 	public void update(User user) {
 		String userId = user.getUserId();
 		String firstName = user.getFirstName();

@@ -11,8 +11,7 @@ public class User {
 	String password;
 	String confirmPassword;
 	String userStatusId;
-	
-	//ArrayList<Card> cards = new ArrayList<Card>();
+
 	public User() {
 		super();
 	}
