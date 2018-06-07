@@ -52,6 +52,4 @@ public class LoginController {
         return userService.loginValidation(user, session); // loginSuccess page/session home page?
 
 	}
-	
-	
 }

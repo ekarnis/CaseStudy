@@ -9,8 +9,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 
-
-import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +21,6 @@ import com.tigers.models.User;
 @Component
 public class UserService implements Service<User> {
 	
-	//Connection connection;
 	@Autowired
     private JdbcTemplate jdbcTemplate;
 	
@@ -32,13 +29,12 @@ public class UserService implements Service<User> {
 	}
 
 	
-	
 	/*
-	 * Add a new user object
+	 * Inserts a new user object
 	 */
 	@Override
 	public void add(User user){
-		String userId = user.getUserId();
+		String userId = getPK();
 		String firstName = user.getFirstName();
 		String lastName = user.getLastName();
 		String phone = user.getPhoneNumber();
@@ -59,13 +55,13 @@ public class UserService implements Service<User> {
 	 */
 	@Override
 	public void delete(String id){
-		String query = "DELETE FROM Users WHERE Users.user_id LIKE ?";
+		String query = "DELETE FROM Users WHERE user_id = ?";
 		jdbcTemplate.update(query, id);
 	}
 	
 	
 	/*
-	 * Return List of all existing users
+	 * Return list of all existing users
 	 */
 	@Override
 	public List<User> list(){
@@ -95,10 +91,8 @@ public class UserService implements Service<User> {
 	 * Return user object by user id
 	 */
 	@Override
-	public User get(String id){
-
-		String query = "SELECT * FROM Users WHERE Users.user_id LIKE '" + id + "'";
-
+	public User get(String userId){
+		String query = "SELECT * FROM Users WHERE Users.user_id = '" + userId + "'";
 		
 		return jdbcTemplate.query(query, new ResultSetExtractor<User>() {
 			
@@ -126,9 +120,7 @@ public class UserService implements Service<User> {
 	 * Return user object by email
 	 */
 	public User getUserByEmail(String email){
-
-		String query = "SELECT * FROM Users WHERE Users.email LIKE '" + email + "'";
-
+		String query = "SELECT * FROM Users WHERE Users.email = '" + email + "'";
 		
 		return jdbcTemplate.query(query, new ResultSetExtractor<User>() {
 			
@@ -155,6 +147,7 @@ public class UserService implements Service<User> {
 	/*
 	 * Update an existing user with new user values
 	 */
+	@Override
 	public void update(User user) {
 		String userId = user.getUserId();
 		String firstName = user.getFirstName();
@@ -168,13 +161,11 @@ public class UserService implements Service<User> {
 		
 		jdbcTemplate.update(query, userId, firstName, lastName,
 							phone, email, password, userStatusId);
-
 	}
 	
+	
 	// does session need to be passed in?
-	public String loginValidation(User user, HttpSession session) 
-	{
-		
+	public String loginValidation(User user, HttpSession session) {
 		User tempUser = getUserByEmail(user.getEmail());
 		
 		if (tempUser != null) {
@@ -185,7 +176,7 @@ public class UserService implements Service<User> {
         		session.setAttribute("currentUser", tempUser);
         		return "home";
         	}
-        	// set currentuser in session and throw to home page
+        	// set current user in session and throw to home page
         	
         	else {
         		// invalid password
@@ -193,8 +184,7 @@ public class UserService implements Service<User> {
         		System.out.println("Invalid login/password combination. Please try logging in again.");
         		return "login";
         	}
-    	
-    }
+		}
 	    else {
 	    	System.out.println("User doesn't exist");
 	    	// give error
@@ -202,6 +192,7 @@ public class UserService implements Service<User> {
 	    	return "login";
 	    }
 	}
+	
 	
 	/*
 	 * Gets a new, unique userId based on Unix time in string format
