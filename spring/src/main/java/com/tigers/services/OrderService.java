@@ -9,9 +9,11 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
 
 import com.tigers.models.Order;
 
+@Component
 public class OrderService implements Service<Order>{
 	
 	@Autowired

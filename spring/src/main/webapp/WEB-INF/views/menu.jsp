@@ -43,7 +43,6 @@ th {
 	<div id="main_container">
 		<h1>Menu</h1>
 		${items}
-		
 	</div>
 
 	<footer>
