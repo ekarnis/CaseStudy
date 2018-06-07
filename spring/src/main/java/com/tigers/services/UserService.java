@@ -161,6 +161,7 @@ public class UserService implements Service<User> {
 		
 		jdbcTemplate.update(query, userId, firstName, lastName,
 							phone, email, password, userStatusId);
+		
 	}
 	
 	
