@@ -16,8 +16,8 @@ import com.tigers.services.OrderService;
 @RequestMapping("/orders")
 public class OrderController {
 	
-	@Autowired
-    private OrderService orderService;
+	//@Autowired
+    //private OrderService orderService;
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public String showOrders(ModelMap model) {
