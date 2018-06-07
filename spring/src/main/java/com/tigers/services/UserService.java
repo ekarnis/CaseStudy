@@ -161,7 +161,6 @@ public class UserService implements Service<User> {
 		
 		jdbcTemplate.update(query, userId, firstName, lastName,
 							phone, email, password, userStatusId);
-		
 	}
 	
 	
@@ -175,7 +174,7 @@ public class UserService implements Service<User> {
         		// successful login
         		System.out.println("passwords match");
         		session.setAttribute("currentUser", tempUser);
-        		return "redirect:/";
+        		return "home";
         	}
         	// set current user in session and throw to home page
         	

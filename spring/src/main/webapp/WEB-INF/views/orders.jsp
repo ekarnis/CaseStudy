@@ -26,11 +26,11 @@ th {
 			<a href="contact">Contact </a>
 			<c:choose>
 			    <c:when test="${sessionScope.currentUser!=null}">
-			        <a href="account">My Account</a>
+			        account and logout buttons
 			        <a href="logout">Logout</a>
 			        <!-- Need to have sessions blocking account/logout pages with redirect so that they can't be accessed without logging in -->
 			        <br />
-			    </c:when> 
+			    </c:when>  
 			    <c:otherwise>
 			        <a href="login">Login</a>
 					<a href="register">Register</a> 
@@ -43,44 +43,8 @@ th {
 	
 	<div id="main_container">
 		<h1>Orders</h1>
-		<table>  
-	  		<tr>
-	  			<th>Order Id</th>
-	  			<th>User Id</th>
-	  			<th>Placed time</th>
-	  			<th>Instructions</th>
-	  			<th>Delivery Method</th>
-	  			<th>Store</th>
-	  			<th>Delivery Status</th>
-	  		</tr>  
-	  		<tr>
-	  			<td>123</td>
-	  			<td>312</td>
-	  			<td>23:40 May 23, 2018</td>
-	  			<td>make it good</td>
-	  			<td>hand</td>
-	  			<td>deer valley</td>
-	  			<td>omw</td>
-	  		</tr>  
-	  		<tr>
-	  			<td>123</td>
-	  			<td>312</td>
-	  			<td>23:40 May 23, 2018</td>
-	  			<td>make it good</td>
-	  			<td>hand</td>
-	  			<td>deer valley</td>
-	  			<td>omw</td>
-	  		</tr>  
-	  		<tr>
-	  			<td>123</td>
-	  			<td>312</td>
-	  			<td>23:40 May 23, 2018</td>
-	  			<td>make it good</td>
-	  			<td>hand</td>
-	  			<td>deer valley</td>
-	  			<td>omw</td>
-	  		</tr>  
-		</table>  
+		${completedOrders}
+		${pendingOrders}
 	</div>
 
 	<footer>
