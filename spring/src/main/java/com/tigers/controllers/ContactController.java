@@ -6,15 +6,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class IndexController { 
+public class ContactController { 
 	
-	@RequestMapping("/")
+	@RequestMapping("/contact")
 	public String index(HttpSession session) {
 		if (session.getAttribute("currentUser") == null)
 		{
 			System.out.println("session is null");
 		}
 		System.out.println(session.getAttribute("currentUser"));
-		return "home";
+		return "contact";
 	}
 }

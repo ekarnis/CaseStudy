@@ -8,10 +8,14 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.tigers.models.User;
+
 
 // should use @Service tag
 @Component
@@ -23,29 +27,26 @@ public class UserService implements Service<User> {
 	public UserService() {
 		super();
 	}
+
 	
 	/*
 	 * Inserts a new user object
 	 */
 	@Override
 	public void add(User user){
-		try {
-			String userId = getPK();
-			String firstName = user.getFirstName();
-			String lastName = user.getLastName();
-			String phone = user.getPhoneNumber();
-			String email = user.getEmail();
-			String password = user.getPassword();
-			String userStatusId = user.getUserStatusId();
-			
-			String query = "{CALL sp_insert_user(?,?,?,?,?,?,?)}";
-			
-			jdbcTemplate.update(query, userId, firstName, lastName, phone, email, password, userStatusId);
-			System.out.println("UserService:  User added.");
-		} catch(Exception e) {
-			System.out.println("UserService:  Failed to add user.");
-			System.out.println(e.getMessage());
-		}	
+		String userId = getPK();
+		String firstName = user.getFirstName();
+		String lastName = user.getLastName();
+		String phone = user.getPhoneNumber();
+		String email = user.getEmail();
+		String password = user.getPassword();
+		String userStatusId = user.getUserStatusId();
+		
+		String query = "{CALL sp_insert_user(?,?,?,?,?,?,?)}";
+		
+		jdbcTemplate.update(query, userId, firstName, lastName,
+							phone, email, password, userStatusId);
+
 	}
 	
 	
@@ -54,7 +55,7 @@ public class UserService implements Service<User> {
 	 */
 	@Override
 	public void delete(String id){
-		String query = "DELETE FROM Users WHERE Users.user_id = ?";
+		String query = "DELETE FROM Users WHERE user_id = ?";
 		jdbcTemplate.update(query, id);
 	}
 	
@@ -160,7 +161,36 @@ public class UserService implements Service<User> {
 		
 		jdbcTemplate.update(query, userId, firstName, lastName,
 							phone, email, password, userStatusId);
-
+	}
+	
+	
+	// does session need to be passed in?
+	public String loginValidation(User user, HttpSession session) {
+		User tempUser = getUserByEmail(user.getEmail());
+		
+		if (tempUser != null) {
+        	System.out.println("User exists");
+        	if (tempUser.getPassword().equals(user.getPassword())) {
+        		// successful login
+        		System.out.println("passwords match");
+        		session.setAttribute("currentUser", tempUser);
+        		return "home";
+        	}
+        	// set current user in session and throw to home page
+        	
+        	else {
+        		// invalid password
+        		// below should be an alert or error page instead of a print statement
+        		System.out.println("Invalid login/password combination. Please try logging in again.");
+        		return "login";
+        	}
+		}
+	    else {
+	    	System.out.println("User doesn't exist");
+	    	// give error
+	    	System.out.println("No account associated with that email. Please re-enter your information or register an account.");
+	    	return "login";
+	    }
 	}
 	
 	
