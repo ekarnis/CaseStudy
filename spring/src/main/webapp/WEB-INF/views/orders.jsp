@@ -43,8 +43,13 @@ th {
 	
 	<div id="main_container">
 		<h1>Orders</h1>
-		${completedOrders}
-		${pendingOrders}
+		<div>
+			${completedOrders}
+		</div>
+		
+		<div>
+			${pendingOrders}
+		</div>
 	</div>
 
 	<footer>
