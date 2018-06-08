@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.tigers.models.Cart;
 import com.tigers.models.User;
 
 
@@ -174,6 +175,8 @@ public class UserService implements Service<User> {
         		// successful login
         		System.out.println("passwords match");
         		session.setAttribute("currentUser", tempUser);
+        		Cart cart = new Cart();
+        		session.setAttribute("cart", cart);
 
         		return "redirect:/";
         	}

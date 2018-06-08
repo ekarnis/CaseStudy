@@ -28,7 +28,7 @@ public class MenuController {
 		System.out.println(session.getAttribute("currentUser"));
 		List<Menu> items = menServ.list();
 		System.out.println(items.toString());
-		cart = new Cart();
+		cart = (Cart) session.getAttribute("cart");
 		return "menu";
 	}
 	
@@ -42,6 +42,8 @@ public class MenuController {
 		cart.add(m);
 		
 		System.out.println(cart);
+		
+		session.setAttribute("cart", cart);
 		
 		//Enumeration<String> test2 = test.getParameterNames();
 		//while(test2.hasMoreElements());
