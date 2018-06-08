@@ -24,9 +24,9 @@ public class MenuServices implements Service<Menu> {
 	}
 
 	@Override
-	public Menu get(String id){	
+	public Menu get(String itemId){	
 		
-		String query = "SELECT * FROM items WHERE item_id = ?";
+		String query = "SELECT * FROM Items WHERE item_id = ?";
 		
 		return jdbcTemplate.query(query, new ResultSetExtractor<Menu>() {
 			@Override
@@ -97,9 +97,9 @@ public class MenuServices implements Service<Menu> {
 		
 	}
 	
-	public void delete(String id){
-		String query = "DELETE FROM items WHERE item_id = ?";
-		jdbcTemplate.update(query, id);
+	public void delete(String itemId){
+		String query = "DELETE FROM Items WHERE item_id = ?";
+		jdbcTemplate.update(query, itemId);
 	}
 	
 	@Override

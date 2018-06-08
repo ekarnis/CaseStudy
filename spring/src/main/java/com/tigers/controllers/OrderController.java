@@ -59,7 +59,7 @@ public class OrderController {
 			}
 			
 			if(orderId.equals("0") || orderId.equals("1")) {
-				orderTable +=	"<tr>"
+				orderTable +="	<tr>"
 						+ "			<td>" + order.getOrderId() + "</td>"
 						+ "			<td>" + order.getTotalPrice() + "</td>"
 						+ "			<td>" + order.getPlacedTimestamp() + "</td>"
@@ -69,7 +69,7 @@ public class OrderController {
 						+ "		</tr>";
 			}
 		}
-		orderTable += "</table>";
+		orderTable += "		</table>";
 		
 		return orderTable;
 	}
