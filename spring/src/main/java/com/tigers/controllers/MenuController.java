@@ -51,25 +51,18 @@ public class MenuController {
 	
 	@ModelAttribute("items")
 	public String menuItemsTable() {
-		String itemTable = "<table>"
-				+ "				<tr>"
-				+ "					<th>Item</th>"
-				+ "					<th>Picture</th>"
-				+ "					<th>Description</th>"
-				+ "					<th>Price</th>"
-				+ "					<th>Add</th>"
-				+ "				</tr>";
+		String itemTable = "<table>";
 		
 		List<Menu> items = menServ.list();
 		
 		for(Menu item:items) {
-			itemTable += "	<form method='POST' class=\"form-horizontal\">"
-					+ "			<tr class=\"mealRow\">"
-					+ "				<td class=\"mealName\">" + item.getName() + "</td>"
-					+ "				<td class=\"mealPhoto\"><img src=\"/images/stockMeal.jpg" + "\" width=\"150\"</td>"
-					+ "				<td class=\"mealDescription\">" + item.getDescription() + "</td>"
-					+ "				<td class=\"mealPrice\">$" + item.getPrice() + "</td>"
-					+ "				<td class=\"mealAdd\"><input type=\"submit\" path=" + item.getId() + " name=" + item.getId() + " value=\"Add\"></td>"
+			itemTable += "	<form method='POST' class='form-horizontal'>"
+					+ "			<tr class='mealRow'>"
+					+ "				<td class='mealName'>" + item.getName() + "</td>"
+					+ "				<td class='mealPhoto'><img src='images/" + item.getPhoto() + "' width='150'></td>"
+					+ "				<td class='mealDescription'>" + item.getDescription() + "</td>"
+					+ "				<td class='mealPrice'>$" + item.getPrice() + "</td>"
+					+ "				<td class='mealAdd'><input type='submit' path=" + item.getId() + " name=" + item.getId() + " value='Add'></td>"
 					+ "			</tr>"
 					+ "		</form>";
 		}
