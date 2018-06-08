@@ -212,7 +212,7 @@ public class OrderService implements Service<Order>{
 	/*
 	 * Return order object by order id
 	 */
-	/*
+	
 	@Override
 	public Order get(String orderId) {
 		String query = "SELECT * FROM ORDERS WHERE order_id = '" + orderId + "'";
@@ -281,9 +281,4 @@ public class OrderService implements Service<Order>{
 		return "" + unixTime;
 	}
 
-	@Override
-	public Order get(String id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

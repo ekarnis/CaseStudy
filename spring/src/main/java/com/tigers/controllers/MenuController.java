@@ -29,14 +29,15 @@ public class MenuController {
 	
 	@ModelAttribute("items")
 	public String menuItemsTable(){
-		String itemTable = "<table> <tr><th>Item</th><th>Picture</th><th>Description</th><th>Price</th><th>Add</th></tr>";
+		String itemTable = "<div id=\"form_container\"><form:form method=\"POST\" modelAttribute=\"user\" class=\"form-horizontal\">"
+				+ "<table> <tr><th>Item</th><th>Picture</th><th>Description</th><th>Price</th><th>Add</th></tr>";
 		List<Menu> items = menServ.list();
 		for(Menu item:items) {
 			itemTable += "<tr><td>" + item.getName() + "</td><td><img src=\"" + item.getPhoto() + "\" width=\"150\"</td><td>" + 
 						item.getDescription() + "</td><td>$" + item.getPrice() + "</td><td><button>Add</button></td></tr>";
 		}
 		
-		itemTable += "</table>";
+		itemTable += "</table></div id=\"form_container\">";
 		
 		return itemTable;
 	}
