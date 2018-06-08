@@ -1,0 +1,40 @@
+table {
+	margin-left: 7%;
+}
+
+td {
+  text-align: center;
+  vertical-align: middle;
+}
+th {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.mealRow {
+	display: inline-block;
+	padding: 25px;
+}
+
+.mealName, .mealPhoto, .mealDescription, .mealPrice, .mealAdd {
+	display: block;
+}
+
+.mealName {
+	
+}
+
+.mealPhoto {
+}
+
+.mealDescription {
+	
+}
+
+.mealPrice {
+	
+}
+
+.mealAdd {
+	
+}

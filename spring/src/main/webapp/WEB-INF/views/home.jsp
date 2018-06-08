@@ -7,7 +7,6 @@
 	<title>Mummy's Restaurant </title>
 	<link rel="stylesheet" type="text/css" href="/css/universal.css">
 	<link rel="stylesheet" type="text/css" href="/css/home.css">
-	<script src="home.js"></script>
 </head>
 
 <body>

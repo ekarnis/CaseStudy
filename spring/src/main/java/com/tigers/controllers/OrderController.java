@@ -59,7 +59,7 @@ public class OrderController {
 			}
 			
 			if(orderId.equals("0") || orderId.equals("1")) {
-				orderTable +=	"<tr>"
+				orderTable +="	<tr>"
 						+ "			<td>" + order.getOrderId() + "</td>"
 						+ "			<td>" + order.getTotalPrice() + "</td>"
 						+ "			<td>" + order.getPlacedTimestamp() + "</td>"
@@ -69,7 +69,7 @@ public class OrderController {
 						+ "		</tr>";
 			}
 		}
-		orderTable += "</table>";
+		orderTable += "		</table>";
 		
 		return orderTable;
 	}
@@ -97,11 +97,11 @@ public class OrderController {
 			String orderId = order.getDeliveryStatusId();
 			String orderStatus;
 			
-			if(orderId.equals("0")) {
-				orderStatus = "pending";
+			if(orderId.equals("2")) {
+				orderStatus = "delivered";
 			}
 			else {
-				orderStatus = "on delivery";
+				orderStatus = "cancelled";
 			}
 			
 			if(orderId.equals("2") || orderId.equals("3")) {

@@ -3,22 +3,18 @@ import com.tigers.models.Cart;
 import com.tigers.models.Menu;
 import com.tigers.services.MenuServices;
 
-import java.util.Arrays;
-import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class MenuController {
@@ -62,14 +58,23 @@ public class MenuController {
 	
 	@ModelAttribute("items")
 	public String menuItemsTable() {
-		String itemTable = "<table> <tr><th>Item</th><th>Picture</th><th>Description</th><th>Price</th><th>Add</th></tr>";
+		String itemTable = "<table>";
+		
 		List<Menu> items = menServ.list();
+		
 		for(Menu item:items) {
-			itemTable += "<form method='POST' class=\"form-horizontal\"><tr><td>" + item.getName() + "</td><td><img src=\"" + item.getPhoto() + "\" width=\"150\"</td><td>" + 
-						item.getDescription() + "</td><td>$" + item.getPrice() + "</td><td><input type=\"submit\" path=" + item.getId() + " name=" + item.getId() + " value=\"Add\"></td></tr></form>";
+			itemTable += "	<form method='POST' class='form-horizontal'>"
+					+ "			<tr class='mealRow'>"
+					+ "				<td class='mealName'>" + item.getName() + "</td>"
+					+ "				<td class='mealPhoto'><img src='images/" + item.getPhoto() + "' width='150'></td>"
+					+ "				<td class='mealDescription'>" + item.getDescription() + "</td>"
+					+ "				<td class='mealPrice'>$" + item.getPrice() + "</td>"
+					+ "				<td class='mealAdd'><input type='submit' path=" + item.getId() + " name=" + item.getId() + " value='Add'></td>"
+					+ "			</tr>"
+					+ "		</form>";
 		}
 		
-		itemTable += "</table>";
+		itemTable += "		</table>";
 		
 		return itemTable;
 	}
