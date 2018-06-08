@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -27,7 +28,8 @@ public class MenuController {
 	
 	@ModelAttribute("items")
 	public String menuItemsTable() {
-		String itemTable = "<table> <tr><th>Item</th><th>Picture</th><th>Description</th><th>Price</th><th>Add</th></tr>";
+		String itemTable = "<div id=\"form_containe\"><form:form method=\"POST\" modelAttribute=\"user\" class=\"form-horizontal\">"
+				+ "<table> <tr><th>Item</th><th>Picture</th><th>Description</th><th>Price</th><th>Add</th></tr>";
 		List<Menu> items = menServ.list();
 		for(Menu item:items) {
 			itemTable += "<tr><td>" + item.getName() + "</td><td><img src=\"" + item.getPhoto() + "\" width=\"150\"</td><td>" + 
@@ -37,6 +39,11 @@ public class MenuController {
 		itemTable += "</table></div id=\"form_container\">";
 		
 		return itemTable;
+	}
+	
+	@RequestMapping(value="add/{id}")
+	public void addItem(@PathVariable("id") String id) {
+		System.out.println("id is " + id);
 	}
 	
 }
