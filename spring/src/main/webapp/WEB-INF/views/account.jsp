@@ -19,7 +19,7 @@
 			<a href="contact">Contact </a>
 			<c:choose>
 			    <c:when test="${sessionScope.currentUser!=null}">
-			        account and logout buttons
+			        <a href="account">My Account</a>
 			        <a href="logout">Logout</a>
 			        <!-- Need to have sessions blocking account/logout pages with redirect so that they can't be accessed without logging in -->
 			        <br />
@@ -38,20 +38,14 @@
 		</section>
 		<section>
 			<article>
-				<h3>Account Settings</h3>
-				<p>Lorem <button type="button">Click Me!</button> </p>
-				<p>Lorem <button type="button">Click Me!</button> </p>
-				<p>Lorem <button type="button">Click Me!</button> </p>
-				<p>Lorem <button type="button">Click Me!</button> </p>	
-			</article>
-		</section>
-		<section>
-			<article>
-				<h3>Account Details</h3>
-				<p>Lorem <button type="button">Click Me!</button> </p>
-				<p>Lorem <button type="button">Click Me!</button> </p>
-				<p>Lorem <button type="button">Click Me!</button> </p>
-				<p>Lorem <button type="button">Click Me!</button> </p>	
+				<ul style="padding:0px;list-style-type:none;">
+					<h3>Account Details</h3>
+					<li><b>First name:</b> ${sessionScope.currentUser.firstName} </li>
+					<li><b>Last name: </b> ${sessionScope.currentUser.lastName} </li>
+					<li><b>Phone number: </b> ${sessionScope.currentUser.phoneNumber} </li>
+					<li><b>Email address: </b> ${sessionScope.currentUser.email} </li>
+					<li><a href="account/accountEdit">Edit account information</a></li>
+				</ul>
 			</article>
 		</section>
 		
