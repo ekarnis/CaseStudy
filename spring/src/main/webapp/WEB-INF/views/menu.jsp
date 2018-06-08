@@ -3,21 +3,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Menu</title>
-<link rel="stylesheet" href="css/universal.css">
-<link rel="stylesheet" href="css/menu.css">
-<style type="text/css">
-td {
-  text-align: center;
-  vertical-align: middle;
-}
-th {
-  text-align: center;
-  vertical-align: middle;
-}
-</style>
+	<meta charset="ISO-8859-1">
+	<title>Menu</title>
+	<link rel="stylesheet" href="css/universal.css">
+	<link rel="stylesheet" href="css/menu.css">
 </head>
+
 <body>
 	<nav>
 		<div id="nav_container">
@@ -52,4 +43,4 @@ th {
 	</footer>
    
 </body>
-  </html>
+</html>
