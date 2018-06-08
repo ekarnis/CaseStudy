@@ -11,8 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.tigers.services.UserService;
-
 @Controller
 public class MenuController {
 
@@ -28,9 +26,8 @@ public class MenuController {
 	}
 	
 	@ModelAttribute("items")
-	public String menuItemsTable(){
-		String itemTable = "<div id=\"form_container\"><form:form method=\"POST\" modelAttribute=\"user\" class=\"form-horizontal\">"
-				+ "<table> <tr><th>Item</th><th>Picture</th><th>Description</th><th>Price</th><th>Add</th></tr>";
+	public String menuItemsTable() {
+		String itemTable = "<table> <tr><th>Item</th><th>Picture</th><th>Description</th><th>Price</th><th>Add</th></tr>";
 		List<Menu> items = menServ.list();
 		for(Menu item:items) {
 			itemTable += "<tr><td>" + item.getName() + "</td><td><img src=\"" + item.getPhoto() + "\" width=\"150\"</td><td>" + 

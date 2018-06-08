@@ -174,8 +174,12 @@ public class UserService implements Service<User> {
         		// successful login
         		System.out.println("passwords match");
         		session.setAttribute("currentUser", tempUser);
+<<<<<<< HEAD
         		//session.setAttribute("cart", Cart);
         		return "home";
+=======
+        		return "redirect:/";
+>>>>>>> Version2
         	}
         	// set current user in session and throw to home page
         	

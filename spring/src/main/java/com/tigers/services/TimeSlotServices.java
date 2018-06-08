@@ -1,4 +1,4 @@
-package com.tigers.services;
+/*package com.tigers.services;
 
 import com.tigers.models.TimeSlots;
 import java.sql.Connection;
@@ -92,4 +92,4 @@ public class TimeSlotServices implements Service<TimeSlots>	{
 
 
 	
-}
+}*/
