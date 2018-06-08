@@ -6,6 +6,7 @@
 <meta charset="ISO-8859-1">
 <title>Menu</title>
 <link rel="stylesheet" href="css/universal.css">
+<link rel="stylesheet" href="css/menu.css">
 <style type="text/css">
 td {
   text-align: center;
