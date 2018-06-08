@@ -43,9 +43,9 @@ public class MenuController {
 		String meal_id = test.getParameterNames().nextElement();
 		System.out.println(meal_id);
 		
-		cart.add(meal_id);
+		//cart.add(meal_id);
 		
-		System.out.println(cart);
+		//System.out.println(cart);
 		
 		//Enumeration<String> test2 = test.getParameterNames();
 		//while(test2.hasMoreElements());
@@ -74,9 +74,5 @@ public class MenuController {
 		return itemTable;
 	}
 	
-	@RequestMapping(value="add/{id}")
-	public void addItem(@PathVariable("id") String id) {
-		System.out.println("id is " + id);
-	}
 	
 }
