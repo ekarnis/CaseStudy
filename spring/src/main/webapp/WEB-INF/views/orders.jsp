@@ -2,21 +2,14 @@
 
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="ISO-8859-1">
-<title>Orders</title>
-<link rel="stylesheet" href="css/universal.css">
-<style type="text/css">
-td {
-  text-align: center;
-  vertical-align: middle;
-}
-th {
-  text-align: center;
-  vertical-align: middle;
-}
-</style>
+	<meta charset="ISO-8859-1">
+	<title>Orders</title>
+	<link rel="stylesheet" href="css/universal.css">
+	<link rel="stylesheet" href="css/orders.css">
 </head>
+
 <body>
 	<nav>
 		<div id="nav_container">
@@ -43,11 +36,11 @@ th {
 	
 	<div id="main_container">
 		<h1>Orders</h1>
-		<div>
+		<div class='table'>
 			${completedOrders}
 		</div>
 		
-		<div>
+		<div class='table'>
 			${pendingOrders}
 		</div>
 	</div>
