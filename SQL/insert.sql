@@ -99,9 +99,9 @@ insert into stores
 	values ('0','0','Deer Valley',1,0,0800,2100);
 
 insert into orders 
-	values ('0','0',2.50,15.50,0,0,'0','hey','0','0','0');
+	values ('0','0',2.50,15.50,'2017/02/01 22:01:32','2017/02/05 10:14:32','0','hey','0','0','0');
 insert into orders 
-	values ('1','1',5.00,16.50,0,0,'0','run to house','1','0','2');
+	values ('1','1',5.00,16.50,'2018/05/15 14:34:31','2018/05/20 12:54:01','0','run to house','1','0','2');
 
 insert into order_items
 	values ('0','0');

@@ -48,17 +48,17 @@ public class OrderController {
 		for(Order order : orders) {
 			// deliveryStatusId of "0" := "pending"
 			// deliveryStatusId of "1" := "on delivery"
-			String orderId = order.getDeliveryStatusId();
+			String statusId = order.getDeliveryStatusId();
 			String orderStatus;
 			
-			if(orderId.equals("0")) {
+			if(statusId.equals("0")) {
 				orderStatus = "pending";
 			}
 			else {
 				orderStatus = "on delivery";
 			}
 			
-			if(orderId.equals("0") || orderId.equals("1")) {
+			if(statusId.equals("0") || statusId.equals("1")) {
 				orderTable +="	<tr>"
 						+ "			<td>" + order.getOrderId() + "</td>"
 						+ "			<td>" + order.getTotalPrice() + "</td>"
@@ -94,17 +94,17 @@ public class OrderController {
 		for(Order order : orders) {
 			// deliveryStatusId of "2" := "delivered"
 			// deliveryStatusId of "3" := "cancelled"
-			String orderId = order.getDeliveryStatusId();
+			String statusId = order.getDeliveryStatusId();
 			String orderStatus;
 			
-			if(orderId.equals("2")) {
+			if(statusId.equals("2")) {
 				orderStatus = "delivered";
 			}
 			else {
 				orderStatus = "cancelled";
 			}
 			
-			if(orderId.equals("2") || orderId.equals("3")) {
+			if(statusId.equals("2") || statusId.equals("3")) {
 				orderTable +=	"<tr>"
 						+ "			<td>" + order.getOrderId() + "</td>"
 						+ "			<td>" + order.getTotalPrice() + "</td>"
