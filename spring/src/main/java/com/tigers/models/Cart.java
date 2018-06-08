@@ -20,7 +20,7 @@ public class Cart {
 	
 	public void add(Menu item) {
 		if(items.contains(item)) {
-			//increase the quantity of that item that is already in the cart
+			//increase the quantity if that item that is already in the cart
 			int index = items.indexOf(item);
 			int count = quantity.get(index) + 1;
 			quantity.set(index, count);
