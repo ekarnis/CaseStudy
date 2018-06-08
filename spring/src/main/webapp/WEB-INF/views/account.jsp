@@ -36,28 +36,10 @@
 		<section>
 			<h2 id="title">Account</h2>
 		</section>
-
 		<section>
 			<article>
-				<h3>Current Order</h3>
-				<p>Lorem <button type="button">Click Me!</button> </p>
-				<p>Lorem <button type="button">Click Me!</button> </p>
-				<p>Lorem <button type="button">Click Me!</button> </p>
-				<p>Lorem <button type="button">Click Me!</button> </p>	
-			</article>
-		</section>
-		<section>
-			<article>
-				<h3>Past Orders</h3>
-				<p>Lorem <button type="button">Click Me!</button> </p>
-				<p>Lorem <button type="button">Click Me!</button> </p>
-				<p>Lorem <button type="button">Click Me!</button> </p>
-				<p>Lorem <button type="button">Click Me!</button> </p>	
-			</article>
-		</section>
-		<section>
-			<article>
-				<ul style="padding:0px;list-style-type:none;"><h3>Account Details</h3>
+				<ul style="padding:0px;list-style-type:none;">
+					<h3>Account Details</h3>
 					<li><b>First name:</b> ${sessionScope.currentUser.firstName} </li>
 					<li><b>Last name: </b> ${sessionScope.currentUser.lastName} </li>
 					<li><b>Phone number: </b> ${sessionScope.currentUser.phoneNumber} </li>
@@ -66,7 +48,12 @@
 				</ul>
 			</article>
 		</section>
-
+		
+		<section>
+			<article>
+				<a href="orders">Order History</a>
+			</article>
+		</section>
 	</div>
 
 	<footer>

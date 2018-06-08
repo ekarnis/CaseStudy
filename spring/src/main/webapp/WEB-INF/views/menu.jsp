@@ -30,7 +30,7 @@ th {
 			        <a href="logout">Logout</a>
 			        <!-- Need to have sessions blocking account/logout pages with redirect so that they can't be accessed without logging in -->
 			        <br />
-			    </c:when>   
+			    </c:when>
 			    <c:otherwise>
 			        <a href="login">Login</a>
 					<a href="register">Register</a> 
@@ -43,7 +43,6 @@ th {
 	<div id="main_container">
 		<h1>Menu</h1>
 		${items}
-		
 	</div>
 
 	<footer>

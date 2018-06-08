@@ -18,8 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.tigers.services.UserService;
-
 @Controller
 public class MenuController {
 
@@ -56,7 +54,7 @@ public class MenuController {
 	}
 	
 	@ModelAttribute("items")
-	public String menuItemsTable(){
+	public String menuItemsTable() {
 		String itemTable = "<table> <tr><th>Item</th><th>Picture</th><th>Description</th><th>Price</th><th>Add</th></tr>";
 		List<Menu> items = menServ.list();
 		for(Menu item:items) {

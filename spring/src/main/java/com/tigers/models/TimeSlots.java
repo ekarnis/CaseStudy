@@ -44,7 +44,4 @@ public class TimeSlots {
 		return "TimeSlots [slot_ID=" + slot_ID + ", timeStart=" + timeStart + ", timeEnd=" + timeEnd + ", timeName="
 				+ timeName + "]";
 	}
-	
-	
-	
 }
