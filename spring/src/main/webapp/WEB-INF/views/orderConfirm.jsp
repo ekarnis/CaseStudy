@@ -33,9 +33,8 @@
 		</div>
 	</nav>
 	<div id="main_container">
-		<h1>Menu</h1>
-		${items}
-		<a href="orderConfirm">Confirm order</a>
+		<h1>Order</h1>
+		${order}
 	</div>
 
 	<footer>

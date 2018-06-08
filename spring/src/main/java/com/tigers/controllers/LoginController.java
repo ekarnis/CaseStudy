@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.tigers.models.Cart;
 import com.tigers.models.User;
 import com.tigers.services.UserService;
 
@@ -49,6 +50,8 @@ public class LoginController {
         
         // Useful link for how to do sessions
         //https://stackoverflow.com/questions/18791645/how-to-use-session-attributes-in-spring-mvc
+        
+        
         return userService.loginValidation(user, session); // loginSuccess page/session home page?
 
 	}

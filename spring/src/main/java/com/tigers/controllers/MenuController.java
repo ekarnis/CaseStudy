@@ -1,4 +1,5 @@
 package com.tigers.controllers;
+import com.tigers.models.Cart;
 import com.tigers.models.Menu;
 import com.tigers.services.MenuServices;
 
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -19,12 +21,14 @@ public class MenuController {
 
 	@Autowired
     private MenuServices menServ;
+	Cart cart;
 	
 	@RequestMapping(value="/menu", method=RequestMethod.GET)
 	public String menu(HttpSession session) {
 		System.out.println(session.getAttribute("currentUser"));
 		List<Menu> items = menServ.list();
 		System.out.println(items.toString());
+		cart = (Cart) session.getAttribute("cart");
 		return "menu";
 	}
 	
@@ -34,7 +38,12 @@ public class MenuController {
 		//System.out.println("request is: " + test.get;
 		String meal_id = test.getParameterNames().nextElement();
 		System.out.println(meal_id);
-
+		Menu m = menServ.get(meal_id);
+		cart.add(m);
+		
+		System.out.println(cart);
+		
+		session.setAttribute("cart", cart);
 		
 		//Enumeration<String> test2 = test.getParameterNames();
 		//while(test2.hasMoreElements());
@@ -43,7 +52,7 @@ public class MenuController {
 		//System.out.println("request is: " + test.getParameter("1"));
 		
 		
-		System.out.println(session.getAttribute("currentUser"));
+		//System.out.println(session.getAttribute("currentUser"));
 		//List<Menu> items = menServ.list();
 		//System.out.println(items.toString());
 		return "menu";
@@ -71,5 +80,6 @@ public class MenuController {
 		
 		return itemTable;
 	}
+	
 	
 }
