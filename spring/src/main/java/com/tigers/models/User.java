@@ -1,5 +1,9 @@
 package com.tigers.models;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 //import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -7,13 +11,35 @@ import org.springframework.stereotype.Component;
 //@Scope("session")
 public class User {
 	
+	@NotNull
 	String userId;
+	
+	@NotNull
+	@NotEmpty(message = "Please enter your first name")
 	String firstName;
+	
+	@NotNull
+	@NotEmpty(message = "Please enter your last name")
 	String lastName;
+	
+	@NotNull
+	@NotEmpty(message = "Please enter your phone number")
 	String phoneNumber;
+	
+	@NotNull
+	@Email(message = "Please enter a valid email")
+	@NotEmpty(message = "Please enter your email")
 	String email;
+	
+	@NotNull
+	@NotEmpty(message = "Please enter a password")
 	String password;
+	
+	@NotNull
+	@NotEmpty(message = "Please confirm your password")
 	String confirmPassword;
+	
+	@NotNull
 	String userStatusId;
 
 	public User() {

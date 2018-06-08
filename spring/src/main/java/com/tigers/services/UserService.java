@@ -164,7 +164,9 @@ public class UserService implements Service<User> {
 	}
 	
 	
-	// does session need to be passed in?
+	/*
+	 * Checks the user's email and password against the database
+	 */
 	public String loginValidation(User user, HttpSession session) {
 		User tempUser = getUserByEmail(user.getEmail());
 		
@@ -176,8 +178,6 @@ public class UserService implements Service<User> {
         		session.setAttribute("currentUser", tempUser);
         		return "redirect:/";
         	}
-        	// set current user in session and throw to home page
-        	
         	else {
         		// invalid password
         		// below should be an alert or error page instead of a print statement
