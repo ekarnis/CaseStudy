@@ -28,30 +28,90 @@ public class OrderController {
         return "orders";
 	}
 	
-	@ModelAttribute("completedOrders")
-	public String completeOrdersTable(HttpSession session) {
+	@ModelAttribute("pendingOrders")
+	public String pendingOrdersTable(HttpSession session) {
 		User user = (User) session.getAttribute("currentUser");
 		
-		String orderTable = "<table>"
+		String orderTable = "<table id='pendingOrders' class='orderTable'>"
+				+ "				<caption>Pending Orders</caption>"
 				+ "				<tr>"
 				+ "					<th>OrderId</th>"
 				+ "					<th>Total</th>"
 				+ "					<th>Date Ordered</th>"
 				+ "					<th>Date Delivered</th>"
 				+ "					<th>Instructions</th>"
+				+ "					<th>Order Status</th>"
 				+ "				</tr>";
 		
 		List<Order> orders = orderService.list(user.getUserId());
 		
 		for(Order order : orders) {
-			// deliveryStatusId of "2" := "delivered"
-			if(order.getDeliveryStatusId().equals("2")) {
+			// deliveryStatusId of "0" := "pending"
+			// deliveryStatusId of "1" := "on delivery"
+			String orderId = order.getDeliveryStatusId();
+			String orderStatus;
+			
+			if(orderId.equals("0")) {
+				orderStatus = "pending";
+			}
+			else {
+				orderStatus = "on delivery";
+			}
+			
+			if(orderId.equals("0") || orderId.equals("1")) {
 				orderTable +=	"<tr>"
 						+ "			<td>" + order.getOrderId() + "</td>"
 						+ "			<td>" + order.getTotalPrice() + "</td>"
 						+ "			<td>" + order.getPlacedTimestamp() + "</td>"
 						+ "			<td>" + order.getDeliveryTimestamp() + "</td>"
 						+ "			<td>" + order.getInstuctions() + "</td>"
+						+ "			<td>" + orderStatus + "</td>"
+						+ "		</tr>";
+			}
+		}
+		orderTable += "</table>";
+		
+		return orderTable;
+	}
+	
+	@ModelAttribute("completedOrders")
+	public String completeOrdersTable(HttpSession session) {
+		User user = (User) session.getAttribute("currentUser");
+		
+		String orderTable = "<table id='completedOrders' class='orderTable'>"
+				+ "				<caption>Completed Orders</caption>"
+				+ "				<tr>"
+				+ "					<th>OrderId</th>"
+				+ "					<th>Total</th>"
+				+ "					<th>Date Ordered</th>"
+				+ "					<th>Date Delivered</th>"
+				+ "					<th>Instructions</th>"
+				+ "					<th>Order Status</th>"
+				+ "				</tr>";
+		
+		List<Order> orders = orderService.list(user.getUserId());
+		
+		for(Order order : orders) {
+			// deliveryStatusId of "2" := "delivered"
+			// deliveryStatusId of "3" := "cancelled"
+			String orderId = order.getDeliveryStatusId();
+			String orderStatus;
+			
+			if(orderId.equals("0")) {
+				orderStatus = "pending";
+			}
+			else {
+				orderStatus = "on delivery";
+			}
+			
+			if(orderId.equals("2") || orderId.equals("3")) {
+				orderTable +=	"<tr>"
+						+ "			<td>" + order.getOrderId() + "</td>"
+						+ "			<td>" + order.getTotalPrice() + "</td>"
+						+ "			<td>" + order.getPlacedTimestamp() + "</td>"
+						+ "			<td>" + order.getDeliveryTimestamp() + "</td>"
+						+ "			<td>" + order.getInstuctions() + "</td>"
+						+ "			<td>" + orderStatus + "</td>"
 						+ "		</tr>";
 			}
 		}

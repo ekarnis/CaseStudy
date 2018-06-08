@@ -18,11 +18,11 @@
 			<a href="contact">Contact </a>
 			<c:choose>
 			    <c:when test="${sessionScope.currentUser!=null}">
-			        account and logout buttons
+			        <a href="account">My Account</a>
 			        <a href="logout">Logout</a>
 			        <!-- Need to have sessions blocking account/logout pages with redirect so that they can't be accessed without logging in -->
 			        <br />
-			    </c:when> 
+			    </c:when>
 			    <c:otherwise>
 			        <a href="login">Login</a>
 					<a href="register">Register</a> 

@@ -2,21 +2,14 @@
 
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="ISO-8859-1">
-<title>Orders</title>
-<link rel="stylesheet" href="css/universal.css">
-<style type="text/css">
-td {
-  text-align: center;
-  vertical-align: middle;
-}
-th {
-  text-align: center;
-  vertical-align: middle;
-}
-</style>
+	<meta charset="ISO-8859-1">
+	<title>Orders</title>
+	<link rel="stylesheet" href="css/universal.css">
+	<link rel="stylesheet" href="css/orders.css">
 </head>
+
 <body>
 	<nav>
 		<div id="nav_container">
@@ -26,11 +19,11 @@ th {
 			<a href="contact">Contact </a>
 			<c:choose>
 			    <c:when test="${sessionScope.currentUser!=null}">
-			        account and logout buttons
+			        <a href="account">My Account</a>
 			        <a href="logout">Logout</a>
 			        <!-- Need to have sessions blocking account/logout pages with redirect so that they can't be accessed without logging in -->
 			        <br />
-			    </c:when>  
+			    </c:when>
 			    <c:otherwise>
 			        <a href="login">Login</a>
 					<a href="register">Register</a> 
@@ -43,11 +36,11 @@ th {
 	
 	<div id="main_container">
 		<h1>Orders</h1>
-		<div>
+		<div class='table'>
 			${completedOrders}
 		</div>
 		
-		<div>
+		<div class='table'>
 			${pendingOrders}
 		</div>
 	</div>

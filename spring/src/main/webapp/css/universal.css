@@ -1,16 +1,15 @@
-html, body
-{
+html, body {
     margin: 0;
     padding: 0;
 }
 
-body{
+body {
 	background-color: #EEEEEE; 
 	display: flex;
 	flex-flow: column;
 }
 
-nav{
+nav {
 	display: flex;
 	justify-content: flex-end;
 	background-color: #DD2C00;
@@ -23,21 +22,21 @@ nav{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-#nav_container{
+#nav_container {
 	display: flex;
 	justify-content: space-between;
 	width: 50vw;
 	right: 5vw;
 }
 
-nav a{
+nav a {
 	color: white;
 	text-decoration: none;
 	font-size: 3vh;
     line-height: 10vh;
 }
 
-#main_container{
+#main_container {
 	background-color: white; 
 	margin: 5% 6% 5% 5%;
 	top:100vh;
@@ -45,11 +44,12 @@ nav a{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-footer p{
+footer p {
 	color: white;
 	margin: 1.5vh;
 }
-footer{
+
+footer {
 	background-color: #424242;
 	text-align: right;
 	height: 10vh;
@@ -58,22 +58,22 @@ footer{
 	padding: 0.2vh 1vw;
 }
 
-h1{
+h1 {
 	font-size: 6vh;
 	text-align: center;
-
 }
-h2{
+
+h2 {
 	font-size: 5vh;
 	text-align: center;
-
 }
-h3{
+
+h3 {
 	font-size: 3vh;
 	text-align: center;
 }
 
-#spacer{
+#spacer {
 	height: 3vh;
 	width: 100%;
 }
