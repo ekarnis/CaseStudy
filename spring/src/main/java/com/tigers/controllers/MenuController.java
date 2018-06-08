@@ -1,4 +1,5 @@
 package com.tigers.controllers;
+import com.tigers.models.Cart;
 import com.tigers.models.Menu;
 import com.tigers.services.MenuServices;
 
@@ -24,12 +25,14 @@ public class MenuController {
 
 	@Autowired
     private MenuServices menServ;
+	Cart cart;
 	
 	@RequestMapping(value="/menu", method=RequestMethod.GET)
 	public String menu(HttpSession session) {
 		System.out.println(session.getAttribute("currentUser"));
 		List<Menu> items = menServ.list();
 		System.out.println(items.toString());
+		cart = new Cart();
 		return "menu";
 	}
 	
@@ -39,7 +42,10 @@ public class MenuController {
 		//System.out.println("request is: " + test.get;
 		String meal_id = test.getParameterNames().nextElement();
 		System.out.println(meal_id);
-
+		
+		cart.add(meal_id);
+		
+		System.out.println(cart);
 		
 		//Enumeration<String> test2 = test.getParameterNames();
 		//while(test2.hasMoreElements());
@@ -48,7 +54,7 @@ public class MenuController {
 		//System.out.println("request is: " + test.getParameter("1"));
 		
 		
-		System.out.println(session.getAttribute("currentUser"));
+		//System.out.println(session.getAttribute("currentUser"));
 		//List<Menu> items = menServ.list();
 		//System.out.println(items.toString());
 		return "menu";
@@ -56,15 +62,14 @@ public class MenuController {
 	
 	@ModelAttribute("items")
 	public String menuItemsTable() {
-		String itemTable = "<div id=\"form_containe\"><form:form method=\"POST\" modelAttribute=\"user\" class=\"form-horizontal\">"
-				+ "<table> <tr><th>Item</th><th>Picture</th><th>Description</th><th>Price</th><th>Add</th></tr>";
+		String itemTable = "<table> <tr><th>Item</th><th>Picture</th><th>Description</th><th>Price</th><th>Add</th></tr>";
 		List<Menu> items = menServ.list();
 		for(Menu item:items) {
-			itemTable += "<form method='POST' class=\\\"form-horizontal\\\"><tr><td>" + item.getName() + "</td><td><img src=\"" + item.getPhoto() + "\" width=\"150\"</td><td>" + 
+			itemTable += "<form method='POST' class=\"form-horizontal\"><tr><td>" + item.getName() + "</td><td><img src=\"" + item.getPhoto() + "\" width=\"150\"</td><td>" + 
 						item.getDescription() + "</td><td>$" + item.getPrice() + "</td><td><input type=\"submit\" path=" + item.getId() + " name=" + item.getId() + " value=\"Add\"></td></tr></form>";
 		}
 		
-		itemTable += "</table></div id=\"form_container\">";
+		itemTable += "</table>";
 		
 		return itemTable;
 	}

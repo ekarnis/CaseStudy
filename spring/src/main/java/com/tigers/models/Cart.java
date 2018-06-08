@@ -3,6 +3,8 @@ package com.tigers.models;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.tigers.services.MenuServices;
+
 public class Cart {
 	ArrayList<Menu> items;
 	ArrayList<Integer> quantity;
@@ -18,7 +20,12 @@ public class Cart {
 		return totalPrice;
 	}
 	
-	public void add(Menu item) {
+	public void add(String id) {
+		MenuServices menServ = new MenuServices();
+		Menu item = menServ.get(id);
+		
+		totalPrice += item.getPrice();
+		
 		if(items.contains(item)) {
 			//increase the quantity if that item that is already in the cart
 			int index = items.indexOf(item);
@@ -37,6 +44,11 @@ public class Cart {
 
 	public ArrayList<Integer> getQuantity() {
 		return quantity;
+	}
+
+	@Override
+	public String toString() {
+		return "Cart [items=" + items + ", quantity=" + quantity + ", totalPrice=" + totalPrice + "]";
 	}
 	
 	
