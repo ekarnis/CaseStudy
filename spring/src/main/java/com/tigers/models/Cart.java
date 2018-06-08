@@ -3,12 +3,17 @@ package com.tigers.models;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.tigers.services.MenuServices;
 
 public class Cart {
 	ArrayList<Menu> items;
 	ArrayList<Integer> quantity;
 	float totalPrice;
+	
+	@Autowired
+    private MenuServices menServ;
 	
 	public Cart() {
 		totalPrice = 0;
@@ -20,9 +25,9 @@ public class Cart {
 		return totalPrice;
 	}
 	
-	public void add(String id) {
-		MenuServices menServ = new MenuServices();
-		Menu item = menServ.get(id);
+	public void add(Menu item) {
+		
+		System.out.println(item);
 		
 		totalPrice += item.getPrice();
 		

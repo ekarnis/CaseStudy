@@ -38,10 +38,10 @@ public class MenuController {
 		//System.out.println("request is: " + test.get;
 		String meal_id = test.getParameterNames().nextElement();
 		System.out.println(meal_id);
+		Menu m = menServ.get(meal_id);
+		cart.add(m);
 		
-		//cart.add(meal_id);
-		
-		//System.out.println(cart);
+		System.out.println(cart);
 		
 		//Enumeration<String> test2 = test.getParameterNames();
 		//while(test2.hasMoreElements());
