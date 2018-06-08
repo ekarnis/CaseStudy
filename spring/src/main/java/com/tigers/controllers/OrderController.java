@@ -97,11 +97,11 @@ public class OrderController {
 			String orderId = order.getDeliveryStatusId();
 			String orderStatus;
 			
-			if(orderId.equals("0")) {
-				orderStatus = "pending";
+			if(orderId.equals("2")) {
+				orderStatus = "delivered";
 			}
 			else {
-				orderStatus = "on delivery";
+				orderStatus = "cancelled";
 			}
 			
 			if(orderId.equals("2") || orderId.equals("3")) {
