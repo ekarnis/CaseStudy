@@ -1,5 +1,6 @@
 package com.tigers.services;
 import com.tigers.models.Menu;
+import com.tigers.models.User;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,7 +27,7 @@ public class MenuServices implements Service<Menu> {
 	@Override
 	public Menu get(String itemId){	
 		
-		String query = "SELECT * FROM Items WHERE item_id = ?";
+		String query = "SELECT * FROM Items WHERE Items.item_id = '" + itemId + "'";
 		
 		return jdbcTemplate.query(query, new ResultSetExtractor<Menu>() {
 			@Override
@@ -50,7 +51,7 @@ public class MenuServices implements Service<Menu> {
 		
 		
 	}
-
+	
 	@Override
 	public List<Menu> list(){
 		
