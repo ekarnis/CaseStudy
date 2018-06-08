@@ -66,10 +66,10 @@ public class MenuController {
 			itemTable += "		<form method='POST' class=\\\"form-horizontal\\\">"
 					+ "				<tr>"
 					+ "					<td>" + item.getName() + "</td>"
-							+ "			<td><img src=\"" + item.getPhoto() + "\" width=\"150\"</td>"
+							+ "			<td><img src=" + "'images/" + item.getPhoto() + "'" + " width='150'</td>"
 							+ "			<td>" +  item.getDescription() + "</td>"
 							+ "			<td>$" + item.getPrice() + "</td>"
-							+ "			<td><input type=\"submit\" path=" + item.getId() + " name=" + item.getId() + " value=\"Add\"></td>"
+							+ "			<td><input type='submit' path=" + item.getId() + " name=" + item.getId() + " value='Add'></td>"
 							+ "		</tr>"
 							+ "	</form>";
 		}
