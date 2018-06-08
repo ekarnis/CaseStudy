@@ -30,8 +30,8 @@ public class OrderService implements Service<Order>{
 			String userId = order.getUserId();
 			float tip = order.getTip();
 			float totalPrice = order.getTotalPrice();
-			int placedTimestamp = order.getPlacedTimestamp();
-			int deliveryTimestamp = order.getDeliveryTimestamp();
+			String placedTimestamp = order.getPlacedTimestamp();
+			String deliveryTimestamp = order.getDeliveryTimestamp();
 			String cardId = order.getCardId();
 			String instructions = order.getInstuctions();
 			String deliveryMethodId = order.getDeliveryMethodId();
@@ -112,8 +112,8 @@ public class OrderService implements Service<Order>{
 				order.setUserId(rs.getString("user_id"));
 				order.setTip(rs.getFloat("tip"));
 				order.setTotalPrice(rs.getFloat("total_price"));
-				order.setPlacedTimestamp(rs.getInt("placed_timestamp"));
-				order.setDeliveryTimestamp(rs.getInt("delivery_timestamp"));
+				order.setPlacedTimestamp(rs.getString("placed_timestamp"));
+				order.setDeliveryTimestamp(rs.getString("delivery_timestamp"));
 				order.setCardId(rs.getString("card_id"));
 				order.setInstuctions(rs.getString("instructions"));
 				order.setDeliveryMethodId(rs.getString("delivery_method_id"));
@@ -143,8 +143,8 @@ public class OrderService implements Service<Order>{
 				order.setUserId(rs.getString("user_id"));
 				order.setTip(rs.getFloat("tip"));
 				order.setTotalPrice(rs.getFloat("total_price"));
-				order.setPlacedTimestamp(rs.getInt("placed_timestamp"));
-				order.setDeliveryTimestamp(rs.getInt("delivery_timestamp"));
+				order.setPlacedTimestamp(rs.getString("placed_timestamp"));
+				order.setDeliveryTimestamp(rs.getString("delivery_timestamp"));
 				order.setCardId(rs.getString("card_id"));
 				order.setInstuctions(rs.getString("instructions"));
 				order.setDeliveryMethodId(rs.getString("delivery_method_id"));
@@ -187,8 +187,8 @@ public class OrderService implements Service<Order>{
 		String userId = order.getUserId();
 		float tip = order.getTip();
 		float totalPrice = order.getTotalPrice();
-		int placedTimestamp = order.getPlacedTimestamp();
-		int deliveryTimestamp = order.getDeliveryTimestamp();
+		String placedTimestamp = order.getPlacedTimestamp();
+		String deliveryTimestamp = order.getDeliveryTimestamp();
 		String cardId = order.getCardId();
 		String instructions = order.getInstuctions();
 		String deliveryMethodId = order.getDeliveryMethodId();
@@ -228,8 +228,8 @@ public class OrderService implements Service<Order>{
 					order.setUserId(rs.getString("user_id"));
 					order.setTip(rs.getFloat("tip"));
 					order.setTotalPrice(rs.getFloat("total_price"));
-					order.setPlacedTimestamp(rs.getInt("placed_timestamp"));
-					order.setDeliveryTimestamp(rs.getInt("delivery_timestamp"));
+					order.setPlacedTimestamp(rs.getString("placed_timestamp"));
+					order.setDeliveryTimestamp(rs.getString("delivery_timestamp"));
 					order.setCardId(rs.getString("card_id"));
 					order.setInstuctions(rs.getString("instructions"));
 					order.setDeliveryMethodId(rs.getString("delivery_method_id"));
@@ -256,8 +256,8 @@ public class OrderService implements Service<Order>{
 				order.setUserId(rs.getString("user_id"));
 				order.setTip(rs.getFloat("tip"));
 				order.setTotalPrice(rs.getFloat("total_price"));
-				order.setPlacedTimestamp(rs.getInt("placed_timestamp"));
-				order.setDeliveryTimestamp(rs.getInt("delivery_timestamp"));
+				order.setPlacedTimestamp(rs.getString("placed_timestamp"));
+				order.setDeliveryTimestamp(rs.getString("delivery_timestamp"));
 				order.setCardId(rs.getString("card_id"));
 				order.setInstuctions(rs.getString("instructions"));
 				order.setDeliveryMethodId(rs.getString("delivery_method_id"));

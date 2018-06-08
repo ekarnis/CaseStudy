@@ -8,8 +8,8 @@ public class Order {
 	private String userId;
 	private float tip;
 	private float totalPrice;
-	private int placedTimestamp;
-	private int deliveryTimestamp;
+	private String placedTimestamp;
+	private String deliveryTimestamp;
 	private String cardId;
 	private String instuctions;
 	private String deliveryMethodId;
@@ -21,7 +21,7 @@ public class Order {
 		super();
 	}
 
-	public Order(String orderId, String userId, float tip, float totalPrice, int placedTimestamp, int deliveryTimestamp,
+	public Order(String orderId, String userId, float tip, float totalPrice, String placedTimestamp, String deliveryTimestamp,
 			String cardId, String instuctions, String deliveryMethodId, String storeId, String deliveryStatusId,
 			List<String> itemIds) {
 		super();
@@ -71,19 +71,19 @@ public class Order {
 		this.totalPrice = totalPrice;
 	}
 
-	public int getPlacedTimestamp() {
+	public String getPlacedTimestamp() {
 		return placedTimestamp;
 	}
 
-	public void setPlacedTimestamp(int placedTimestamp) {
+	public void setPlacedTimestamp(String placedTimestamp) {
 		this.placedTimestamp = placedTimestamp;
 	}
 
-	public int getDeliveryTimestamp() {
+	public String getDeliveryTimestamp() {
 		return deliveryTimestamp;
 	}
 
-	public void setDeliveryTimestamp(int deliveryTimestamp) {
+	public void setDeliveryTimestamp(String deliveryTimestamp) {
 		this.deliveryTimestamp = deliveryTimestamp;
 	}
 
