@@ -30,5 +30,14 @@ public class Cart {
 			quantity.add(1);
 		}
 	}
+
+	public ArrayList<Menu> getItems() {
+		return items;
+	}
+
+	public ArrayList<Integer> getQuantity() {
+		return quantity;
+	}
+	
 	
 }
